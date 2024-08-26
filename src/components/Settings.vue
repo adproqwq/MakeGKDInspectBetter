@@ -16,9 +16,7 @@ export default defineComponent({
     }
     if(window.localStorage.getItem('simplyName') == 'true') (document.querySelector('#simplyName') as Switch).checked = true;
 
-    receive('SettingsReady', () => {
-      (document.querySelector('#page') as Dialog).open = true;
-    });
+    (document.querySelector('#page') as Dialog).open = true;
   },
 });
 </script>

@@ -25,13 +25,11 @@ export default defineComponent({
   mounted(){
     generateCategories();
 
-    receive('MainReady', () => {
-      (document.querySelector('#page') as Dialog).open = true;
-    });
-
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
       window.currentCategory = (e.target as RadioGroup).value;
     });
+
+    (document.querySelector('#page') as Dialog).open = true;
   },
 });
 </script>
