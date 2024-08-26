@@ -20,5 +20,6 @@
     "vite": "^5.2.12",
     "vite-plugin-monkey": "^4.0.0",
     "vue-tsc": "^2.0.19"
-  }
+  },
+  "packageManager": "pnpm@9.8.0"
 }
