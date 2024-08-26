@@ -23,6 +23,8 @@ export default defineComponent({
     };
   },
   mounted(){
+    window.currentCategory = '';
+
     generateCategories();
 
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
@@ -30,6 +32,10 @@ export default defineComponent({
     });
 
     (document.querySelector('#page') as Dialog).open = true;
+
+    receive('MainOpen', () => {
+      (document.querySelector('#page') as Dialog).open = true;
+    });
   },
 });
 </script>

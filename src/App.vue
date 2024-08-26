@@ -1,10 +1,9 @@
 <script lang="ts">
 import 'mdui';
 import 'mdui/mdui.css';
-import { Dialog } from 'mdui';
 import { defineComponent } from 'vue';
 import './utils/hookCopy';
-import { receive } from './utils/communicate';
+import { receive, send } from './utils/communicate';
 import './utils/insertIcon';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
@@ -21,11 +20,13 @@ export default defineComponent({
   },
   created(){
     receive('copyEvent', () => {
-      this.currentComponent = 'Main';
+      if(this.currentComponent != 'Main') this.currentComponent = 'Main';
+      else send('MainOpen');
     });
 
     receive('openSettings', () => {
-      this.currentComponent = 'Settings';
+      if(this.currentComponent != 'Settings') this.currentComponent = 'Settings';
+      else send('SettingsOpen');
     });
   },
 });

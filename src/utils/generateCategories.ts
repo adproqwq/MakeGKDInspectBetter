@@ -8,12 +8,12 @@ export default () => {
 
   if(categoriesString){
     const categories: RawCategory[] = json5.parse(categoriesString);
+    let innerHtmlString = '';
 
     categories.forEach((category) => {
-      const radio = document.createElement('mdui-radio');
-      radio.value = category.name;
-      radio.textContent = category.name;
-      categoriesGroup.appendChild(radio);
+      innerHtmlString += `<mdui-radio value=${category.name}>${category.name}</mdui-radio>`;
     });
+
+    categoriesGroup.innerHTML = innerHtmlString;
   }
 };
