@@ -8,7 +8,7 @@ GKD 网页审查工具 复制增强油猴脚本
 
 ### GreasyFork（推荐）
 
-访问https://greasyfork.org/zh-CN/scripts/488829，即可安装
+访问 https://greasyfork.org/zh-CN/scripts/488829 即可安装
 
 ### Github（无法检测更新）
 
