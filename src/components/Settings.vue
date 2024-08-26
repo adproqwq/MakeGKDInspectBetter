@@ -44,4 +44,8 @@ mdui-dialog > * > span {
   display: flex;
   font-size: var(--mdui-typescale-body-large-size);
 }
+
+#categories {
+  width: 500px;
+}
 </style>
