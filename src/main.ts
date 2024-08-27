@@ -5,7 +5,7 @@ createApp(App).mount(
   (() => {
     const icon = document.createElement('link');
     icon.rel = 'stylesheet';
-    icon.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    icon.href = 'https://fonts.font.im/icon?family=Material+Icons';
     document.head.append(icon);
 
     const app = document.createElement('div');
