@@ -58,7 +58,7 @@ export default defineComponent({
     <div>
       <span>插入限制字段：</span>
       <mdui-switch id="limit"></mdui-switch>
-      <span>插入matchTime、resetMatch和actionMaximum</span>
+      <span class="introduction">插入matchTime、resetMatch和actionMaximum</span>
     </div>
     <div>
       <span>去除exampleUrls：</span>
@@ -67,7 +67,7 @@ export default defineComponent({
     <div>
       <span>使用fastQuery：</span>
       <mdui-switch id="fastQuery"></mdui-switch>
-      <span>使用fastQuery替换quickFind</span>
+      <span class="introduction">使用fastQuery替换quickFind</span>
     </div>
     <div>
       <span>修改key值为：</span>
