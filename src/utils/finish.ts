@@ -54,6 +54,7 @@ export default () => {
   const category = window.currentCategory;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
+  const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const position = (document.querySelector('#position') as TextField).value;
   const origin: RawApp = json5.parse(window.originRule);
 
@@ -73,6 +74,15 @@ export default () => {
   if(isNoExample){
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
     delete rule.exampleUrls;
+    origin.groups[0].rules = [rule];
+  }
+
+  if(isUseFastQuery){
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    if(rule.quickFind){
+      delete rule.quickFind;
+      rule.fastQuery = true;
+    }
     origin.groups[0].rules = [rule];
   }
 
