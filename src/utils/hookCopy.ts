@@ -1,9 +1,12 @@
-import { snackbar } from 'mdui';
+import { snackbar, prompt } from 'mdui';
+import json5 from 'json5';
 import { receive, send } from './communicate';
 
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
   apply: async (target, thisArg, args) => {
-    if(args[0].startsWith('{') && args[0].endsWith('}')){
+    const data: string = args[0];
+
+    if(data.startsWith('{') && data.endsWith('}')){
       window.originRule = args[0];
 
       // 发送复制事件
@@ -21,16 +24,49 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
         });
       });
     }
-    else if(args[0].startsWith('name=')){
+    else if(data.startsWith('name=')){
       if(window.localStorage.getItem('simplyName') == 'true'){
-        const fullname = args[0].split('"')[1];
+        const fullname = data.split('"')[1];
         const splitedName = fullname.split('.');
         const name = splitedName[splitedName.length - 1];
         await Reflect.apply(target, thisArg, [name]);
       }
-      else await Reflect.apply(target, thisArg, [args[0]]);
+      else await Reflect.apply(target, thisArg, [data]);
     }
-    else await Reflect.apply(target, thisArg, [args[0]]);
+    else if(data.startsWith(window.origin)){
+      const selectors = window.localStorage.getItem('selectors');
+
+      if(selectors){
+        const copiedUrl = new URL(data);
+
+        if(copiedUrl.searchParams.has('gkd')){
+          const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
+          const parsedSelectors: { name: string, base64: string }[] = json5.parse(selectors);
+
+          prompt({
+            headline: '备注',
+            description: '给该选择器的备注，留空就用默认的了哦~',
+            confirmText: '就决定是你了！',
+            cancelText: '这个不要保存！',
+            closeOnEsc: true,
+            closeOnOverlayClick: true,
+            onConfirm: (value) => {
+              parsedSelectors.push({
+                name: value ? value : selectorBase64,
+                base64: selectorBase64,
+              });
+
+              window.localStorage.setItem('selectors', json5.stringify(parsedSelectors));
+            },
+          }).catch(() => {
+            console.log('closed');
+          });
+        }
+      }
+
+      await Reflect.apply(target, thisArg, [data]);
+    }
+    else await Reflect.apply(target, thisArg, [data]);
   },
 });
 navigator.clipboard.writeText = copyProxy;
