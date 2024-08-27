@@ -53,6 +53,7 @@ export default () => {
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.currentCategory;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
+  const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const position = (document.querySelector('#position') as TextField).value;
   const origin: RawApp = json5.parse(window.originRule);
 
@@ -67,6 +68,12 @@ export default () => {
     origin.groups[0].actionMaximum = 1;
     origin.groups[0].resetMatch = 'app';
     origin.groups[0].matchTime = 10000;
+  }
+
+  if(isNoExample){
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    delete rule.exampleUrls;
+    origin.groups[0].rules = [rule];
   }
 
   if(position){

@@ -60,6 +60,10 @@ export default defineComponent({
       <mdui-switch id="limit"></mdui-switch>
     </div>
     <div>
+      <span>去除exampleUrls：</span>
+      <mdui-switch id="noExample"></mdui-switch>
+    </div>
+    <div>
       <span>修改key值为：</span>
       <mdui-text-field id="key" variant="filled" type="number" label="key" placeholder="填写一个数字"
         helper="必须在其他修改前修改！rules模式修改ruleKey，其余修改groupKey。记得点勾！">
