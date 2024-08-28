@@ -2,6 +2,10 @@
 
 GKD 网页审查工具 复制增强油猴脚本
 
+Powered By Vite + Vue + TypeScript
+
+使用`vite-plugin-monkey`帮助编译
+
 ## 安装
 
 你可以通过以下方式安装：
