@@ -1,4 +1,4 @@
-import { RadioGroup, TextField } from 'mdui';
+import { RadioGroup, TextField, snackbar } from 'mdui';
 import json5 from 'json5';
 import { RawApp, IArray, RawAppRule } from '@gkd-kit/api';
 import iArrayToArray from './iArrayToArray';
@@ -17,5 +17,10 @@ export default () => {
     else origin.groups[0].key = Number(key);
 
     window.originRule = json5.stringify(origin, null, 2);
+
+    snackbar({
+      message: 'key值修改成功！',
+      placement: 'top',
+    });
   }
 };
