@@ -59,20 +59,18 @@ export default () => {
   const origin: RawApp = json5.parse(window.originRule);
 
   if(ruleName) origin.groups[0].name = ruleName;
+  else origin.groups[0].name = '';
 
   if(ruleDesc) origin.groups[0].desc = ruleDesc;
   else delete origin.groups[0].desc;
 
   if(category){
-    if(category == '开屏广告'){
-      if(!ruleName) origin.groups[0].name = category;
-      else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
-
-      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-      delete rule.activityIds;
-      origin.groups[0].rules = [rule];
-    }
+    if(!ruleName) origin.groups[0].name = category;
     else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
+
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    delete rule.activityIds;
+    origin.groups[0].rules = [rule];
   }
 
   if(isLimit){
