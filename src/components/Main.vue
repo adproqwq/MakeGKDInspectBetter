@@ -72,8 +72,7 @@ export default defineComponent({
     <div>
       <span>修改key值为：</span>
       <mdui-text-field id="key" variant="filled" type="number" label="key" placeholder="填写一个数字"
-        helper="必须在其他修改前修改！rules模式修改ruleKey，其余修改groupKey。记得点勾！">
-        <mdui-button-icon slot="end-icon" icon="check" @click="key"></mdui-button-icon>
+        helper="必须在其他修改前修改！rules模式修改ruleKey，其余修改groupKey。请提前选好模式，失焦保存！" @change="key">
       </mdui-text-field>
     </div>
     <div>
