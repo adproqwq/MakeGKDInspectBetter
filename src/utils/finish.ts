@@ -63,7 +63,17 @@ export default () => {
   if(ruleDesc) origin.groups[0].desc = ruleDesc;
   else delete origin.groups[0].desc;
 
-  if(category) origin.groups[0].name = `${category}-${origin.groups[0].name}`;
+  if(category){
+    if(category == '开屏广告'){
+      if(!ruleName) origin.groups[0].name = category;
+      else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
+
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+      delete rule.activityIds;
+      origin.groups[0].rules = [rule];
+    }
+    else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
+  }
 
   if(isLimit){
     origin.groups[0].actionMaximum = 1;
@@ -118,12 +128,6 @@ export default () => {
       });
       return;
     }
-  }
-
-  if(category == '开屏广告'){
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    delete rule.activityIds;
-    origin.groups[0].rules = [rule];
   }
 
   const stringify = json5.stringify(origin, null, 2);
