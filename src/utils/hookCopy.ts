@@ -19,8 +19,8 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
           snackbar({
             message: '注入修改成功',
             placement: 'top',
+            onClosed: () => resolve(true),
           });
-          resolve(true);
         });
       });
     }
