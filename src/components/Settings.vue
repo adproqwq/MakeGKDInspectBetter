@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { TextField, Switch, Dialog } from 'mdui';
-import settings from '../utils/settings';
+import settings from '../Settings/settings';
 import { receive } from '../utils/communicate';
 
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
     <div>
       <span>选择器分享自动添加快捷搜索：</span>
       <mdui-switch id="autoAddSelector"></mdui-switch>
-      <span class="introduction">在分享选择器时，自动添加到快捷搜索列表中。需搭配 GKD网页审查工具规则快捷搜索 脚本使用，未安装该脚本时，该项将被忽略</span>
+      <span class="introduction">在分享选择器时，自动添加到快捷搜索列表中</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>

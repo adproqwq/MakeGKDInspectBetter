@@ -1,6 +1,7 @@
 import { snackbar, prompt } from 'mdui';
 import json5 from 'json5';
-import { receive, send } from './communicate';
+import { receive, send } from '../utils/communicate';
+import { ISelectors } from '../types/selectors';
 
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
   apply: async (target, thisArg, args) => {
@@ -41,7 +42,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
 
         if(copiedUrl.searchParams.has('gkd')){
           const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
-          const parsedSelectors: { name: string, base64: string }[] = json5.parse(selectors);
+          const parsedSelectors: ISelectors[] = json5.parse(selectors);
 
           prompt({
             headline: '备注',
@@ -58,9 +59,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
 
               window.localStorage.setItem('selectors', json5.stringify(parsedSelectors));
             },
-          }).catch(() => {
-            console.log('closed');
-          });
+          }).catch();
         }
       }
 

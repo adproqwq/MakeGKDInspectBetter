@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "js-base64": "^3.7.7",
     "json5": "^2.2.3",
     "mdui": "^2.1.2",
     "vue": "^3.4.27"
@@ -21,5 +22,5 @@
     "vite-plugin-monkey": "^4.0.0",
     "vue-tsc": "^2.0.19"
   },
-  "packageManager": "pnpm@9.8.0"
+  "packageManager": "pnpm@9.9.0"
 }

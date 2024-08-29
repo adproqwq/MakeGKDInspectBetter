@@ -2,16 +2,23 @@
 import 'mdui';
 import 'mdui/mdui.css';
 import { defineComponent } from 'vue';
-import './utils/hookCopy';
+import './common/init';
+import './common/hookCopy';
+import './common/insertIcon';
 import { receive, send } from './utils/communicate';
-import './utils/insertIcon';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
+import UseSelector from './components/UseSelector.vue';
+import AddSelector from './components/AddSelector.vue';
+import ManageSelectors from './components/ManageSelectors.vue';
 
 export default defineComponent({
   components: {
     Main,
     Settings,
+    UseSelector,
+    AddSelector,
+    ManageSelectors,
   },
   data(){
     return {
@@ -27,6 +34,21 @@ export default defineComponent({
     receive('openSettings', () => {
       if(this.currentComponent != 'Settings') this.currentComponent = 'Settings';
       else send('SettingsOpen');
+    });
+
+    receive('openUseSelector', () => {
+      if(this.currentComponent != 'UseSelector') this.currentComponent = 'UseSelector';
+      else send('UseSelectorOpen');
+    });
+
+    receive('openAddSelector', () => {
+      if(this.currentComponent != 'AddSelector') this.currentComponent = 'AddSelector';
+      else send('AddSelectorOpen');
+    });
+
+    receive('openManageSelectors', () => {
+      if(this.currentComponent != 'ManageSelectors') this.currentComponent = 'ManageSelectors';
+      else send('ManageSelectorsOpen');
     });
   },
 });

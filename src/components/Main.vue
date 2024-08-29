@@ -3,9 +3,9 @@ import { defineComponent } from 'vue';
 import json5 from 'json5';
 import { RawApp } from '@gkd-kit/api';
 import { Dialog, RadioGroup } from 'mdui';
-import finish from '../utils/finish';
-import key from '../utils/key';
-import generateCategories from '../utils/generateCategories';
+import finish from '../Main/finish';
+import key from '../Main/key';
+import generateCategories from '../Main/generateCategories';
 import { receive } from '../utils/communicate';
 
 export default defineComponent({

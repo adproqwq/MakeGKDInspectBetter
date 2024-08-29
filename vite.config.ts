@@ -18,10 +18,10 @@ export default defineConfig({
         namespace: 'https://blog.adproqwq.xyz',
         match: ['https://i.gkd.li/*'],
         exclude: ['https://i.gkd.li'],
-        name: 'GKD网页审查工具规则复制增强',
+        name: 'GKD网页审查工具增强',
         author: 'Adpro',
         grant: 'none',
-        description: '在GKD网页审查工具复制规则后，弹出菜单，让用户自定义部分内容',
+        description: '让GKD网页审查工具再次强大！',
         license: 'MIT',
       },
       build: {

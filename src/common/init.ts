@@ -1,0 +1,1 @@
+if(!window.localStorage.getItem('selectors')) window.localStorage.setItem('selectors', '[]');
