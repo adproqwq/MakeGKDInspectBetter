@@ -1,6 +1,6 @@
-# GKDInspect-BetterCopy
+# MakeGKDInspectBetter
 
-GKD 网页审查工具 复制增强油猴脚本
+GKD 网页审查工具增强 油猴脚本
 
 Powered By Vite + Vue + TypeScript
 
@@ -16,7 +16,7 @@ Powered By Vite + Vue + TypeScript
 
 ### Github（无法检测更新）
 
-1. 打开[`Releases`](https://github.com/adproqwq/GKDInspect-BetterCopy/releases/latest)
+1. 打开[`Releases`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
 2. 点击下方`Assets`中的`gkd_inspect-better_copy.user.js`，等待跳转后即可。
 
 > [!WARNING]
