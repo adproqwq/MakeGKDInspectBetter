@@ -10,11 +10,11 @@ Powered By Vite + Vue + TypeScript
 
 你可以通过以下方式安装：
 
-### GreasyFork（推荐）
+### GreasyFork
 
 访问 https://greasyfork.org/zh-CN/scripts/488829 即可安装
 
-### Github（无法检测更新）
+### Github
 
 1. 打开[`Releases`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
 2. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
