@@ -3,6 +3,30 @@ import json5 from 'json5';
 import { receive, send } from '../utils/communicate';
 import { ISelectors } from '../types/selectors';
 
+const attrList = [
+  'id',
+  'vid',
+  'text',
+  'text.length',
+  'desc',
+  'desc.length',
+  'clickable',
+  'focusable',
+  'checkable',
+  'checked',
+  'editable',
+  'longClickable',
+  'visibleToUser',
+  'left',
+  'top',
+  'right',
+  'bottom',
+  'width',
+  'height',
+  'childCount',
+  'index',
+];
+
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
   apply: async (target, thisArg, args) => {
     const data: string = args[0];
@@ -33,6 +57,9 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
         await Reflect.apply(target, thisArg, [name]);
       }
       else await Reflect.apply(target, thisArg, [data]);
+    }
+    else if(attrList.filter((attr) => data.startsWith(`${attr}=`))){
+      await Reflect.apply(target, thisArg, [`[${data}]`]);
     }
     else if(data.startsWith(window.origin)){
       const selectors = window.localStorage.getItem('selectors');
