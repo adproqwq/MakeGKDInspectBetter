@@ -58,7 +58,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       }
       else await Reflect.apply(target, thisArg, [data]);
     }
-    else if(attrList.filter((attr) => data.startsWith(`${attr}=`))){
+    else if(attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0){
       await Reflect.apply(target, thisArg, [`[${data}]`]);
     }
     else if(data.startsWith(window.origin)){
