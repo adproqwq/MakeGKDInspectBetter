@@ -1,4 +1,4 @@
-import { RadioGroup, Radio, Switch, TextField, Dialog, snackbar } from "mdui";
+i1mport { RadioGroup, Radio, Switch, TextField, Dialog, snackbar } from "mdui";
 import { RawApp, Position, IArray, RawAppRule } from "@gkd-kit/api";
 import json5 from 'json5';
 import iArrayToArray from "../utils/iArrayToArray";
@@ -68,9 +68,11 @@ export default () => {
     if(!ruleName) origin.groups[0].name = category;
     else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
 
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    delete rule.activityIds;
-    origin.groups[0].rules = [rule];
+    if(category == '开屏广告'){
+        const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+        delete rule.activityIds;
+        origin.groups[0].rules = [rule];
+    }
   }
 
   if(isLimit){
