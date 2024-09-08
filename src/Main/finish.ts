@@ -1,8 +1,9 @@
-import { RadioGroup, Radio, Switch, TextField, Dialog, snackbar } from "mdui";
-import { RawApp, Position, IArray, RawAppRule } from "@gkd-kit/api";
+import { RadioGroup, Switch, TextField, Dialog, snackbar } from 'mdui';
+import { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
-import iArrayToArray from "../utils/iArrayToArray";
-import { send } from "../utils/communicate";
+import iArrayToArray from '../utils/iArrayToArray';
+import { send } from '../utils/communicate';
+import sort from '../utils/sort';
 
 const checkPositionLegal = (position: Position): boolean => {
   const { top, left, right, bottom } = position;
@@ -55,6 +56,7 @@ export default () => {
   const isLimit = (document.querySelector('#limit') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
+  const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position = (document.querySelector('#position') as TextField).value;
   const origin: RawApp = json5.parse(window.originRule);
 
@@ -69,9 +71,9 @@ export default () => {
     else origin.groups[0].name = `${category}-${origin.groups[0].name}`;
 
     if(category == '开屏广告'){
-        const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-        delete rule.activityIds;
-        origin.groups[0].rules = [rule];
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+      delete rule.activityIds;
+      origin.groups[0].rules = [rule];
     }
   }
 
@@ -93,6 +95,19 @@ export default () => {
       delete rule.quickFind;
       rule.fastQuery = true;
     }
+    origin.groups[0].rules = [rule];
+  }
+
+  if(preKeys){
+    const preKeysArray = preKeys.split(',');
+    const preKeysNumberArray: number[] = [];
+
+    preKeysArray.forEach((preKey) => {
+      preKeysNumberArray.push(Number(preKey));
+    });
+
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    rule.preKeys = preKeysNumberArray;
     origin.groups[0].rules = [rule];
   }
 
@@ -129,6 +144,8 @@ export default () => {
       return;
     }
   }
+
+  origin.groups[0] = sort(origin.groups[0]);
 
   const stringify = json5.stringify(origin, null, 2);
   if(mode == 'ts'){
