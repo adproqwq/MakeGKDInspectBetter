@@ -16,7 +16,7 @@ Powered By Vite + Vue + TypeScript
 
 ### Github
 
-1. 打开[`Releases`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
+1. 打开[`Latest Release`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
 2. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
 
 > [!WARNING]
