@@ -49,11 +49,11 @@ export default (groups: RawAppGroup): RawAppGroup => {
   const rulesKeyValue: any[] = [];
 
   groupsKeyOrder.forEach((groupsKey) => {
-    if(groups[groupsKey]) groupsKeyValue.push(groups[groupsKey]);
+    if(groups[groupsKey] !== undefined) groupsKeyValue.push(groups[groupsKey]);
     else groupsKeyValue.push(undefined);
   });
   rulesKeyOrder.forEach((rulesKey) => {
-    if((groups.rules as RawAppRule[])[0][rulesKey]) rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
+    if((groups.rules as RawAppRule[])[0][rulesKey] !== undefined) rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
     else rulesKeyValue.push(undefined);
   });
   const sortedRules: RawAppRule = {
