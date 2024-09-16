@@ -1,3 +1,5 @@
+export type PrimitiveType = boolean | string | number | null | undefined;
+
 export interface Device {
   device: string;
   model: string;
@@ -19,14 +21,9 @@ export interface Device {
 export interface RawNode {
   id: number;
   pid: number;
-  quickFind?: boolean;
   idQf?: boolean;
   textQf?: boolean;
   attr: RawAttr;
-
-  // list to tree
-  parent?: RawNode;
-  children: RawNode[];
 }
 
 export interface RawAttr {
@@ -34,10 +31,16 @@ export interface RawAttr {
   vid?: string;
   name: string;
   text?: string;
-  textLen?: number;
   desc?: string;
-  descLen?: number;
-  isClickable: boolean;
+  clickable: boolean;
+  checkable: boolean;
+  checked: boolean;
+  editable: boolean;
+  focusable: boolean;
+  longClickable: boolean;
+  visibleToUser: boolean;
+  width: number;
+  height: number;
   childCount: number;
   index: number;
   depth: number;
@@ -46,8 +49,6 @@ export interface RawAttr {
   top: number;
   right: number;
   bottom: number;
-  _id?: number;
-  _pid?: number;
 }
 
 export interface Overview {

@@ -1,13 +1,19 @@
 import localforage from 'localforage';
-import { Snapshot } from '../types/snapshot';
+import { Snapshot, PrimitiveType } from '../types/snapshot';
+import { AttrList } from '../common/attrList';
 
-const shallowSnapshotStorage = localforage.createInstance({
-  name: 'shallowSnapshot',
+interface EditNodeOption {
+  target: AttrList;
+  value: PrimitiveType;
+};
+
+const snapshotStorage = localforage.createInstance({
+  name: 'snapshot',
   version: 1,
 });
 
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
-  const snapshotInfo = await shallowSnapshotStorage.getItem<Snapshot>(snapshotId);
+  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
 
   if(snapshotInfo?.activityId.startsWith(snapshotInfo.appId)){
     const simplyActivityIds = snapshotInfo.activityId.replace(snapshotInfo.appId, '');
@@ -15,4 +21,24 @@ export const simplyActivityIds = async (snapshotId: string): Promise<string | fa
     return simplyActivityIds;
   }
   else return false;
+};
+
+export const editNode = async (snapshotId: string, nodeId: number, option: EditNodeOption): Promise<boolean> => {
+  try{
+    const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+
+    const nodes = snapshotInfo!.nodes;
+    const nodeAttr = nodes[nodeId].attr;
+
+    (nodeAttr[option.target] as PrimitiveType) = option.value;
+
+    nodes[nodeId].attr = nodeAttr;
+    snapshotInfo!.nodes = nodes;
+
+    await snapshotStorage.setItem(snapshotId, snapshotInfo);
+
+    return true;
+  } catch{
+    return false;
+  }
 };

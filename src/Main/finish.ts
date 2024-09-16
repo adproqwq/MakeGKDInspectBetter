@@ -5,6 +5,7 @@ import iArrayToArray from '../utils/iArrayToArray';
 import { send } from '../utils/communicate';
 import sort from '../utils/sort';
 import { simplyActivityIds } from '../utils/indexedDB';
+import getSnapshotId from '../utils/getSnapshotId';
 
 const checkPositionLegal = (position: Position): boolean => {
   const { top, left, right, bottom } = position;
@@ -148,7 +149,7 @@ export default async () => {
   }
 
   if(isSimplyActivityIds === 'true'){
-    const snapshotId = location.pathname.split('/')[2];
+    const snapshotId = getSnapshotId();
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
 
     const result = await simplyActivityIds(snapshotId);

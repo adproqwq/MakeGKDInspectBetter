@@ -1,0 +1,44 @@
+export const attrList = [
+  'id',
+  'vid',
+  'text',
+  'text.length',
+  'desc',
+  'desc.length',
+  'clickable',
+  'focusable',
+  'checkable',
+  'checked',
+  'editable',
+  'longClickable',
+  'visibleToUser',
+  'left',
+  'top',
+  'right',
+  'bottom',
+  'width',
+  'height',
+  'childCount',
+  'index',
+];
+
+export type AttrList =
+  'id'|
+  'vid'|
+  'text'|
+  'desc'|
+  'clickable'|
+  'focusable'|
+  'checkable'|
+  'checked'|
+  'editable'|
+  'longClickable'|
+  'visibleToUser'|
+  'left'|
+  'top'|
+  'right'|
+  'bottom'|
+  'width'|
+  'height'|
+  'childCount'|
+  'index';
