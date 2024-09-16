@@ -1,3 +1,2 @@
-1. 新增activityIds规则复制优化
-
-部分代码来自[gkd-kit/inspect](https://github.com/gkd-kit/inspect)
+1. 新增隐私节点信息替换
+2. 默认启用【使用fastQuery】
