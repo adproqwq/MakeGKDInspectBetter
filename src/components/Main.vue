@@ -66,7 +66,7 @@ export default defineComponent({
     </div>
     <div>
       <span>使用fastQuery：</span>
-      <mdui-switch id="fastQuery"></mdui-switch>
+      <mdui-switch id="fastQuery" checked></mdui-switch>
       <span class="introduction">使用fastQuery替换quickFind</span>
     </div>
     <div>
