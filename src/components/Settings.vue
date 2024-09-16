@@ -42,6 +42,11 @@ export default defineComponent({
       <span class="introduction">在分享选择器时，自动添加到快捷搜索列表中</span>
     </div>
     <div>
+      <span>activityIds规则复制优化：</span>
+      <mdui-switch id="activityIdsSimply"></mdui-switch>
+      <span class="introduction">在复制规则代码时，若activityIds满足简写条件时，使用简写</span>
+    </div>
+    <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>
     </div>
   </mdui-dialog>

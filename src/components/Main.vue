@@ -10,8 +10,8 @@ import { receive } from '../utils/communicate';
 
 export default defineComponent({
   methods: {
-    finish(){
-      finish();
+    async finish(){
+      await finish();
     },
     key(){
       key();

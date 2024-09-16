@@ -14,6 +14,9 @@ importers:
       json5:
         specifier: ^2.2.3
         version: 2.2.3
+      localforage:
+        specifier: ^1.10.0
+        version: 1.10.0
       mdui:
         specifier: ^2.1.2
         version: 2.1.2
@@ -481,6 +484,9 @@ packages:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
 
+  immediate@3.0.6:
+    resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
+
   import-meta-resolve@4.1.0:
     resolution: {integrity: sha512-I6fiaX09Xivtk+THaMfAwnA3MVA5Big1WHF1Dfx9hFuvNIWpXnorlkzhcQf6ehrqQiiZECRt1poOAkPmer3ruw==}
 
@@ -525,6 +531,9 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
+  lie@3.1.1:
+    resolution: {integrity: sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==}
+
   lit-element@4.1.0:
     resolution: {integrity: sha512-gSejRUQJuMQjV2Z59KAS/D4iElUhwKpIyJvZ9w+DIagIQjfJnhR20h2Q5ddpzXGS+fF0tMZ/xEYGMnKmaI/iww==}
 
@@ -533,6 +542,9 @@ packages:
 
   lit@3.2.0:
     resolution: {integrity: sha512-s6tI33Lf6VpDu7u4YqsSX78D28bYQulM+VAzsGch4fx2H0eLZnJsUBsPWmGYSGoKDNbjtRv02rio1o+UdPVwvw==}
+
+  localforage@1.10.0:
+    resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
 
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
@@ -1130,6 +1142,8 @@ snapshots:
 
   human-signals@4.3.1: {}
 
+  immediate@3.0.6: {}
+
   import-meta-resolve@4.1.0: {}
 
   is-docker@2.2.1: {}
@@ -1156,6 +1170,10 @@ snapshots:
 
   json5@2.2.3: {}
 
+  lie@3.1.1:
+    dependencies:
+      immediate: 3.0.6
+
   lit-element@4.1.0:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.2.1
@@ -1171,6 +1189,10 @@ snapshots:
       '@lit/reactive-element': 2.0.4
       lit-element: 4.1.0
       lit-html: 3.2.0
+
+  localforage@1.10.0:
+    dependencies:
+      lie: 3.1.1
 
   magic-string@0.30.11:
     dependencies:

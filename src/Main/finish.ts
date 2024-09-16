@@ -4,6 +4,7 @@ import json5 from 'json5';
 import iArrayToArray from '../utils/iArrayToArray';
 import { send } from '../utils/communicate';
 import sort from '../utils/sort';
+import { simplyActivityIds } from '../utils/indexedDB';
 
 const checkPositionLegal = (position: Position): boolean => {
   const { top, left, right, bottom } = position;
@@ -48,7 +49,7 @@ const checkPositionLegal = (position: Position): boolean => {
   return true;
 };
 
-export default () => {
+export default async () => {
   const mode = (document.querySelector('#mode') as RadioGroup).value;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
@@ -58,6 +59,7 @@ export default () => {
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position = (document.querySelector('#position') as TextField).value;
+  const isSimplyActivityIds = window.localStorage.getItem('activityIdsSimply');
   const origin: RawApp = json5.parse(window.originRule);
 
   if(ruleName) origin.groups[0].name = ruleName;
@@ -142,6 +144,18 @@ export default () => {
         placement: 'top',
       });
       return;
+    }
+  }
+
+  if(isSimplyActivityIds === 'true'){
+    const snapshotId = location.pathname.split('/')[2];
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+
+    const result = await simplyActivityIds(snapshotId);
+
+    if(result && rule.activityIds){
+      rule.activityIds = result;
+      origin.groups[0].rules = [rule];
     }
   }
 
