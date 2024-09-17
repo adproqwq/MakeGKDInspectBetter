@@ -1,4 +1,4 @@
-name: auto-build
+name: release
 on:
   push:
     tags:
@@ -33,3 +33,4 @@ jobs:
         with:
           files: ./dist/make-gkd_inspect-better.user.js
           body_path: ./changeLog.md
+          prerelease: false
