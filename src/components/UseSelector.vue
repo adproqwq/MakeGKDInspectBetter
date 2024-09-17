@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
-import { generateSelectors, search } from '../selectors/use';
+import { generateSelectors, search } from '../Selectors/use';
 import { receive } from '../utils/communicate';
 
 export default defineComponent({
