@@ -23,8 +23,6 @@ export default defineConfig({
         grant: 'none',
         description: '让GKD网页审查工具再次强大！',
         license: 'MIT',
-        downloadURL: encodeURI('https://update.greasyfork.org/scripts/488829/GKD网页审查工具增强.user.js'),
-        updateURL: encodeURI('https://update.greasyfork.org/scripts/488829/GKD网页审查工具增强.meta.js'),
       },
       build: {
         externalGlobals: {
