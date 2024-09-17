@@ -1,6 +1,6 @@
 import json5 from 'json5';
 import { decode, encodeURI } from 'js-base64';
-import { RadioGroup, TextField, Radio, type RadioEventMap } from 'mdui';
+import { RadioGroup, TextField, Radio } from 'mdui';
 import { ISelectors } from '../types/selectors';
 
 export const generateSelectors = () => {
