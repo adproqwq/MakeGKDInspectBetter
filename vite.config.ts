@@ -18,11 +18,19 @@ export default defineConfig({
         namespace: 'https://blog.adproqwq.xyz',
         match: ['https://i.gkd.li/*'],
         exclude: ['https://i.gkd.li'],
-        name: 'GKD网页审查工具增强',
+        name: {
+          '': 'GKD网页审查工具增强',
+          'en-US': 'Make GKDInspect Better',
+        },
         author: 'Adpro',
         grant: 'none',
-        description: '让GKD网页审查工具再次强大！',
+        description: {
+          '': '让GKD网页审查工具再次强大！',
+          'en-US': 'Let GKD Inspect Better Again!',
+        },
         license: 'MIT',
+        homepage: 'https://github.com/adproqwq/MakeGKDInspectBetter',
+        supportURL: 'https://github.com/adproqwq/MakeGKDInspectBetter/issues',
       },
       build: {
         externalGlobals: {
