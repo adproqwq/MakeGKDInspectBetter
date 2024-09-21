@@ -5,7 +5,7 @@ import { RawApp } from '@gkd-kit/api';
 import { Dialog, RadioGroup } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
-import generateCategories from '../Main/generateCategories';
+import renderedCategories from '../Main/renderedCategories';
 import { receive } from '../utils/communicate';
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
   mounted(){
     window.currentCategory = '';
 
-    generateCategories();
+    renderedCategories();
 
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
       window.currentCategory = (e.target as RadioGroup).value;
