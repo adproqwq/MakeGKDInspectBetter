@@ -81,9 +81,18 @@ export default async () => {
   }
 
   if(isLimit){
-    origin.groups[0].actionMaximum = 1;
-    origin.groups[0].resetMatch = 'app';
-    origin.groups[0].matchTime = 10000;
+    if(mode == 'rules'){
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+      rule.actionMaximum = 1;
+      rule.resetMatch = 'app';
+      rule.matchTime = 10000;
+      origin.groups[0].rules = [rule];
+    }
+    else{
+      origin.groups[0].actionMaximum = 1;
+      origin.groups[0].resetMatch = 'app';
+      origin.groups[0].matchTime = 10000;
+    }
   }
 
   if(isNoExample){
