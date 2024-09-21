@@ -7,15 +7,6 @@ export interface Device {
   brand: string;
   sdkInt: number;
   release: string;
-
-  /**
-   * @deprecated use gkdAppInfo instead
-   */
-  gkdVersionCode?: number;
-  /**
-   * @deprecated use gkdAppInfo instead
-   */
-  gkdVersionName?: string;
 }
 
 export interface RawNode {
@@ -63,19 +54,6 @@ export interface Overview {
 
   appInfo: AppInfo;
   gkdAppInfo: AppInfo;
-
-  /**
-   * @deprecated use appInfo instead
-   */
-  appName?: string;
-  /**
-   * @deprecated use appInfo instead
-   */
-  appVersionName?: string;
-  /**
-   * @deprecated use appInfo instead
-   */
-  appVersionCode?: number;
 }
 
 export interface Snapshot extends Overview {

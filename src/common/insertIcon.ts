@@ -39,7 +39,7 @@ observeElement('.n-radio-group > div', () => {
 observeElement('.z-1.box-shadow-dim.bg-white', () => {
   const app = document.querySelector('#app')!;
 
-  // 搜索选择器按钮
+  // 节点打码按钮
   const editNodeIcon = document.createElement('mdui-fab');
   editNodeIcon.icon = 'edit';
   editNodeIcon.variant = 'secondary';
