@@ -9,19 +9,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "file-saver": "^2.0.5",
     "js-base64": "^3.7.7",
     "json5": "^2.2.3",
+    "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "mdui": "^2.1.2",
     "vue": "^3.5.7"
   },
   "devDependencies": {
     "@gkd-kit/api": "^0.4.0",
+    "@types/file-saver": "^2.0.7",
     "@vitejs/plugin-vue": "^5.1.4",
     "typescript": "^5.6.2",
     "vite": "^5.4.7",
     "vite-plugin-monkey": "^4.0.6",
     "vue-tsc": "^2.1.6"
   },
-  "packageManager": "pnpm@9.10.0"
+  "packageManager": "pnpm@9.11.0"
 }

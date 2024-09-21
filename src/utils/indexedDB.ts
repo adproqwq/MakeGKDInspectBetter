@@ -1,4 +1,6 @@
 import localforage from 'localforage';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 import { Snapshot, PrimitiveType } from '../types/snapshot';
 import { AttrList } from '../common/attrList';
 
@@ -9,6 +11,10 @@ interface EditNodeOption {
 
 const snapshotStorage = localforage.createInstance({
   name: 'snapshot',
+  version: 1,
+});
+const screenshotStorage = localforage.createInstance({
+  name: 'screenshot',
   version: 1,
 });
 
@@ -41,4 +47,16 @@ export const editNode = async (snapshotId: string, nodeId: number, options: Edit
   } catch{
     return false;
   }
+};
+
+export const downloadSnapshot = async (snapshotId: string) => {
+  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+  const screenshot = await screenshotStorage.getItem<ArrayBuffer>(snapshotId);
+
+  const jszip = new JSZip();
+  jszip.file(`snapshot-${snapshotId}.json`, JSON.stringify(snapshotInfo, undefined, 2));
+  jszip.file(`screenshot-${snapshotId}.png`, screenshot);
+  jszip.generateAsync({ type: 'blob' }).then((snapshotFile) => {
+    saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
+  });
 };
