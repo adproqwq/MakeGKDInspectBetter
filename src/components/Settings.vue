@@ -15,6 +15,7 @@ export default defineComponent({
       (document.querySelector('#categories') as TextField).value = window.localStorage.getItem('categories')!;
     }
     if(window.localStorage.getItem('simplyName') == 'true') (document.querySelector('#simplyName') as Switch).checked = true;
+    if(window.localStorage.getItem('activityIdsSimply') == 'true') (document.querySelector('#activityIdsSimply') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
 
