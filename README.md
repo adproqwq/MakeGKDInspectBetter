@@ -25,3 +25,32 @@ Powered By Vite + Vue + TypeScript
 
 > [!WARNING]
 > 请确保你已安装`TemperMonkey`或`ScriptCat`或其他类似的脚本管理器，但本脚本仅对`TemperMonkey`和`ScriptCat`进行长期支持，使用其他脚本管理器出现的任何Bug或失效，开发者保留无视的权力。
+
+## 构建
+
+本项目使用`pnpm`作为包管理器
+
+1. 安装依赖
+
+```shell
+pnpm install
+```
+
+2. 构建
+
+```shell
+pnpm build
+```
+
+构建产物将会出现在`dist`文件夹中
+
+## 贡献
+
+本项目需要要求使用`VSCode`和`pnpm`，使用`TypeScript`编写
+
+你需要fork本仓库，完成修改后，向本仓库发起`Pull Request`，等待`Review`后即可合并
+
+如果是为了解决某个`Issue`而提出的`Pull Request`，需要在`Pull Request`描述中附上对应`Issue`的编号
+
+> [!WARNING]
+> 仓库维护者有直接关闭`Pull Request`的权力
