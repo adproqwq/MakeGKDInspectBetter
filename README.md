@@ -30,13 +30,19 @@ Powered By Vite + Vue + TypeScript
 
 本项目使用`pnpm`作为包管理器
 
-1. 安装依赖
+1. Clone仓库
+
+```shell
+git clone https://github.com/adproqwq/MakeGKDInspectBetter.git
+```
+
+2. 安装依赖
 
 ```shell
 pnpm install
 ```
 
-2. 构建
+3. 构建
 
 ```shell
 pnpm build
