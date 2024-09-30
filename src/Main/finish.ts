@@ -52,6 +52,7 @@ const checkPositionLegal = (position: Position): boolean => {
 
 export default async () => {
   const mode = (document.querySelector('#mode') as RadioGroup).value;
+  const action = (document.querySelector('#action') as RadioGroup).value as 'clickCenter' | 'back' | undefined;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.currentCategory;
@@ -78,6 +79,12 @@ export default async () => {
       delete rule.activityIds;
       origin.groups[0].rules = [rule];
     }
+  }
+
+  if(action){
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    rule.action = action;
+    origin.groups[0].rules = [rule];
   }
 
   if(isLimit){

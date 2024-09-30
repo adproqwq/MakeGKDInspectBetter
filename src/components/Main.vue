@@ -56,6 +56,13 @@ export default defineComponent({
       <mdui-radio-group id="category"></mdui-radio-group>
     </div>
     <div>
+      <span>插入action类型：</span>
+      <mdui-radio-group id="action">
+        <mdui-radio value="clickCenter">clickCenter</mdui-radio>
+        <mdui-radio value="back">back</mdui-radio>
+      </mdui-radio-group>
+    </div>
+    <div>
       <span>插入限制字段：</span>
       <mdui-switch id="limit"></mdui-switch>
       <span class="introduction">插入matchTime、resetMatch和actionMaximum</span>
