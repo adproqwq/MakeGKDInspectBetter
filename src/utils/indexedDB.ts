@@ -21,10 +21,13 @@ const screenshotStorage = localforage.createInstance({
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
 
-  if(snapshotInfo?.activityId.startsWith(snapshotInfo.appId)){
-    const simplyActivityIds = snapshotInfo.activityId.replace(snapshotInfo.appId, '');
+  if(snapshotInfo?.activityId){
+    if(snapshotInfo?.activityId.startsWith(snapshotInfo.appId)){
+      const simplyActivityIds = snapshotInfo.activityId.replace(snapshotInfo.appId, '');
 
-    return simplyActivityIds;
+      return simplyActivityIds;
+    }
+    else return false;
   }
   else return false;
 };
