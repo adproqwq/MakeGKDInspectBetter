@@ -9,9 +9,11 @@ declare interface ISelectorsExtend {
 }
 
 declare interface Window {
-  originRule: string;
-  returnResult: string;
-  currentCategory: string;
-  currentSelector: ISelectorsExtend;
-  currentUseSelectorIndex: number;
+  Hanashiro: {
+    originRule: string;
+    returnResult: string;
+    currentCategory: string;
+    currentSelector: ISelectorsExtend;
+    currentUseSelectorIndex: number;
+  },
 }

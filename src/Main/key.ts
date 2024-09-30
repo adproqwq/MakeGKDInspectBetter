@@ -6,7 +6,7 @@ import iArrayToArray from '../utils/iArrayToArray';
 export default () => {
   const mode = (document.querySelector('#mode') as RadioGroup).value;
   const key = (document.querySelector('#key') as TextField).value;
-  const origin: RawApp = json5.parse(window.originRule);
+  const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
   if(key){
     if(mode == 'rules'){
@@ -16,7 +16,7 @@ export default () => {
     }
     else origin.groups[0].key = Number(key);
 
-    window.originRule = json5.stringify(origin, null, 2);
+    window.Hanashiro.originRule = json5.stringify(origin, null, 2);
 
     snackbar({
       message: 'key值修改成功！',

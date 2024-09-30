@@ -55,14 +55,14 @@ export default async () => {
   const action = (document.querySelector('#action') as RadioGroup).value as 'clickCenter' | 'back' | undefined;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
-  const category = window.currentCategory;
+  const category = window.Hanashiro.currentCategory;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position = (document.querySelector('#position') as TextField).value;
   const isSimplyActivityIds = window.localStorage.getItem('activityIdsSimply');
-  const origin: RawApp = json5.parse(window.originRule);
+  const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
   if(ruleName) origin.groups[0].name = ruleName;
   else origin.groups[0].name = '';
@@ -181,11 +181,11 @@ export default async () => {
   const stringify = json5.stringify(origin, null, 2);
   if(mode == 'ts'){
     const text = `import { defineGkdApp } from '@gkd-kit/define';\r\rexport default defineGkdApp(${stringify});\r`;
-    window.returnResult = text;
+    window.Hanashiro.returnResult = text;
   }
-  else if(mode == 'app') window.returnResult = stringify;
-  else if(mode == 'groups') window.returnResult = json5.stringify(origin.groups[0], null, 2);
-  else if(mode == 'rules') window.returnResult = json5.stringify(iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0], null, 2);
+  else if(mode == 'app') window.Hanashiro.returnResult = stringify;
+  else if(mode == 'groups') window.Hanashiro.returnResult = json5.stringify(origin.groups[0], null, 2);
+  else if(mode == 'rules') window.Hanashiro.returnResult = json5.stringify(iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0], null, 2);
 
   (document.querySelector('#page') as Dialog).open = false;
 

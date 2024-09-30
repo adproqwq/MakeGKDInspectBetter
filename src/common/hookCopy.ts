@@ -9,7 +9,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
     const data: string = args[0];
 
     if(data.startsWith('{') && data.endsWith('}')){
-      window.originRule = args[0];
+      window.Hanashiro.originRule = args[0];
 
       // 发送复制事件
       send('copyEvent');
@@ -17,7 +17,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       // 等待 modifyEnd
       await new Promise((resolve) => {
         receive('modifyEnd', async () => {
-          await Reflect.apply(target, thisArg, [window.returnResult]);
+          await Reflect.apply(target, thisArg, [window.Hanashiro.returnResult]);
           snackbar({
             message: '注入修改成功',
             placement: 'top',

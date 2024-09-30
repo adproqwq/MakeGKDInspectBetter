@@ -16,7 +16,7 @@ export const generateSelectors = () => {
 
   document.querySelectorAll('#selector')!.forEach((radio) => {
     radio.addEventListener('click', (e) => {
-      window.currentUseSelectorIndex = Number((e.target as Radio).getAttribute('data-index')!);
+      window.Hanashiro.currentUseSelectorIndex = Number((e.target as Radio).getAttribute('data-index')!);
     });
   });
 };
@@ -26,7 +26,7 @@ export const search = () => {
 
   const target = new URL(window.location.href);
 
-  target.searchParams.set('gkd', selectors[window.currentUseSelectorIndex].base64);
+  target.searchParams.set('gkd', selectors[window.Hanashiro.currentUseSelectorIndex].base64);
 
   window.location.href = target.toString();
 };

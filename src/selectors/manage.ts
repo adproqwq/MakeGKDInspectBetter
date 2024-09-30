@@ -23,7 +23,7 @@ export const generateSelectors = () => {
       nameTextField.value = (e.target as Radio).innerText;
       selectorTextField.value = decode((e.target as Radio).value);
 
-      window.currentSelector = {
+      window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
         base64: (e.target as Radio).value,
@@ -38,12 +38,12 @@ export const editSelector = () => {
   const selectorTextField = document.querySelector('#selector')! as TextField;
 
   if(selectorTextField.value){
-    selectors[window.currentSelector.index] = {
+    selectors[window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
       base64: encodeURI(selectorTextField.value),
     };
   }
-  else selectors.splice(window.currentSelector.index, 1);
+  else selectors.splice(window.Hanashiro.currentSelector.index, 1);
 
   window.localStorage.setItem('selectors', json5.stringify(selectors));
 };

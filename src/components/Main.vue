@@ -19,16 +19,16 @@ export default defineComponent({
   },
   data(){
     return {
-      originRule: json5.parse(window.originRule) as RawApp,
+      originRule: json5.parse(window.Hanashiro.originRule) as RawApp,
     };
   },
   mounted(){
-    window.currentCategory = '';
+    window.Hanashiro.currentCategory = '';
 
     renderedCategories();
 
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
-      window.currentCategory = (e.target as RadioGroup).value;
+      window.Hanashiro.currentCategory = (e.target as RadioGroup).value;
     });
 
     (document.querySelector('#page') as Dialog).open = true;
