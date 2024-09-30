@@ -1,1 +1,2 @@
-1. 新增节点打码二次确认提示
+1. activityIds为null时，在开启activityIds规则复制优化功能时的卡死问题(#5)
+2. 支持插入action字段(#6)
