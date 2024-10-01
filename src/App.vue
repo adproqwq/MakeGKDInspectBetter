@@ -9,6 +9,7 @@ import './common/insertIcon';
 import { receive, send } from './utils/communicate';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
+import Help from './components/Help.vue';
 import UseSelector from './components/UseSelector.vue';
 import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
@@ -17,6 +18,7 @@ export default defineComponent({
   components: {
     Main,
     Settings,
+    Help,
     UseSelector,
     AddSelector,
     ManageSelectors,
@@ -35,6 +37,11 @@ export default defineComponent({
     receive('openSettings', () => {
       if(this.currentComponent != 'Settings') this.currentComponent = 'Settings';
       else send('SettingsOpen');
+    });
+
+    receive('openHelp', () => {
+      if(this.currentComponent != 'Help') this.currentComponent = 'Help';
+      else send('HelpOpen');
     });
 
     receive('openUseSelector', () => {

@@ -33,7 +33,14 @@ observeElement('.n-radio-group > div', () => {
     send('openSettings');
   };
 
-  radioGroup.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, SettingsIcon);
+  // 帮助按钮
+  const HelpIcon = document.createElement('mdui-button-icon');
+  HelpIcon.icon = 'help';
+  HelpIcon.onclick = () => {
+    send('openHelp');
+  };
+
+  radioGroup.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, SettingsIcon, HelpIcon);
 });
 
 observeElement('.z-1.box-shadow-dim.bg-white', () => {
