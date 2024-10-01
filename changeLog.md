@@ -1,2 +1,2 @@
-1. activityIds为null时，在开启activityIds规则复制优化功能时的卡死问题(#5)
-2. 支持插入action字段(#6)
+1. 新增帮助页
+2. 在window中拓展一个全局对象，用于存放脚本的全局变量，防止过度污染window

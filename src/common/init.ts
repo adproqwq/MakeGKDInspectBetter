@@ -7,7 +7,7 @@ Object.defineProperty(window, 'Hanashiro', {
 });
 
 snackbar({
-  message: '忆对中秋丹桂丛，花也杯中，月也杯中。',
+  message: '深秋帘幕千家雨，落日楼台一笛风。',
   autoCloseDelay: 3000,
   placement: 'top',
 });
