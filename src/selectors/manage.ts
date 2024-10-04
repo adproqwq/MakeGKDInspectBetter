@@ -1,10 +1,10 @@
-import json5 from 'json5';
 import { decode, encodeURI } from 'js-base64';
 import { RadioGroup, TextField, Radio } from 'mdui';
+import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
-export const generateSelectors = () => {
-  const selectors = json5.parse(window.localStorage.getItem('selectors')!) as ISelectors[];
+export const generateSelectors = async () => {
+  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const selectorsGroup = (document.querySelector('#selectors') as RadioGroup);
 
   let innerHtmlString = '';
@@ -32,8 +32,8 @@ export const generateSelectors = () => {
   });
 };
 
-export const editSelector = () => {
-  let selectors = json5.parse(window.localStorage.getItem('selectors')!) as ISelectors[];
+export const editSelector = async () => {
+  let selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const nameTextField = document.querySelector('#name')! as TextField;
   const selectorTextField = document.querySelector('#selector')! as TextField;
 
@@ -45,5 +45,5 @@ export const editSelector = () => {
   }
   else selectors.splice(window.Hanashiro.currentSelector.index, 1);
 
-  window.localStorage.setItem('selectors', json5.stringify(selectors));
+  await setHanashiroSettings('selectors', selectors);
 };

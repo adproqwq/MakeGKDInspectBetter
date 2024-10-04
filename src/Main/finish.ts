@@ -4,7 +4,7 @@ import json5 from 'json5';
 import iArrayToArray from '../utils/iArrayToArray';
 import { send } from '../utils/communicate';
 import sort from '../utils/sort';
-import { simplyActivityIds } from '../utils/indexedDB';
+import { simplyActivityIds, getHanashiroSettings } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 
 const checkPositionLegal = (position: Position): boolean => {
@@ -61,7 +61,7 @@ export default async () => {
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position = (document.querySelector('#position') as TextField).value;
-  const isSimplyActivityIds = window.localStorage.getItem('activityIdsSimply');
+  const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
   if(ruleName) origin.groups[0].name = ruleName;
@@ -164,7 +164,7 @@ export default async () => {
     }
   }
 
-  if(isSimplyActivityIds === 'true'){
+  if(isSimplyActivityIds === true){
     const snapshotId = getSnapshotId();
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
 

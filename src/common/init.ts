@@ -1,6 +1,7 @@
 import { snackbar } from 'mdui';
+import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 
-if(!window.localStorage.getItem('selectors')) window.localStorage.setItem('selectors', '[]');
+if(!(await getHanashiroSettings('selectors'))) await setHanashiroSettings('selectors', []);
 
 Object.defineProperty(window, 'Hanashiro', {
   value: {},

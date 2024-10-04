@@ -1,13 +1,13 @@
 import { RadioGroup } from 'mdui';
 import json5 from 'json5';
 import { RawCategory } from '@gkd-kit/api';
+import { getHanashiroSettings } from '../utils/indexedDB';
 
-export default () => {
-  const categoriesString = window.localStorage.getItem('categories');
+export default async () => {
+  const categories = (await getHanashiroSettings<RawCategory[]>('categories'))!;
   const categoriesGroup = (document.querySelector('#category') as RadioGroup);
 
-  if(categoriesString){
-    const categories: RawCategory[] = json5.parse(categoriesString);
+  if(categories){
     let innerHtmlString = '';
 
     categories.forEach((category) => {

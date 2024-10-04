@@ -6,12 +6,12 @@ import { receive } from '../utils/communicate';
 
 export default defineComponent({
   methods: {
-    search(){
-      search();
+    async search(){
+      await search();
     },
   },
-  mounted(){
-    generateSelectors();
+  async mounted(){
+    await generateSelectors();
 
     (document.querySelector('#page') as Dialog).open = true;
 

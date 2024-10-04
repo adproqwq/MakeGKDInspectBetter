@@ -6,20 +6,20 @@ import { receive } from '../utils/communicate';
 
 export default defineComponent({
   methods: {
-    editSelector(){
-      editSelector();
+    async editSelector(){
+      await editSelector();
     },
     close(){
       (document.querySelector('#page') as Dialog).open = false;
     },
   },
-  mounted(){
-    generateSelectors();
+  async mounted(){
+    await generateSelectors();
 
     (document.querySelector('#page') as Dialog).open = true;
 
-    receive('ManageSelectorsOpen', () => {
-      generateSelectors();
+    receive('ManageSelectorsOpen', async () => {
+      await generateSelectors();
       (document.querySelector('#page') as Dialog).open = true;
     });
   },

@@ -2,8 +2,8 @@
 import { defineComponent } from 'vue';
 import { prompt, snackbar } from 'mdui';
 import { encodeURI } from 'js-base64';
-import json5 from 'json5';
 import { receive } from '../utils/communicate';
+import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
 export default defineComponent({
@@ -32,23 +32,23 @@ export default defineComponent({
               cancelText: '算了',
               closeOnEsc: true,
               closeOnOverlayClick: true,
-              onConfirm: (selector) => {
+              onConfirm: async (selector) => {
                 if(!selector){
                   snackbar({
                     message: '请不要留空哦~',
                     placement: 'top',
                   });
-                  return false;
+                  return new Promise((_, reject) => reject(false));
                 }
                 else{
-                  const savedSelectors = json5.parse(window.localStorage.getItem('selectors')!) as ISelectors[];
+                  const savedSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
                   savedSelectors.push({
                     name: name,
                     base64: encodeURI(selector),
                   });
 
-                  window.localStorage.setItem('selectors', json5.stringify(savedSelectors));
+                  await setHanashiroSettings('selectors', savedSelectors);
                 }
               },
             }).catch();

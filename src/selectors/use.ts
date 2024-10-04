@@ -1,9 +1,9 @@
 import { RadioGroup, Radio } from 'mdui';
-import json5 from 'json5';
+import { getHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
-export const generateSelectors = () => {
-  const selectors = json5.parse(window.localStorage.getItem('selectors')!) as ISelectors[];
+export const generateSelectors = async () => {
+  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const selectorsGroup = (document.querySelector('#selectors') as RadioGroup);
 
   let innerHtmlString = '';
@@ -21,8 +21,8 @@ export const generateSelectors = () => {
   });
 };
 
-export const search = () => {
-  const selectors = json5.parse(window.localStorage.getItem('selectors')!) as ISelectors[];
+export const search = async () => {
+  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
   const target = new URL(window.location.href);
 

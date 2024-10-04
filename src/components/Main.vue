@@ -22,10 +22,10 @@ export default defineComponent({
       originRule: json5.parse(window.Hanashiro.originRule) as RawApp,
     };
   },
-  mounted(){
+  async mounted(){
     window.Hanashiro.currentCategory = '';
 
-    renderedCategories();
+    await renderedCategories();
 
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
       window.Hanashiro.currentCategory = (e.target as RadioGroup).value;

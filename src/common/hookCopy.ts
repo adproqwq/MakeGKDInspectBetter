@@ -1,7 +1,7 @@
 import { snackbar, prompt } from 'mdui';
-import json5 from 'json5';
 import { attrList } from './attrList';
 import { receive, send } from '../utils/communicate';
+import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
@@ -27,7 +27,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       });
     }
     else if(data.startsWith('name=')){
-      if(window.localStorage.getItem('simplyName') == 'true'){
+      if(await getHanashiroSettings('simplyName') == true){
         const fullname = data.split('"')[1];
         const splitedName = fullname.split('.');
         const name = splitedName[splitedName.length - 1];
@@ -39,14 +39,13 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       await Reflect.apply(target, thisArg, [`[${data}]`]);
     }
     else if(data.startsWith(window.origin)){
-      const selectors = window.localStorage.getItem('selectors');
+      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
-      if(selectors){
+      if(selectors.length != 0){
         const copiedUrl = new URL(data);
 
         if(copiedUrl.searchParams.has('gkd')){
           const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
-          const parsedSelectors: ISelectors[] = json5.parse(selectors);
 
           prompt({
             headline: '备注',
@@ -55,13 +54,13 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             cancelText: '这个不要保存！',
             closeOnEsc: true,
             closeOnOverlayClick: true,
-            onConfirm: (value) => {
-              parsedSelectors.push({
+            onConfirm: async (value) => {
+              selectors.push({
                 name: value ? value : selectorBase64,
                 base64: selectorBase64,
               });
 
-              window.localStorage.setItem('selectors', json5.stringify(parsedSelectors));
+              await setHanashiroSettings('selectors', selectors);
             },
           }).catch();
         }

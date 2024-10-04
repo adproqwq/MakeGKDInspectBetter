@@ -17,6 +17,9 @@ const screenshotStorage = localforage.createInstance({
   name: 'screenshot',
   version: 1,
 });
+const hanashiroStorage = localforage.createInstance({
+  name: 'Hanashiro',
+});
 
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
@@ -62,4 +65,12 @@ export const downloadSnapshot = async (snapshotId: string) => {
   jszip.generateAsync({ type: 'blob' }).then((snapshotFile) => {
     saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
   });
+};
+
+export const setHanashiroSettings = async (item: string, value: any) => {
+  await hanashiroStorage.setItem(item, value);
+};
+
+export const getHanashiroSettings = async <T>(item: string): Promise<T | null> => {
+  return await hanashiroStorage.getItem(item);
 };

@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import { TextField, Switch, Dialog } from 'mdui';
 import settings from '../Settings/settings';
 import { receive } from '../utils/communicate';
+import { getHanashiroSettings } from '../utils/indexedDB';
 
 export default defineComponent({
   methods: {
@@ -10,12 +11,12 @@ export default defineComponent({
       settings();
     },
   },
-  mounted(){
-    if(window.localStorage.getItem('categories')){
-      (document.querySelector('#categories') as TextField).value = window.localStorage.getItem('categories')!;
+  async mounted(){
+    if(await getHanashiroSettings('categories')){
+      (document.querySelector('#categories') as TextField).value = (await getHanashiroSettings<string>('categories'))!;
     }
-    if(window.localStorage.getItem('simplyName') == 'true') (document.querySelector('#simplyName') as Switch).checked = true;
-    if(window.localStorage.getItem('activityIdsSimply') == 'true') (document.querySelector('#activityIdsSimply') as Switch).checked = true;
+    if(await getHanashiroSettings('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
+    if(await getHanashiroSettings('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
 
