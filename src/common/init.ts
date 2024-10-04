@@ -9,8 +9,8 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '木落雁南度，北风江上寒。',
-    autoCloseDelay: 3000,
+    message: '漫漫秋夜长，烈烈北风凉。',
+    autoCloseDelay: 2000,
     placement: 'top',
   });
 }

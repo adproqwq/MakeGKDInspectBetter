@@ -1,6 +1,6 @@
 # MakeGKDInspectBetter
 
-GKD 网页审查工具增强 用户脚本
+当前版本：Mercury 2.5.1
 
 Powered By Vite + Vue + TypeScript
 
