@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { TextField, Switch, Dialog } from 'mdui';
+import { RawCategory } from '@gkd-kit/api';
+import json5 from 'json5';
 import settings from '../Settings/settings';
 import { receive } from '../utils/communicate';
 import { getHanashiroSettings } from '../utils/indexedDB';
@@ -13,10 +15,11 @@ export default defineComponent({
   },
   async mounted(){
     if(await getHanashiroSettings('categories')){
-      (document.querySelector('#categories') as TextField).value = (await getHanashiroSettings<string>('categories'))!;
+      (document.querySelector('#categories') as TextField).value = json5.stringify((await getHanashiroSettings<RawCategory[]>('categories'))!);
     }
-    if(await getHanashiroSettings('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
-    if(await getHanashiroSettings('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
+    if(await getHanashiroSettings<boolean>('hideLoadSnackbar') == true) (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
+    if(await getHanashiroSettings<boolean>('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
+    if(await getHanashiroSettings<boolean>('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
 
