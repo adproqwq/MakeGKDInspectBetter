@@ -2,12 +2,15 @@ import { send } from '../utils/communicate';
 import observeElement from '../utils/observeElement';
 import replaceNodeInfo from '../utils/replaceNodeInfo';
 
-observeElement('.n-radio-group > div', () => {
-  const radioGroup = document.querySelector('.n-radio-group > div')!;
+observeElement('.n-input-group', () => {
+  const inputGroup = document.querySelector('.n-input-group')!;
+  const iconBar = document.createElement('div');
 
   // 搜索选择器按钮
   const UseSelectorIcon = document.createElement('mdui-button-icon');
   UseSelectorIcon.icon = 'search';
+  UseSelectorIcon.style.height = '36px';
+  UseSelectorIcon.style.width = '36px';
   UseSelectorIcon.onclick = () => {
     send('openUseSelector');
   };
@@ -15,6 +18,8 @@ observeElement('.n-radio-group > div', () => {
   // 添加选择器按钮
   const AddSelectorIcon = document.createElement('mdui-button-icon');
   AddSelectorIcon.icon = 'add';
+  AddSelectorIcon.style.height = '36px';
+  AddSelectorIcon.style.width = '36px';
   AddSelectorIcon.onclick = () => {
     send('openAddSelector');
   };
@@ -22,6 +27,8 @@ observeElement('.n-radio-group > div', () => {
   // 管理选择器按钮
   const ManageSelectorsIcon = document.createElement('mdui-button-icon');
   ManageSelectorsIcon.icon = 'edit';
+  ManageSelectorsIcon.style.height = '36px';
+  ManageSelectorsIcon.style.width = '36px';
   ManageSelectorsIcon.onclick = () => {
     send('openManageSelectors');
   };
@@ -29,6 +36,8 @@ observeElement('.n-radio-group > div', () => {
   // 设置按钮
   const SettingsIcon = document.createElement('mdui-button-icon');
   SettingsIcon.icon = 'settings';
+  SettingsIcon.style.height = '36px';
+  SettingsIcon.style.width = '36px';
   SettingsIcon.onclick = () => {
     send('openSettings');
   };
@@ -36,11 +45,14 @@ observeElement('.n-radio-group > div', () => {
   // 帮助按钮
   const HelpIcon = document.createElement('mdui-button-icon');
   HelpIcon.icon = 'help';
+  HelpIcon.style.height = '36px';
+  HelpIcon.style.width = '36px';
   HelpIcon.onclick = () => {
     send('openHelp');
   };
 
-  radioGroup.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, SettingsIcon, HelpIcon);
+  iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, SettingsIcon, HelpIcon);
+  inputGroup.insertAdjacentElement('beforebegin', iconBar);
 });
 
 observeElement('.z-1.box-shadow-dim.bg-white', () => {
