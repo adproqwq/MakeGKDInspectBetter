@@ -34,6 +34,11 @@ export default defineComponent({
       <mdui-text-field variant="filled" id="categories" label="分类" placeholder="填入合法的分类" rows="10"></mdui-text-field>
     </div>
     <div>
+      <span>隐藏加载成功提示：</span>
+      <mdui-switch id="hideLoadSnackbar"></mdui-switch>
+      <span class="introduction">每次脚本加载时会弹出一句诗句，此选项可选择是否弹出</span>
+    </div>
+    <div>
       <span>name属性复制优化：</span>
       <mdui-switch id="simplyName"></mdui-switch>
       <span class="introduction">在复制name属性时，会自动优化复制的内容。如复制 android.widget.TextView 时会优化为 TextView</span>
