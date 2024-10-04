@@ -1,5 +1,5 @@
 <script lang="ts">
-import 'mdui';
+import { setColorScheme } from 'mdui';
 import 'mdui/mdui.css';
 import { defineComponent } from 'vue';
 import './common/init';
@@ -58,6 +58,9 @@ export default defineComponent({
       if(this.currentComponent != 'ManageSelectors') this.currentComponent = 'ManageSelectors';
       else send('ManageSelectorsOpen');
     });
+  },
+  mounted(){
+    setColorScheme('#626262');
   },
 });
 </script>
