@@ -60,3 +60,7 @@ pnpm build
 
 > [!WARNING]
 > 仓库维护者有直接关闭`Pull Request`的权力
+
+## 捐赠
+
+如果你想要给我捐赠的话，点击项目旁的`Sponsor`，或者到我的[爱发电主页](https://afdian.com/a/Adpro)给我捐赠即可
