@@ -64,21 +64,11 @@ export default (groups: RawAppGroup): RawAppGroup => {
     if((groups.rules as RawAppRule[])[0][rulesKey] !== undefined) rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
     else rulesKeyValue.push(undefined);
   });
-  const sortedRules: RawAppRule = {
-    key: rulesKeyValue[0],
-    preKeys: rulesKeyValue[1],
-    fastQuery: rulesKeyValue[2],
-    quickFind: rulesKeyValue[3],
-    matchTime: rulesKeyValue[4],
-    actionMaximum: rulesKeyValue[5],
-    resetMatch: rulesKeyValue[6],
-    action: rulesKeyValue[7],
-    activityIds: rulesKeyValue[8],
-    position: rulesKeyValue[9],
-    matches: rulesKeyValue[10],
-    exampleUrls: rulesKeyValue[11],
-    snapshotUrls: rulesKeyValue[12],
-  };
+
+  const sortedRules: RawAppRule = {};
+  rulesKeyOrder.forEach((rulesKey, index) => {
+    sortedRules[rulesKey] = rulesKeyValue[index];
+  });
   const sortedGroups: RawAppGroup = {
     key: groupsKeyValue[0],
     name: groupsKeyValue[1],
