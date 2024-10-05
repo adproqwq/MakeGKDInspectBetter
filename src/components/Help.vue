@@ -6,7 +6,7 @@ import { send } from '../utils/communicate';
 export default defineComponent({
   methods: {
     closeDialog(){
-      send('close');
+      send('closePage');
     },
   },
   mounted(){

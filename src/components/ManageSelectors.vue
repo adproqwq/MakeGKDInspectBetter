@@ -10,7 +10,7 @@ export default defineComponent({
       await editSelector();
     },
     close(){
-      send('close');
+      send('closePage');
     },
   },
   async mounted(){

@@ -16,5 +16,5 @@ export default async () => {
   await setHanashiroSettings('autoAddSelector', isAutoAddSelector);
   await setHanashiroSettings('activityIdsSimply', isActivityIdsSimply);
 
-  send('close');
+  send('closePage');
 };

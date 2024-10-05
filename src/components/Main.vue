@@ -17,7 +17,7 @@ export default defineComponent({
       key();
     },
     closeDialog(){
-      send('close');
+      send('closePage');
     },
   },
   data(){

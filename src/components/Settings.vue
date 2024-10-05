@@ -21,7 +21,7 @@ export default defineComponent({
       _import();
     },
     closeDialog(){
-      send('close');
+      send('closePage');
     },
   },
   async mounted(){

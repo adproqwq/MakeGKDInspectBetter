@@ -187,6 +187,6 @@ export default async () => {
   else if(mode == 'groups') window.Hanashiro.returnResult = json5.stringify(origin.groups[0], null, 2);
   else if(mode == 'rules') window.Hanashiro.returnResult = json5.stringify(iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0], null, 2);
 
-  send('close');
+  send('closePage');
   send('modifyEnd');
 };

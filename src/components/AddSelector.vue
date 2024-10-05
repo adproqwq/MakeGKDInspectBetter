@@ -49,14 +49,14 @@ export default defineComponent({
 
                 await setHanashiroSettings('selectors', savedSelectors);
 
-                send('close');
+                send('closePage');
               }
             },
-            onCancel: () => send('close'),
+            onCancel: () => send('closePage'),
           }).catch();
         }
       },
-      onCancel: () => send('close'),
+      onCancel: () => send('closePage'),
     }).catch();
   },
 });

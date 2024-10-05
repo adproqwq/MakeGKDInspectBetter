@@ -10,7 +10,7 @@ export default defineComponent({
       await search();
     },
     closeDialog(){
-      send('close');
+      send('closePage');
     },
   },
   async mounted(){

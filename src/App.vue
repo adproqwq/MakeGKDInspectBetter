@@ -7,6 +7,7 @@ import './common/autoShowSize';
 import './common/hookCopy';
 import './common/insertIcon';
 import { receive } from './utils/communicate';
+import observeElement from './utils/observeElement';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
 import Help from './components/Help.vue';
@@ -53,7 +54,7 @@ export default defineComponent({
       this.currentComponent = 'ManageSelectors';
     });
 
-    receive('close', () => {
+    receive('closePage', () => {
       this.currentComponent = '';
     });
   },
