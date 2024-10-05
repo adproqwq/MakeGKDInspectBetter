@@ -19,7 +19,7 @@ export default defineComponent({
   },
   data(){
     return {
-      originRule: json5.parse(window.Hanashiro.originRule) as RawApp,
+      originRule: <RawApp>json5.parse(window.Hanashiro.originRule),
     };
   },
   async mounted(){
@@ -36,6 +36,8 @@ export default defineComponent({
     receive('MainOpen', () => {
       (document.querySelector('#page') as Dialog).open = true;
     });
+
+    receive('originRuleChange', () => this.originRule = <RawApp>json5.parse(window.Hanashiro.originRule));
   },
 });
 </script>
@@ -43,7 +45,7 @@ export default defineComponent({
 <template>
   <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc>
     <div>
-      <span>选择模式：</span>
+      <span>选择复制模式：</span>
       <mdui-radio-group id="mode" value="app">
         <mdui-radio value="ts">ts模式</mdui-radio>
         <mdui-radio value="app">app模式</mdui-radio>

@@ -5,6 +5,7 @@ import { defineComponent } from 'vue';
 import './common/init';
 import './common/autoShowSize';
 import './common/hookCopy';
+import './common/watchHanashiro';
 import './common/insertIcon';
 import { receive, send } from './utils/communicate';
 import Main from './components/Main.vue';

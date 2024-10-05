@@ -5,6 +5,7 @@ if(!(await getHanashiroSettings('selectors'))) await setHanashiroSettings('selec
 
 Object.defineProperty(window, 'Hanashiro', {
   value: {},
+  writable: true,
 });
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
