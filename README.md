@@ -1,6 +1,6 @@
 # MakeGKDInspectBetter
 
-当前版本：Mercury 2.5.1
+当前版本：Mercury 2.5.2
 
 Powered By Vite + Vue + TypeScript
 
