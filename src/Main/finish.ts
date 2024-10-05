@@ -176,7 +176,7 @@ export default async () => {
     }
   }
 
-  origin.groups[0] = sort(origin.groups[0]);
+  origin.groups[0] = await sort(origin.groups[0]);
 
   const stringify = json5.stringify(origin, null, 2);
   if(mode == 'ts'){

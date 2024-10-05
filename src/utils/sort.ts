@@ -1,4 +1,5 @@
 import type { RawAppGroup, RawAppRule } from '@gkd-kit/api';
+import { getHanashiroSettings } from './indexedDB';
 
 type GroupsKeyOrder = [
   'key',
@@ -10,7 +11,7 @@ type GroupsKeyOrder = [
   'rules',
 ];
 
-type RulesKeyOrder = [
+export type RulesKeyOrder = [
   'key',
   'preKeys',
   'fastQuery',
@@ -26,7 +27,7 @@ type RulesKeyOrder = [
   'snapshotUrls',
 ];
 
-const groupsKeyOrder: GroupsKeyOrder = [
+export const groupsKeyOrder: GroupsKeyOrder = [
   'key',
   'name',
   'desc',
@@ -36,23 +37,9 @@ const groupsKeyOrder: GroupsKeyOrder = [
   'rules',
 ];
 
-const rulesKeyOrder: RulesKeyOrder = [
-  'key',
-  'preKeys',
-  'fastQuery',
-  'quickFind',
-  'matchTime',
-  'actionMaximum',
-  'resetMatch',
-  'action',
-  'activityIds',
-  'position',
-  'matches',
-  'exampleUrls',
-  'snapshotUrls',
-];
+export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
+  const rulesKeyOrder = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
 
-export default (groups: RawAppGroup): RawAppGroup => {
   const groupsKeyValue: any[] = [];
   const rulesKeyValue: any[] = [];
 
