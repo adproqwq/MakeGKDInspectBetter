@@ -7,7 +7,6 @@ import './common/autoShowSize';
 import './common/hookCopy';
 import './common/insertIcon';
 import { receive } from './utils/communicate';
-import observeElement from './utils/observeElement';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
 import Help from './components/Help.vue';
@@ -59,7 +58,7 @@ export default defineComponent({
     });
   },
   mounted(){
-    setColorScheme('#984f11');
+    setColorScheme('#dedee1');
   },
 });
 </script>
