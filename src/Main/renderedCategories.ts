@@ -1,5 +1,4 @@
 import { RadioGroup } from 'mdui';
-import json5 from 'json5';
 import { RawCategory } from '@gkd-kit/api';
 import { getHanashiroSettings } from '../utils/indexedDB';
 

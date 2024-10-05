@@ -1,4 +1,4 @@
-import { RadioGroup, Switch, TextField, Dialog, snackbar } from 'mdui';
+import { RadioGroup, Switch, TextField, snackbar } from 'mdui';
 import { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
 import iArrayToArray from '../utils/iArrayToArray';

@@ -1,4 +1,4 @@
-import { TextField, Switch, Dialog } from 'mdui';
+import { TextField, Switch } from 'mdui';
 import json5 from 'json5';
 import { setHanashiroSettings } from '../utils/indexedDB';
 import { send } from '../utils/communicate';
