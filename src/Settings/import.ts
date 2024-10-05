@@ -30,7 +30,7 @@ const getRemoteSettings = async (url: string) => {
   }
 
   snackbar({
-    message: '设置应用成功！打开其他页面再打开设置页即可看见更改',
+    message: '设置应用成功！重新打开页面即可看见更改',
     placement: 'top',
   });
 };
