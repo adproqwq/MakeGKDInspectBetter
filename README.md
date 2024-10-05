@@ -1,6 +1,6 @@
 # MakeGKDInspectBetter
 
-当前版本：Venus 2.6.0
+当前版本：Venus 2.6.1
 
 Powered By Vite + Vue + TypeScript
 
