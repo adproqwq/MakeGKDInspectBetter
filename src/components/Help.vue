@@ -1,21 +1,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
-import { receive } from '../utils/communicate';
+import { send } from '../utils/communicate';
 
 export default defineComponent({
+  methods: {
+    closeDialog(){
+      send('close');
+    },
+  },
   mounted(){
     (document.querySelector('#page') as Dialog).open = true;
-
-    receive('HelpOpen', () => {
-      (document.querySelector('#page') as Dialog).open = true;
-    });
   },
 });
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="帮助" close-on-overlay-click close-on-esc>
+  <mdui-dialog id="page" headline="帮助" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <p>
         本脚本已开源至Github，欢迎反馈：<a href="https://github.com/adproqwq/MakeGKDInspectBetter">Github仓库</a><br>

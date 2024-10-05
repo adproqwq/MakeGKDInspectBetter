@@ -31,33 +31,31 @@ export default defineComponent({
   },
   created(){
     receive('copyEvent', () => {
-      if(this.currentComponent != 'Main') this.currentComponent = 'Main';
-      else send('MainOpen');
+      this.currentComponent = 'Main';
     });
 
     receive('openSettings', () => {
-      if(this.currentComponent != 'Settings') this.currentComponent = 'Settings';
-      else send('SettingsOpen');
+      this.currentComponent = 'Settings';
     });
 
     receive('openHelp', () => {
-      if(this.currentComponent != 'Help') this.currentComponent = 'Help';
-      else send('HelpOpen');
+      this.currentComponent = 'Help';
     });
 
     receive('openUseSelector', () => {
-      if(this.currentComponent != 'UseSelector') this.currentComponent = 'UseSelector';
-      else send('UseSelectorOpen');
+      this.currentComponent = 'UseSelector';
     });
 
     receive('openAddSelector', () => {
-      if(this.currentComponent != 'AddSelector') this.currentComponent = 'AddSelector';
-      else send('AddSelectorOpen');
+      this.currentComponent = 'AddSelector';
     });
 
     receive('openManageSelectors', () => {
-      if(this.currentComponent != 'ManageSelectors') this.currentComponent = 'ManageSelectors';
-      else send('ManageSelectorsOpen');
+      this.currentComponent = 'ManageSelectors';
+    });
+
+    receive('close', () => {
+      this.currentComponent = '';
     });
   },
   mounted(){

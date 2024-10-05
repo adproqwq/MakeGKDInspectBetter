@@ -6,7 +6,7 @@ import json5 from 'json5';
 import settings from '../Settings/settings';
 import _import from '../Settings/import';
 import _export from '../Settings/export';
-import { receive } from '../utils/communicate';
+import { send } from '../utils/communicate';
 import { getHanashiroSettings } from '../utils/indexedDB';
 
 export default defineComponent({
@@ -20,6 +20,9 @@ export default defineComponent({
     importSettings(){
       _import();
     },
+    closeDialog(){
+      send('close');
+    },
   },
   async mounted(){
     if(await getHanashiroSettings('categories')){
@@ -30,16 +33,12 @@ export default defineComponent({
     if(await getHanashiroSettings<boolean>('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
-
-    receive('SettingsOpen', () => {
-      (document.querySelector('#page') as Dialog).open = true;
-    });
   },
 });
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="设置" close-on-overlay-click close-on-esc>
+  <mdui-dialog id="page" headline="设置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <mdui-button variant="tonal" @click="exportSettings">导出</mdui-button>
       <mdui-button variant="tonal" @click="importSettings">导入</mdui-button>

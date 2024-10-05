@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
 import { generateSelectors, editSelector } from '../selectors/manage';
-import { receive } from '../utils/communicate';
+import { send } from '../utils/communicate';
 
 export default defineComponent({
   methods: {
@@ -10,24 +10,19 @@ export default defineComponent({
       await editSelector();
     },
     close(){
-      (document.querySelector('#page') as Dialog).open = false;
+      send('close');
     },
   },
   async mounted(){
     await generateSelectors();
 
     (document.querySelector('#page') as Dialog).open = true;
-
-    receive('ManageSelectorsOpen', async () => {
-      await generateSelectors();
-      (document.querySelector('#page') as Dialog).open = true;
-    });
   },
 });
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="管理选择器" close-on-overlay-click close-on-esc>
+  <mdui-dialog id="page" headline="管理选择器" close-on-overlay-click close-on-esc @closed="close">
     <div>
       <span>选择选择器：</span>
       <mdui-radio-group id="selectors"></mdui-radio-group>

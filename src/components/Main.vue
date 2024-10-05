@@ -6,7 +6,7 @@ import { Dialog, RadioGroup } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
 import renderedCategories from '../Main/renderedCategories';
-import { receive } from '../utils/communicate';
+import { send } from '../utils/communicate';
 
 export default defineComponent({
   methods: {
@@ -15,6 +15,9 @@ export default defineComponent({
     },
     key(){
       key();
+    },
+    closeDialog(){
+      send('close');
     },
   },
   data(){
@@ -32,18 +35,12 @@ export default defineComponent({
     });
 
     (document.querySelector('#page') as Dialog).open = true;
-
-    receive('MainOpen', () => {
-      (document.querySelector('#page') as Dialog).open = true;
-    });
-
-    receive('originRuleChange', () => this.originRule = <RawApp>json5.parse(window.Hanashiro.originRule));
   },
 });
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc>
+  <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <span>选择复制模式：</span>
       <mdui-radio-group id="mode" value="app">

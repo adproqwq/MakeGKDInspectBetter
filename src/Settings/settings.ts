@@ -1,6 +1,7 @@
 import { TextField, Switch, Dialog } from 'mdui';
 import json5 from 'json5';
 import { setHanashiroSettings } from '../utils/indexedDB';
+import { send } from '../utils/communicate';
 
 export default async () => {
   const categories = (document.querySelector('#categories') as TextField).value;
@@ -15,5 +16,5 @@ export default async () => {
   await setHanashiroSettings('autoAddSelector', isAutoAddSelector);
   await setHanashiroSettings('activityIdsSimply', isActivityIdsSimply);
 
-  (document.querySelector('#page') as Dialog).open = false;
+  send('close');
 };
