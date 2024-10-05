@@ -27,7 +27,7 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '好段东风，好轮明月，尽教封侯误。',
+    message: '北风吹雪四更初，嘉瑞天教及岁除。',
     autoCloseDelay: 2000,
     placement: 'top',
   });
