@@ -4,6 +4,8 @@ import { TextField, Switch, Dialog } from 'mdui';
 import { RawCategory } from '@gkd-kit/api';
 import json5 from 'json5';
 import settings from '../Settings/settings';
+import _import from '../Settings/import';
+import _export from '../Settings/export';
 import { receive } from '../utils/communicate';
 import { getHanashiroSettings } from '../utils/indexedDB';
 
@@ -11,6 +13,12 @@ export default defineComponent({
   methods: {
     settings(){
       settings();
+    },
+    async exportSettings(){
+      await _export();
+    },
+    importSettings(){
+      _import();
     },
   },
   async mounted(){
@@ -32,6 +40,10 @@ export default defineComponent({
 
 <template>
   <mdui-dialog id="page" headline="设置" close-on-overlay-click close-on-esc>
+    <div>
+      <mdui-button variant="tonal" @click="exportSettings">导出</mdui-button>
+      <mdui-button variant="tonal" @click="importSettings">导入</mdui-button>
+    </div>
     <div>
       <span>分类设置：</span>
       <mdui-text-field variant="filled" id="categories" label="分类" placeholder="填入合法的分类" rows="10"></mdui-text-field>
