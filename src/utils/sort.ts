@@ -8,6 +8,7 @@ type GroupsKeyOrder = [
   'matchTime',
   'actionMaximum',
   'resetMatch',
+  'priorityTime',
   'rules',
 ];
 
@@ -19,6 +20,7 @@ export type RulesKeyOrder = [
   'matchTime',
   'actionMaximum',
   'resetMatch',
+  'priorityTime',
   'action',
   'activityIds',
   'position',
@@ -34,6 +36,7 @@ export const groupsKeyOrder: GroupsKeyOrder = [
   'matchTime',
   'actionMaximum',
   'resetMatch',
+  'priorityTime',
   'rules',
 ];
 
@@ -63,6 +66,7 @@ export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
     matchTime: groupsKeyValue[3],
     actionMaximum: groupsKeyValue[4],
     resetMatch: groupsKeyValue[5],
+    priorityTime: groupsKeyValue[6],
     rules: [sortedRules],
   };
 

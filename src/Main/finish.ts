@@ -56,6 +56,7 @@ export default async () => {
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.Hanashiro.currentCategory;
+  const isPriority = (document.querySelector('#priority') as Switch).checked;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
@@ -100,6 +101,15 @@ export default async () => {
       origin.groups[0].resetMatch = 'app';
       origin.groups[0].matchTime = 10000;
     }
+  }
+
+  if(isPriority){
+    if(mode == 'rules'){
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+      rule.priorityTime = 10000;
+      origin.groups[0].rules = [rule];
+    }
+    else origin.groups[0].priorityTime = 10000;
   }
 
   if(isNoExample){

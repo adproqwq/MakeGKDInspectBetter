@@ -67,6 +67,11 @@ export default defineComponent({
       <span class="introduction">插入matchTime、resetMatch和actionMaximum</span>
     </div>
     <div>
+      <span>使用优先级字段：</span>
+      <mdui-switch id="priority"></mdui-switch>
+      <span class="introduction">插入priorityTime字段，将在GKD最新发行版发布时内置入开屏广告相关默认项内</span>
+    </div>
+    <div>
       <span>去除exampleUrls：</span>
       <mdui-switch id="noExample"></mdui-switch>
     </div>
