@@ -56,8 +56,8 @@ export default defineComponent({
       <mdui-text-field variant="filled" id="rulesKeySort" label="字段排序" placeholder="目前仅支持rules内字段" rows="10"></mdui-text-field>
       <span class="introduction">
         接受一个字符串数组，目前支持的字段有：
-        key,preKeys,fastQuery,quickFind,matchTime,actionMaximum,resetMatch,action,
-        activityIds,position,matches,exampleUrls,snapshotUrls
+        key,preKeys,fastQuery,quickFind,matchTime,actionMaximum,resetMatch
+        priorityTime,action,activityIds,position,matches,exampleUrls,snapshotUrls
       </span>
     </div>
     <div>
