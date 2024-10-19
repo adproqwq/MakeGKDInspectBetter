@@ -72,6 +72,9 @@ export default defineComponent({
   color: rgb(var(--mdui-color-on-surface-variant));
   display: block;
   opacity: 1;
+  word-break: normal;
+  white-space: pre-warp;
+  word-wrap: break-word;
   transition: opacity var(--mdui-motion-duration-short4) var(--mdui-motion-easing-linear);
   font-size: var(--mdui-typescale-body-small-size);
   font-weight: var(--mdui-typescale-body-small-weight);
