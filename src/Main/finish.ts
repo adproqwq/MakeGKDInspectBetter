@@ -77,8 +77,11 @@ export default async () => {
 
     if(category == '开屏广告'){
       const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+      if(mode == 'rules') rule.priorityTime = 10000;
+      else{
+        origin.groups[0].priorityTime = 10000;
+      }
       delete rule.activityIds;
-      rule.priorityTime = 10000;
       origin.groups[0].rules = [rule];
     }
   }
