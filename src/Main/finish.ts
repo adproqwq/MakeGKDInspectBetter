@@ -61,7 +61,7 @@ export default async () => {
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
-  const position = constructPositionArray() ? constructPositionArray() : false;
+  const position = constructPositionArray().length != 0 ? constructPositionArray() : false;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
