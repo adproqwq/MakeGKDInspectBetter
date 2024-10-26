@@ -13,6 +13,7 @@ import Help from './components/Help.vue';
 import UseSelector from './components/UseSelector.vue';
 import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
+import ChangeScreenshot from './components/ChangeScreenshot.vue';
 
 export default defineComponent({
   components: {
@@ -22,6 +23,7 @@ export default defineComponent({
     UseSelector,
     AddSelector,
     ManageSelectors,
+    ChangeScreenshot,
   },
   data(){
     return {
@@ -51,6 +53,10 @@ export default defineComponent({
 
     receive('openManageSelectors', () => {
       this.currentComponent = 'ManageSelectors';
+    });
+
+    receive('openChangeScreenshot', () => {
+      this.currentComponent = 'ChangeScreenshot';
     });
 
     receive('closePage', () => {

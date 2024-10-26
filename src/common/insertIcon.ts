@@ -35,6 +35,15 @@ observeElement('.n-input-group', () => {
       send('openManageSelectors');
     };
 
+    // 更换截图按钮
+    const ChangeScreenshotIcon = document.createElement('mdui-button-icon');
+    ChangeScreenshotIcon.icon = 'photo';
+    ChangeScreenshotIcon.style.height = '36px';
+    ChangeScreenshotIcon.style.width = '36px';
+    ChangeScreenshotIcon.onclick = () => {
+      send('openChangeScreenshot');
+    };
+
     // 设置按钮
     const SettingsIcon = document.createElement('mdui-button-icon');
     SettingsIcon.icon = 'settings';
@@ -53,7 +62,7 @@ observeElement('.n-input-group', () => {
       send('openHelp');
     };
 
-    iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, SettingsIcon, HelpIcon);
+    iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, ChangeScreenshotIcon, SettingsIcon, HelpIcon);
     inputGroup.insertAdjacentElement('beforebegin', iconBar);
   }
 }, true);

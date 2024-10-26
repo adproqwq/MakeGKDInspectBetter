@@ -55,6 +55,10 @@ export const editNode = async (snapshotId: string, nodeId: number, options: Edit
   }
 };
 
+export const replaceScreenshot = async (snapshotId: string, image: ArrayBuffer) => {
+  await screenshotStorage.setItem<ArrayBuffer>(snapshotId, image);
+};
+
 export const getNodeAttr = async (snapshotId: string, nodeId: number, target: AttrList): Promise<PrimitiveType> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
 
