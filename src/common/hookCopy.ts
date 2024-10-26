@@ -23,7 +23,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             placement: 'top',
             onClosed: () => resolve(true),
           });
-        });
+        }, true);
       });
     }
     else if(data.startsWith('name=')){

@@ -3,6 +3,6 @@ export const send = (channal: string) => {
   window.dispatchEvent(event);
 };
 
-export const receive = (channal: string, callback: () => void) => {
-  window.addEventListener(channal, callback);
+export const receive = (channal: string, callback: () => void, once?: boolean) => {
+  window.addEventListener(channal, callback, { once: once });
 };
