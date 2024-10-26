@@ -1,6 +1,7 @@
 import { RadioGroup, Switch, TextField, snackbar } from 'mdui';
 import { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
+import { constructPositionArray } from './position';
 import iArrayToArray from '../utils/iArrayToArray';
 import { send } from '../utils/communicate';
 import sort from '../utils/sort';
@@ -61,7 +62,7 @@ export default async () => {
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
-  const position = (document.querySelector('#position') as TextField).value;
+  const position = constructPositionArray() ? constructPositionArray() : false;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
@@ -141,37 +142,20 @@ export default async () => {
   }
 
   if(position){
-    if(position.startsWith('[') && position.endsWith(']')){
-      const purePosition = position.slice(1, position.length - 1);
-      const positionArray = purePosition.split(',');
-      const positionName: ['top', 'left', 'right', 'bottom'] = ['top', 'left', 'right', 'bottom'];
-      const positionObject: Position = {};
+    const positionName: ['top', 'left', 'right', 'bottom'] = ['top', 'left', 'right', 'bottom'];
+    const positionObject: Position = {};
 
-      positionArray.forEach((position, index) => {
-        if(position){
-          positionObject[positionName[index]] = position;
-        }
-      });
-
-      if(!checkPositionLegal(positionObject)){
-        snackbar({
-          message: '非法坐标',
-          placement: 'top',
-        });
-        return;
+    position.forEach((position, index) => {
+      if(position){
+        positionObject[positionName[index]] = position;
       }
+    });
 
-      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-      rule.position = positionObject;
-      origin.groups[0].rules = [rule];
-    }
-    else{
-      snackbar({
-        message: '非法坐标',
-        placement: 'top',
-      });
-      return;
-    }
+    if(!checkPositionLegal(positionObject)) return;
+
+    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+    rule.position = positionObject;
+    origin.groups[0].rules = [rule];
   }
 
   if(isSimplyActivityIds === true){

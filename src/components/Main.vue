@@ -2,9 +2,10 @@
 import { defineComponent } from 'vue';
 import json5 from 'json5';
 import { RawApp } from '@gkd-kit/api';
-import { Dialog, RadioGroup } from 'mdui';
+import type { Dialog, RadioGroup, TextField } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
+import { onChange } from '../Main/position';
 import renderedCategories from '../Main/renderedCategories';
 import { send } from '../utils/communicate';
 
@@ -15,6 +16,9 @@ export default defineComponent({
     },
     key(){
       key();
+    },
+    onPositionChange(event: Event){
+      onChange(event.target as TextField);
     },
     closeDialog(){
       send('closePage');
@@ -92,7 +96,14 @@ export default defineComponent({
     </div>
     <div>
       <span>坐标：</span>
-      <mdui-text-field variant="filled" id="position" label="坐标" placeholder="填入[top,left,right,bottom]的合法坐标，空出无用项"></mdui-text-field>
+      <mdui-chip variant="input">左</mdui-chip>
+      <mdui-text-field variant="filled" class="position" id="left" @change="onPositionChange"></mdui-text-field>
+      <mdui-chip variant="input">右</mdui-chip>
+      <mdui-text-field variant="filled" class="position" id="right" @change="onPositionChange"></mdui-text-field>
+      <mdui-chip variant="input">上</mdui-chip>
+      <mdui-text-field variant="filled" class="position" id="top" @change="onPositionChange"></mdui-text-field>
+      <mdui-chip variant="input">下</mdui-chip>
+      <mdui-text-field variant="filled" class="position" id="bottom" @change="onPositionChange"></mdui-text-field>
     </div>
     <div>
       <span>规则组名称：</span>
@@ -112,5 +123,10 @@ export default defineComponent({
 mdui-dialog > * > span {
   display: flex;
   font-size: var(--mdui-typescale-body-large-size);
+}
+
+.position {
+  width: 15%;
+  height: var(--mdui-typescale-title-large-line-height);
 }
 </style>
