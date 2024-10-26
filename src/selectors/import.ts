@@ -2,11 +2,12 @@ import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
 import { fileOpen } from 'browser-fs-access';
 import { ISelectors } from '../types/selectors';
-import { setHanashiroSettings } from '../utils/indexedDB';
+import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
 
 const setValue = async (selectors: ISelectors[]) => {
   try{
-    await setHanashiroSettings('selectors', selectors);
+    const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+    await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
   } catch{
     snackbar({
       message: '应用设置失败',
