@@ -1,18 +1,39 @@
 import { snackbar, dialog } from 'mdui';
-import { editNode, downloadSnapshot } from '../utils/indexedDB';
+import { getNodeAttr, editNode, downloadSnapshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 
-const replaceNodeInfo = () => {
+const replaceNodeInfo = async () => {
   const snapshotId = getSnapshotId();
   const nodeId = Number((document.querySelectorAll('tr > td > span')[23] as HTMLSpanElement).textContent);
+
+  const text = await getNodeAttr(snapshotId, nodeId, 'text') as string | null;
+  const desc = await getNodeAttr(snapshotId, nodeId, 'desc') as string | null;
+
+  let newText: string | null, newDesc: string | null;
+
+  if(text !== null){
+    newText = '';
+    for(let i = 0;i < text.length;i++){
+      newText += '*';
+    }
+  }
+  else newText = null;
+  if(desc !== null){
+    newDesc = '';
+    for(let i = 0;i < desc.length;i++){
+      newDesc += '*';
+    }
+  }
+  else newDesc = null;
+
   editNode(snapshotId, nodeId, [
     {
       target: 'text',
-      value: '本节点信息已由 GKD网页审查工具增强 脚本修改',
+      value: newText,
     },
     {
       target: 'desc',
-      value: '本节点信息已由 GKD网页审查工具增强 脚本修改',
+      value: newDesc,
     },
   ]).then((result) => {
     if(result) snackbar({
@@ -37,7 +58,6 @@ export default () => {
             snackbar({
               message: '开始下载中……下载开始后会自动关闭弹窗',
               placement: 'top',
-              autoCloseDelay: 1000,
             });
             downloadSnapshot(getSnapshotId())
               .then(() => {
@@ -48,7 +68,6 @@ export default () => {
                 snackbar({
                   message: '下载失败',
                   placement: 'top',
-                  autoCloseDelay: 1000,
                 });
                 reject();
               });

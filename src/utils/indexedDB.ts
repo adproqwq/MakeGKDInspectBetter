@@ -55,6 +55,15 @@ export const editNode = async (snapshotId: string, nodeId: number, options: Edit
   }
 };
 
+export const getNodeAttr = async (snapshotId: string, nodeId: number, target: AttrList): Promise<PrimitiveType> => {
+  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+
+  const nodes = snapshotInfo!.nodes;
+  const nodeAttr = nodes[nodeId].attr;
+
+  return nodeAttr[target] as PrimitiveType;
+};
+
 export const downloadSnapshot = async (snapshotId: string) => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
   const screenshot = await screenshotStorage.getItem<ArrayBuffer>(snapshotId);
