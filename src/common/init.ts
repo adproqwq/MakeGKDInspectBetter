@@ -43,7 +43,7 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '北风卷地白草折，胡天八月即飞雪。',
+    message: '江天一色无纤尘，皎皎空中孤月轮。',
     autoCloseDelay: 2000,
     placement: 'top',
   });
