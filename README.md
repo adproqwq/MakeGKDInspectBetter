@@ -1,6 +1,6 @@
 # MakeGKDInspectBetter
 
-当前版本：Mars 2.8.2
+当前版本：Mars 2.8.3
 
 Powered By Vite + Vue + TypeScript
 
