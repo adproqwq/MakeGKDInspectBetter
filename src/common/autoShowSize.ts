@@ -9,7 +9,8 @@ observeElement('.n-message__content', () => {
       const lostNodeNum = Number(searchResult[0].slice(1,-1));
 
       const showSizeURL = new URL(window.location.href);
-      showSizeURL.searchParams.set('showSize', String(lostNodeNum + 2000));
+      const currentShowSize = new URL(window.location.href).searchParams.get('showSize');
+      showSizeURL.searchParams.set('showSize', String(lostNodeNum + (currentShowSize === null ? 2000 : Number(currentShowSize))));
       window.location.href = showSizeURL.toString();
     }
   }
