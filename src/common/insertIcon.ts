@@ -67,7 +67,7 @@ observeElement('.n-input-group', () => {
   }
 }, true);
 
-observeElement('.z-1.box-shadow-dim.bg-white', () => {
+observeElement('#app', () => {
   const app = document.querySelector('#app')!;
 
   // 节点打码按钮
@@ -77,7 +77,7 @@ observeElement('.z-1.box-shadow-dim.bg-white', () => {
   editNodeIcon.extended = true;
   editNodeIcon.textContent = '替换当前节点信息';
   editNodeIcon.style.right = '16px';
-  editNodeIcon.style.bottom = '120px';
+  editNodeIcon.style.bottom = '60px';
   editNodeIcon.setAttribute('fixed', '');
   editNodeIcon.onclick = replaceNodeInfo;
 
