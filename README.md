@@ -23,6 +23,9 @@ Powered By Vite + Vue + TypeScript
 1. 打开[`Latest Release`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
 2. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
 
+> [!IMPORTANT]
+> 有且仅有以上3种分发渠道由仓库维护者直接管理。使用其他渠道的分发将面临一定的风险，请谨慎使用！
+
 > [!WARNING]
 > 请确保你已安装`TemperMonkey`或`ScriptCat`或其他类似的脚本管理器，但本脚本仅对`TemperMonkey`和`ScriptCat`进行长期支持，使用其他脚本管理器出现的任何Bug或失效，开发者保留无视的权力。
 
