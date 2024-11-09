@@ -26,7 +26,7 @@ Powered By Vite + Vue + TypeScript
 > [!IMPORTANT]
 > 有且仅有以上3种分发渠道由仓库维护者直接管理。使用其他渠道的分发将面临一定的风险，请谨慎使用！
 
-> [!WARNING]
+> [!NOTE]
 > 请确保你已安装`TemperMonkey`或`ScriptCat`或其他类似的脚本管理器，但本脚本仅对`TemperMonkey`和`ScriptCat`进行长期支持，使用其他脚本管理器出现的任何Bug或失效，开发者保留无视的权力。
 
 ## 构建
@@ -61,9 +61,13 @@ pnpm build
 
 如果是为了解决某个`Issue`而提出的`Pull Request`，需要在`Pull Request`描述中附上对应`Issue`的编号
 
-> [!WARNING]
+> [!IMPORTANT]
 > 仓库维护者有直接关闭`Pull Request`的权力
 
 ## 捐赠
 
 如果你想要给我捐赠的话，点击项目旁的`Sponsor`，或者到我的[爱发电主页](https://afdian.com/a/Adpro)给我捐赠即可
+
+## 许可证
+
+本仓库已签署MIT开源许可证，请遵循相关许可证条款规定。
