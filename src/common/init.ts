@@ -5,7 +5,6 @@ const rulesKeySort = [
   'key',
   'preKeys',
   'fastQuery',
-  'quickFind',
   'matchTime',
   'actionMaximum',
   'resetMatch',
@@ -27,7 +26,7 @@ if(!(await getHanashiroSettings('rulesKeySort')) || (await getHanashiroSettings<
 for(const rulesKey of (await getHanashiroSettings<Array<string>>('rulesKeySort'))!){
   if(!rulesKeySort.includes(rulesKey)) confirm({
     headline: '同步最新rulesKey排序',
-    description: '检测你的rulesKey排序有缺失的字段，可能无法使用最新的功能。是否同步？注意：这会丢失你现有的排序设置。',
+    description: '检测你的rulesKey排序有多余或缺失字段，可能无法使用最新的功能。是否同步？注意：这会丢失你现有的排序设置。',
     closeOnEsc: true,
     closeOnOverlayClick: true,
     confirmText: '同步',

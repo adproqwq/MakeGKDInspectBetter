@@ -75,11 +75,6 @@ export default defineComponent({
       <mdui-switch id="noExample"></mdui-switch>
     </div>
     <div>
-      <span>使用fastQuery：</span>
-      <mdui-switch id="fastQuery" checked></mdui-switch>
-      <span class="introduction">使用fastQuery替换quickFind</span>
-    </div>
-    <div>
       <span>修改key值为：</span>
       <mdui-text-field id="key" variant="filled" type="number" label="key" placeholder="填写一个数字"
         helper="rules模式修改ruleKey，其余修改groupKey。请提前选好模式，失焦保存！" @change="key">

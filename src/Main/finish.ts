@@ -59,7 +59,6 @@ export default async () => {
   const category = window.Hanashiro.currentCategory;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
-  const isUseFastQuery = (document.querySelector('#fastQuery') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position = constructPositionArray().length != 0 ? constructPositionArray() : false;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
@@ -107,15 +106,6 @@ export default async () => {
   if(isNoExample){
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
     delete rule.exampleUrls;
-    origin.groups[0].rules = [rule];
-  }
-
-  if(isUseFastQuery){
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    if(rule.quickFind){
-      delete rule.quickFind;
-      rule.fastQuery = true;
-    }
     origin.groups[0].rules = [rule];
   }
 

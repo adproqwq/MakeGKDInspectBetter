@@ -16,7 +16,6 @@ export type RulesKeyOrder = [
   'key',
   'preKeys',
   'fastQuery',
-  'quickFind',
   'matchTime',
   'actionMaximum',
   'resetMatch',
