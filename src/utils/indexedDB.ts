@@ -55,6 +55,16 @@ export const editNode = async (snapshotId: string, nodeId: number, options: Edit
   }
 };
 
+export const getScreenInfo = async (snapshotId: string): Promise<{ width: number, height: number }> => {
+  const snapshotInfo = (await snapshotStorage.getItem<Snapshot>(snapshotId))!;
+
+  return { width: snapshotInfo.screenWidth, height: snapshotInfo.screenHeight };
+};
+
+export const getScreenshot = async (snapshotId: string): Promise<ArrayBuffer> => {
+  return (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
+};
+
 export const replaceScreenshot = async (snapshotId: string, image: ArrayBuffer) => {
   await screenshotStorage.setItem<ArrayBuffer>(snapshotId, image);
 };

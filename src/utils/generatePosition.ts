@@ -1,0 +1,74 @@
+import type { Position } from '@gkd-kit/api';
+import { dialog, type Dialog } from 'mdui';
+import json5 from 'json5';
+import { getScreenshot, getNodeAttr, getScreenInfo } from './indexedDB';
+import getSnapshotId from './getSnapshotId';
+
+const arrayBufferToImage = (arrayBuffer: ArrayBuffer): HTMLImageElement => {
+  const arrayBufferView = new Uint8Array(arrayBuffer);
+  const blob = new Blob([arrayBufferView], { type: 'image/png' });
+  const src = (window.URL || window.webkitURL).createObjectURL(blob);
+  const img = document.createElement('img');
+  img.src = src;
+
+  return img;
+};
+
+export default async () => {
+  const canvas = document.querySelector('#canvas')! as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  const snapshotId = getSnapshotId();
+  const screenshot = await getScreenshot(snapshotId);
+  const nodeId = Number((document.querySelectorAll('tr > td > span')[23] as HTMLSpanElement).textContent);
+
+  const screenWidth = (await getScreenInfo(getSnapshotId())).width;
+  const screenHeight = (await getScreenInfo(getSnapshotId())).height;
+  const left = await getNodeAttr(snapshotId, nodeId, 'left')! as number;
+  const top = await getNodeAttr(snapshotId, nodeId, 'top')! as number;
+  const width = await getNodeAttr(snapshotId, nodeId, 'width')! as number;
+  const height = await getNodeAttr(snapshotId, nodeId, 'height')! as number;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const fullImg = arrayBufferToImage(screenshot);
+
+  fullImg.onload = () => {
+    const tampCanvas = document.createElement('canvas');
+    const tampCtx = tampCanvas.getContext('2d')!;
+
+    tampCanvas.width = screenWidth;
+    tampCanvas.height = screenHeight;
+
+    tampCtx.drawImage(fullImg, 0, 0, screenWidth, screenHeight);
+    const imgData = tampCtx.getImageData(left, top, width, height);
+
+    ctx.putImageData(imgData, 0, 0);
+  };
+
+  canvas.onclick = (e) => {
+    const x = e.clientX - canvas.offsetLeft;
+    const y = e.clientY - canvas.offsetTop;
+
+    const absolutePosition: Position = {
+      left: left + x,
+      top: top + y,
+    };
+    const relativePosition: Position = {
+      left: `width * ${String((x / width).toFixed(4))}`,
+      top: `width * ${String((y / width).toFixed(4))}`,
+    };
+
+    dialog({
+      headline: '坐标',
+      description: '生成的绝对坐标和相对坐标',
+      body: `绝对坐标：
+      ${json5.stringify(absolutePosition, undefined, 2)}
+      相对坐标：
+      ${json5.stringify(relativePosition, undefined, 2)}`,
+      closeOnEsc: true,
+      closeOnOverlayClick: true,
+    });
+  };
+};

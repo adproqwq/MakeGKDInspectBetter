@@ -77,9 +77,20 @@ observeElement('#app', () => {
   editNodeIcon.extended = true;
   editNodeIcon.textContent = '替换当前节点信息';
   editNodeIcon.style.right = '16px';
-  editNodeIcon.style.bottom = '60px';
+  editNodeIcon.style.bottom = '120px';
   editNodeIcon.setAttribute('fixed', '');
   editNodeIcon.onclick = replaceNodeInfo;
 
-  app.append(editNodeIcon);
+  // 生成坐标按钮
+  const positionIcon = document.createElement('mdui-fab');
+  positionIcon.icon = 'open_with';
+  positionIcon.variant = 'secondary';
+  positionIcon.extended = true;
+  positionIcon.textContent = '生成坐标';
+  positionIcon.style.right = '16px';
+  positionIcon.style.bottom = '60px';
+  positionIcon.setAttribute('fixed', '');
+  positionIcon.onclick = () => send('openGeneratePosition');
+
+  app.append(editNodeIcon, positionIcon);
 });

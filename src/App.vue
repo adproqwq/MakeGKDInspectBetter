@@ -14,6 +14,7 @@ import UseSelector from './components/UseSelector.vue';
 import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
 import ChangeScreenshot from './components/ChangeScreenshot.vue';
+import GeneratePosition from './components/GeneratePosition.vue';
 
 export default defineComponent({
   components: {
@@ -24,6 +25,7 @@ export default defineComponent({
     AddSelector,
     ManageSelectors,
     ChangeScreenshot,
+    GeneratePosition,
   },
   data(){
     return {
@@ -57,6 +59,10 @@ export default defineComponent({
 
     receive('openChangeScreenshot', () => {
       this.currentComponent = 'ChangeScreenshot';
+    });
+
+    receive('openGeneratePosition', () => {
+      this.currentComponent = 'GeneratePosition';
     });
 
     receive('closePage', () => {
