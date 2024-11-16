@@ -5,13 +5,23 @@ import { generateSelectors, editSelector } from '../selectors/manage';
 import _import from '../selectors/import';
 import _export from '../selectors/export';
 import { send } from '../utils/communicate';
+import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
+import { ISelectors } from '../types/selectors';
 
 export default defineComponent({
   methods: {
     async editSelector(){
       await editSelector();
     },
-    close(){
+    async close(){
+      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      selectors.sort((a, b) => {
+        if(a.order > b.order) return -1;
+        else if (a.order == b.order) return 0;
+        else return 1;
+      });
+      await setHanashiroSettings('selectors', selectors);
+
       send('closePage');
     },
     async exportSelectors(){
@@ -48,6 +58,11 @@ export default defineComponent({
       <span>选择器：</span>
       <mdui-text-field variant="filled" id="selector" label="选择器" @change="editSelector"></mdui-text-field>
       <span class="introduction">留空删除。失焦保存</span>
+    </div>
+    <div>
+      <span>排序优先值：</span>
+      <mdui-text-field variant="filled" id="order" label="排序优先值" @change="editSelector"></mdui-text-field>
+      <span class="introduction">数字越大，排序越前，最小为1。失焦保存</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="close">关闭</mdui-button>

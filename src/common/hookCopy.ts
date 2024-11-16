@@ -58,6 +58,13 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
               selectors.push({
                 name: value ? value : selectorBase64,
                 base64: selectorBase64,
+                order: 1,
+              });
+
+              selectors.sort((a, b) => {
+                if(a.order > b.order) return -1;
+                else if (a.order == b.order) return 0;
+                else return 1;
               });
 
               await setHanashiroSettings('selectors', selectors);

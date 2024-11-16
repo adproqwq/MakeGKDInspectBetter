@@ -9,8 +9,14 @@ export const generateSelectors = async () => {
 
   let innerHtmlString = '';
 
-  selectors.forEach(({ name, base64 }, index) => {
-    innerHtmlString += `<mdui-radio id="selectorRadio" value=${base64} data-index="${String(index)}">${name}</mdui-radio>`;
+  selectors.sort((a, b) => {
+    if(a.order > b.order) return -1;
+    else if (a.order == b.order) return 0;
+    else return 1;
+  });
+
+  selectors.forEach(({ name, base64, order }, index) => {
+    innerHtmlString += `<mdui-radio id="selectorRadio" value=${base64} data-index="${String(index)}" data-order="${String(order ?? 1)}">${name}</mdui-radio>`;
   });
 
   selectorsGroup.innerHTML = innerHtmlString;
@@ -19,9 +25,11 @@ export const generateSelectors = async () => {
     radio.addEventListener('click', (e) => {
       const nameTextField = document.querySelector('#name')! as TextField;
       const selectorTextField = document.querySelector('#selector')! as TextField;
+      const orderTextField = document.querySelector('#order')! as TextField;
 
       nameTextField.value = (e.target as Radio).innerText;
       selectorTextField.value = decode((e.target as Radio).value);
+      orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
 
       window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
@@ -36,11 +44,13 @@ export const editSelector = async () => {
   let selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const nameTextField = document.querySelector('#name')! as TextField;
   const selectorTextField = document.querySelector('#selector')! as TextField;
+  const orderTextField = document.querySelector('#order')! as TextField;
 
   if(selectorTextField.value){
     selectors[window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
       base64: encodeURI(selectorTextField.value),
+      order: Number(orderTextField.value == '' ? 1 : orderTextField.value),
     };
   }
   else selectors.splice(window.Hanashiro.currentSelector.index, 1);

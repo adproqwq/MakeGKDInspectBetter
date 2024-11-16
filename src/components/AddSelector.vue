@@ -45,6 +45,13 @@ export default defineComponent({
                 savedSelectors.push({
                   name: name,
                   base64: encodeURI(selector),
+                  order: 1,
+                });
+
+                savedSelectors.sort((a, b) => {
+                  if(a.order > b.order) return -1;
+                  else if (a.order == b.order) return 0;
+                  else return 1;
                 });
 
                 await setHanashiroSettings('selectors', savedSelectors);
