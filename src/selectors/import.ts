@@ -4,10 +4,13 @@ import { fileOpen } from 'browser-fs-access';
 import { ISelectors } from '../types/selectors';
 import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
 
-const setValue = async (selectors: ISelectors[]) => {
+const setValue = async (selectors: ISelectors[], importWay: number) => {
   try{
-    const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
-    await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
+    if(importWay == 0) await setHanashiroSettings('selectors', selectors);
+    else{
+      const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
+    }
   } catch{
     snackbar({
       message: '应用设置失败',
@@ -17,7 +20,7 @@ const setValue = async (selectors: ISelectors[]) => {
   }
 };
 
-const getRemoteSelectors = async (url: string) => {
+const getRemoteSelectors = async (url: string, importWay: number) => {
   let remoteSelectors: ISelectors[];
   try{
     remoteSelectors = json5.parse(await (await fetch(url)).text());
@@ -29,7 +32,7 @@ const getRemoteSelectors = async (url: string) => {
     return;
   }
 
-  await setValue(remoteSelectors);
+  await setValue(remoteSelectors, importWay);
 
   snackbar({
     message: '设置应用成功！重新打开页面即可看见更改',
@@ -37,7 +40,7 @@ const getRemoteSelectors = async (url: string) => {
   });
 };
 
-const getLocalSelectors = async () => {
+const getLocalSelectors = async (importWay: number) => {
   const file = await fileOpen({
     description: '选择器清单文件',
     extensions: ['.json5'],
@@ -46,7 +49,7 @@ const getLocalSelectors = async () => {
 
   const localSelectors = json5.parse<ISelectors[]>(await file.text());
 
-  await setValue(localSelectors);
+  await setValue(localSelectors, importWay);
 
   snackbar({
     message: '设置应用成功！重新打开页面即可看见更改',
@@ -55,15 +58,38 @@ const getLocalSelectors = async () => {
 };
 
 export default () => {
+  let importWay = 0;
+
   dialog({
     headline: '选择导入方式',
+    description: '选择覆盖导入或者添加导入',
+    closeOnEsc: true,
+    closeOnOverlayClick: true,
+    actions: [
+      {
+        text: '覆盖导入',
+        onClick: () => {
+          importWay = 0;
+        },
+      },
+      {
+        text: '添加导入',
+        onClick: () => {
+          importWay = 1;
+        },
+      },
+    ],
+  });
+
+  dialog({
+    headline: '选择导入渠道',
     description: '选择从本地导入或者远程导入',
     closeOnEsc: true,
     closeOnOverlayClick: true,
     actions: [
       {
         text: '本地导入',
-        onClick: async () => await getLocalSelectors(),
+        onClick: async () => await getLocalSelectors(importWay),
       },
       {
         text: '远程导入',
@@ -84,7 +110,7 @@ export default () => {
 
                 return new Promise((_, reject) => reject(false));
               }
-              else await getRemoteSelectors(value);
+              else await getRemoteSelectors(value, importWay);
             },
           });
         },

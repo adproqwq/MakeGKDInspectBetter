@@ -60,7 +60,7 @@ const getLocalSettings = async () => {
 
 export default () => {
   dialog({
-    headline: '选择导入方式',
+    headline: '选择导入渠道',
     description: '选择从本地导入或者远程导入',
     closeOnEsc: true,
     closeOnOverlayClick: true,
