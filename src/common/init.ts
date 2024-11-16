@@ -42,7 +42,7 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '霜威出塞早，云色渡河秋。',
+    message: '五月畲田收火米，三更津吏报潮鸡。',
     autoCloseDelay: 2000,
     placement: 'top',
   });
