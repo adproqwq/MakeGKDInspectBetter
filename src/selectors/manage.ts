@@ -1,5 +1,5 @@
 import { decode, encodeURI } from 'js-base64';
-import { RadioGroup, TextField, Radio } from 'mdui';
+import { RadioGroup, TextField, Radio, snackbar } from 'mdui';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
@@ -56,4 +56,9 @@ export const editSelector = async () => {
   else selectors.splice(window.Hanashiro.currentSelector.index, 1);
 
   await setHanashiroSettings('selectors', selectors);
+
+  snackbar({
+    message: '修改成功！',
+    placement: 'top',
+  });
 };
