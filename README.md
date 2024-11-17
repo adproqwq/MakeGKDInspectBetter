@@ -1,6 +1,6 @@
 # MakeGKDInspectBetter
 
-当前版本：Jupiter 2.9.1
+当前版本：Jupiter 2.9.2
 
 Powered By Vite + Vue + TypeScript
 
