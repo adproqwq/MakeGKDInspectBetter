@@ -1,5 +1,5 @@
 import type { Position } from '@gkd-kit/api';
-import { dialog, type Dialog } from 'mdui';
+import { dialog } from 'mdui';
 import json5 from 'json5';
 import { getScreenshot, getNodeAttr, getScreenInfo } from './indexedDB';
 import getSnapshotId from './getSnapshotId';
