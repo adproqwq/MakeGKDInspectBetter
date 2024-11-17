@@ -1,6 +1,5 @@
 import type { Position } from '@gkd-kit/api';
-import { dialog } from 'mdui';
-import json5 from 'json5';
+import { Dialog } from 'mdui';
 import { getScreenshot, getNodeAttr, getScreenInfo } from './indexedDB';
 import getSnapshotId from './getSnapshotId';
 
@@ -60,15 +59,12 @@ export default async () => {
       top: `width * ${String((y / width).toFixed(4))}`,
     };
 
-    dialog({
-      headline: '坐标',
-      description: '生成的绝对坐标和相对坐标',
-      body: `绝对坐标：
-      ${json5.stringify(absolutePosition, undefined, 2)}
-      相对坐标：
-      ${json5.stringify(relativePosition, undefined, 2)}`,
-      closeOnEsc: true,
-      closeOnOverlayClick: true,
-    });
+    window.Hanashiro.nodePosition = {
+      absolute: absolutePosition,
+      relative: relativePosition,
+    };
+
+    const result = document.querySelector('#result')! as Dialog;
+    result.open = true;
   };
 };

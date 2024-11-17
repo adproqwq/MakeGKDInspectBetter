@@ -8,6 +8,11 @@ declare interface ISelectorsExtend {
   base64: string,
 }
 
+declare interface IPosition {
+  left?: number | string,
+  top?: number | string,
+};
+
 declare interface Window {
   Hanashiro: {
     originRule: string;
@@ -15,5 +20,9 @@ declare interface Window {
     currentCategory: string;
     currentSelector: ISelectorsExtend;
     currentUseSelectorIndex: number;
+    nodePosition: {
+      absolute: IPosition,
+      relative: IPosition,
+    };
   },
 }
