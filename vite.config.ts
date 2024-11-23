@@ -14,7 +14,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMzIgMzIiPjxwYXRoIGZpbGw9IiM4NDcyNjQiIGQ9Im0yMyA0bC01IDMuNzV2Ni41TDE1IDEybC01IDMuNzV2Ni41TDcgMjBsLTUgMy43NVYzMGgydi01LjI1bDMtMi4yNWwzIDIuMjVWMzBoMlYxNi43NWwzLTIuMjVsMyAyLjI1VjMwaDJWOC43NWwzLTIuMjVsMyAyLjI1VjMwaDJWNy43NXoiLz48L3N2Zz4=',
+        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgNDggNDgiPjxwYXRoIGZpbGw9IiNFMkNCQTIiIHN0cm9rZT0iI0UyQ0JBMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjQiIGQ9Ik01IDI0TDI0IDZsMTkgMThIMzF2MThIMTdWMjR6Ii8+PC9zdmc+',
         namespace: 'https://blog.adproqwq.xyz',
         match: ['https://i.gkd.li/*'],
         exclude: ['https://i.gkd.li'],
@@ -25,8 +25,8 @@ export default defineConfig({
         author: 'Adpro',
         grant: 'none',
         description: {
-          '': '让GKD网页审查工具再次强大！版本：Jupiter',
-          'en-US': 'Let GKD Inspect Better Again! Version: Jupiter',
+          '': '让GKD网页审查工具再次强大！版本：Saturn',
+          'en-US': 'Let GKD Inspect Better Again! Version: Saturn',
         },
         license: 'MIT',
         homepage: 'https://github.com/adproqwq/MakeGKDInspectBetter',

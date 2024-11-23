@@ -70,7 +70,7 @@ export default defineComponent({
     });
   },
   mounted(){
-    setColorScheme('#847264');
+    setColorScheme('#E2CBA2');
   },
 });
 </script>
