@@ -1,10 +1,11 @@
 import { snackbar, dialog } from 'mdui';
 import { getNodeAttr, editNode, downloadSnapshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
+import getCurrentNodeId from './getCurrentNodeId';
 
 const replaceNodeInfo = async () => {
   const snapshotId = getSnapshotId();
-  const nodeId = Number((document.querySelectorAll('tr > td > span')[23] as HTMLSpanElement).textContent);
+  const nodeId = getCurrentNodeId();
 
   const text = await getNodeAttr(snapshotId, nodeId, 'text') as string | null;
   const desc = await getNodeAttr(snapshotId, nodeId, 'desc') as string | null;

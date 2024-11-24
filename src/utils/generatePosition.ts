@@ -2,6 +2,7 @@ import type { Position } from '@gkd-kit/api';
 import { Dialog } from 'mdui';
 import { getScreenshot, getNodeAttr, getScreenInfo } from './indexedDB';
 import getSnapshotId from './getSnapshotId';
+import getCurrentNodeId from './getCurrentNodeId';
 
 const arrayBufferToImage = (arrayBuffer: ArrayBuffer): HTMLImageElement => {
   const arrayBufferView = new Uint8Array(arrayBuffer);
@@ -19,7 +20,7 @@ export default async () => {
 
   const snapshotId = getSnapshotId();
   const screenshot = await getScreenshot(snapshotId);
-  const nodeId = Number((document.querySelectorAll('tr > td > span')[23] as HTMLSpanElement).textContent);
+  const nodeId = getCurrentNodeId();
 
   const screenWidth = (await getScreenInfo(getSnapshotId())).width;
   const screenHeight = (await getScreenInfo(getSnapshotId())).height;
