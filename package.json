@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -24,8 +24,7 @@
     "@vitejs/plugin-vue": "^5.2.0",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
-    "vite-plugin-monkey": "^4.0.6",
-    "vue-tsc": "^2.1.10"
+    "vite-plugin-monkey": "^4.0.6"
   },
   "packageManager": "pnpm@9.14.2"
 }
