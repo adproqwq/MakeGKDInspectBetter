@@ -52,7 +52,7 @@ const checkPositionLegal = (position: Position): boolean => {
 };
 
 export default async () => {
-  const mode = (document.querySelector('#mode') as RadioGroup).value;
+  const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
   const action = (document.querySelector('#action') as RadioGroup).value as 'clickCenter' | 'back' | undefined;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
@@ -89,7 +89,7 @@ export default async () => {
   }
 
   if(isLimit){
-    if(mode == 'rules'){
+    if(copyDepth == 'rules'){
       const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       rule.actionMaximum = 1;
       rule.resetMatch = 'app';
@@ -154,13 +154,13 @@ export default async () => {
   origin.groups[0] = await sort(origin.groups[0]);
 
   const stringify = json5.stringify(origin, null, 2);
-  if(mode == 'ts'){
+  if(copyDepth == 'ts'){
     const text = `import { defineGkdApp } from '@gkd-kit/define';\r\rexport default defineGkdApp(${stringify});\r`;
     window.Hanashiro.returnResult = text;
   }
-  else if(mode == 'app') window.Hanashiro.returnResult = stringify;
-  else if(mode == 'groups') window.Hanashiro.returnResult = json5.stringify(origin.groups[0], null, 2);
-  else if(mode == 'rules') window.Hanashiro.returnResult = json5.stringify(iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0], null, 2);
+  else if(copyDepth == 'app') window.Hanashiro.returnResult = stringify;
+  else if(copyDepth == 'groups') window.Hanashiro.returnResult = json5.stringify(origin.groups[0], null, 2);
+  else if(copyDepth == 'rules') window.Hanashiro.returnResult = json5.stringify(iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0], null, 2);
 
   send('closePage');
   send('modifyEnd');

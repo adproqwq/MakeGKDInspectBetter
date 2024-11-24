@@ -46,12 +46,12 @@ export default defineComponent({
 <template>
   <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
-      <span>选择复制模式：</span>
-      <mdui-radio-group id="mode" value="app">
-        <mdui-radio value="ts">ts模式</mdui-radio>
-        <mdui-radio value="app">app模式</mdui-radio>
-        <mdui-radio value="groups">groups模式</mdui-radio>
-        <mdui-radio value="rules">rules模式</mdui-radio>
+      <span>选择复制深度：</span>
+      <mdui-radio-group id="copyDepth" value="app">
+        <mdui-radio value="ts">ts层</mdui-radio>
+        <mdui-radio value="app">app层</mdui-radio>
+        <mdui-radio value="groups">groups层</mdui-radio>
+        <mdui-radio value="rules">rules层</mdui-radio>
       </mdui-radio-group>
     </div>
     <div>
