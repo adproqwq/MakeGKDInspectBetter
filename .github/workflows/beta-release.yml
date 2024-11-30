@@ -28,6 +28,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: Beta
+          tag_name: Beta
           files: ./dist/make-gkd_inspect-better.user.js
           body_path: ./changeLog.md
           prerelease: true
