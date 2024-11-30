@@ -20,8 +20,18 @@ Powered By Vite + Vue + TypeScript
 
 ### Github
 
+#### Stable
+
 1. 打开[`Latest Release`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
 2. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
+
+#### Beta
+
+`Beta`版暂时仅在`Github`渠道分发。
+
+1. 打开[`Release`](https://github.com/adproqwq/MakeGKDInspectBetter/releases)
+2. 所有的`Prerelease`都是`Beta`版，选择你需要安装的版本进入详细页面。
+3. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
 
 > [!IMPORTANT]
 > 有且仅有以上3种分发渠道由仓库维护者直接管理。使用其他渠道的分发将面临一定的风险，请谨慎使用！
