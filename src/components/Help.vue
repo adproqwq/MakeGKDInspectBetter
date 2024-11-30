@@ -30,7 +30,7 @@ export default defineComponent({
         如果你觉得脚本好用，可以通过赞助支持我：<br>
         <a href="https://afdian.com/a/Adpro">爱发电</a><br>
         <br>
-        在这里推荐AIsouler的GKD订阅，特别好用，拥有3.3k+的star！<a href="https://github.com/AIsouler/GKD_subscription">Github仓库</a>
+        在这里推荐AIsouler的GKD订阅，特别好用，受到用户广泛好评！<a href="https://github.com/AIsouler/GKD_subscription">Github仓库</a>
       </p>
     </div>
   </mdui-dialog>
