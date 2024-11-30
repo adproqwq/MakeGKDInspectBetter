@@ -20,6 +20,7 @@ declare interface Window {
     currentCategory: string;
     currentSelector: ISelectorsExtend;
     currentUseSelectorIndex: number;
+    currentPositionView: 'partial' | 'global';
     nodePosition: {
       absolute: IPosition,
       relative: IPosition,

@@ -14,13 +14,21 @@ const arrayBufferToImage = (arrayBuffer: ArrayBuffer): HTMLImageElement => {
   return img;
 };
 
-export default async () => {
+export const getInfo = async (): Promise<[
+  HTMLCanvasElement,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  HTMLImageElement,
+]> => {
   const canvas = document.querySelector('#canvas')! as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d')!;
 
   const snapshotId = getSnapshotId();
   const screenshot = await getScreenshot(snapshotId);
-  const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
+  const nodeId = getCurrentNodeId();
 
   const screenWidth = (await getScreenInfo(getSnapshotId())).width;
   const screenHeight = (await getScreenInfo(getSnapshotId())).height;
@@ -29,27 +37,68 @@ export default async () => {
   const width = await getNodeAttr(snapshotId, nodeId, 'width')! as number;
   const height = await getNodeAttr(snapshotId, nodeId, 'height')! as number;
 
+  const fullImg = arrayBufferToImage(screenshot);
+
+  return [canvas, screenWidth, screenHeight, left, top, width, height, fullImg];
+};
+
+export const partialView = (
+  canvas: HTMLCanvasElement,
+  screenWidth: number,
+  screenHeight: number,
+  left: number,
+  top: number,
+  width: number,
+  height: number,
+  fullImg: HTMLImageElement,
+) => {
+  window.Hanashiro.currentPositionView = 'partial';
+
+  const ctx = canvas.getContext('2d')!;
+
+  const tampCanvas = document.createElement('canvas');
+  const tampCtx = tampCanvas.getContext('2d')!;
+
   canvas.width = width;
   canvas.height = height;
 
-  const fullImg = arrayBufferToImage(screenshot);
+  tampCanvas.width = screenWidth;
+  tampCanvas.height = screenHeight;
 
-  fullImg.onload = () => {
-    const tampCanvas = document.createElement('canvas');
-    const tampCtx = tampCanvas.getContext('2d')!;
+  tampCtx.drawImage(fullImg, 0, 0, screenWidth, screenHeight);
+  const imgData = tampCtx.getImageData(left, top, width, height);
 
-    tampCanvas.width = screenWidth;
-    tampCanvas.height = screenHeight;
+  ctx.putImageData(imgData, 0, 0);
+};
 
-    tampCtx.drawImage(fullImg, 0, 0, screenWidth, screenHeight);
-    const imgData = tampCtx.getImageData(left, top, width, height);
+export const globalView = (
+  canvas: HTMLCanvasElement,
+  screenWidth: number,
+  screenHeight: number,
+  fullImg: HTMLImageElement,
+) => {
+  window.Hanashiro.currentPositionView = 'global';
 
-    ctx.putImageData(imgData, 0, 0);
-  };
+  const ctx = canvas.getContext('2d')!;
+
+  canvas.width = screenWidth;
+  canvas.height = screenHeight;
+
+  ctx.drawImage(fullImg, 0, 0, screenWidth, screenHeight);
+};
+
+export default async () => {
+  const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] = await getInfo();
+
+  fullImg.onload = () => partialView(canvas, screenWidth, screenHeight, left, top, width, height, fullImg);
 
   canvas.onclick = (e) => {
-    const x = e.clientX - canvas.offsetLeft;
-    const y = e.clientY - canvas.offsetTop;
+    let x = e.offsetX, y = e.offsetY;
+
+    if(window.Hanashiro.currentPositionView == 'global'){
+      x -= left;
+      y -= top;
+    }
 
     const absolutePosition: Position = {
       left: left + x,
