@@ -20,7 +20,7 @@ export default async () => {
 
   const snapshotId = getSnapshotId();
   const screenshot = await getScreenshot(snapshotId);
-  const nodeId = getCurrentNodeId();
+  const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
 
   const screenWidth = (await getScreenInfo(getSnapshotId())).width;
   const screenHeight = (await getScreenInfo(getSnapshotId())).height;

@@ -5,7 +5,7 @@ export default (): number => {
 
   if(!currentSelectedNode){
     snackbar({
-      message: '请先选中节点！',
+      message: '当前未选中节点，已自动选择最上层节点',
       placement: 'top',
     });
     return -1;

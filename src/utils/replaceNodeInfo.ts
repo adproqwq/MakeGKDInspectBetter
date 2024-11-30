@@ -5,7 +5,7 @@ import getCurrentNodeId from './getCurrentNodeId';
 
 const replaceNodeInfo = async () => {
   const snapshotId = getSnapshotId();
-  const nodeId = getCurrentNodeId();
+  const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
 
   const text = await getNodeAttr(snapshotId, nodeId, 'text') as string | null;
   const desc = await getNodeAttr(snapshotId, nodeId, 'desc') as string | null;
