@@ -2,6 +2,7 @@ import localforage from 'localforage';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { Snapshot, PrimitiveType } from '../types/snapshot';
+import { IInspectSettings } from '../types/inspectSettings';
 import { AttrList } from '../common/attrList';
 
 interface EditNodeOption {
@@ -9,13 +10,14 @@ interface EditNodeOption {
   value: PrimitiveType;
 };
 
+const localStorage = localforage.createInstance({
+  name: 'localforage',
+});
 const snapshotStorage = localforage.createInstance({
   name: 'snapshot',
-  version: 1,
 });
 const screenshotStorage = localforage.createInstance({
   name: 'screenshot',
-  version: 1,
 });
 const hanashiroStorage = localforage.createInstance({
   name: 'Hanashiro',
@@ -96,4 +98,12 @@ export const setHanashiroSettings = async (item: string, value: any) => {
 
 export const getHanashiroSettings = async <T>(item: string): Promise<T | null> => {
   return await hanashiroStorage.getItem(item);
+};
+
+export const getInspectSettings = async (): Promise<IInspectSettings | null> => {
+  return await localStorage.getItem('settings');
+};
+
+export const setInspectSettings = async (newSettings: IInspectSettings) => {
+  await localStorage.setItem('settings', newSettings);
 };

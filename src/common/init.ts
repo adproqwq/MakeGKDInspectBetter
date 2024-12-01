@@ -1,5 +1,5 @@
 import { snackbar, confirm } from 'mdui';
-import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
+import { getHanashiroSettings, setHanashiroSettings, getInspectSettings, setInspectSettings } from '../utils/indexedDB';
 
 const rulesKeySort = [
   'key',
@@ -34,6 +34,13 @@ for(const rulesKey of (await getHanashiroSettings<Array<string>>('rulesKeySort')
     onConfirm: async () => await setHanashiroSettings('rulesKeySort', rulesKeySort),
   });
 }
+
+if(!(await getInspectSettings())) await setInspectSettings({
+  autoUploadImport: false,
+  ignoreUploadWarn: false,
+  ignoreWasmWarn: false,
+  maxShowNodeSize: 2000,
+});
 
 Object.defineProperty(window, 'Hanashiro', {
   value: {},

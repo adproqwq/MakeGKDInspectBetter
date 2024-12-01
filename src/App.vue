@@ -3,7 +3,6 @@ import { setColorScheme } from 'mdui';
 import 'mdui/mdui.css';
 import { defineComponent } from 'vue';
 import './common/init';
-import './common/autoShowSize';
 import './common/hookCopy';
 import './common/insertIcon';
 import { receive } from './utils/communicate';

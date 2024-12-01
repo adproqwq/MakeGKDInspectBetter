@@ -7,7 +7,7 @@ import settings from '../Settings/settings';
 import _import from '../Settings/import';
 import _export from '../Settings/export';
 import { send } from '../utils/communicate';
-import { getHanashiroSettings } from '../utils/indexedDB';
+import { getHanashiroSettings, getInspectSettings } from '../utils/indexedDB';
 import type { RulesKeyOrder } from '../utils/sort';
 
 export default defineComponent({
@@ -31,6 +31,9 @@ export default defineComponent({
     }
     if(await getHanashiroSettings('rulesKeySort')){
       (document.querySelector('#rulesKeySort') as TextField).value = json5.stringify((await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!);
+    }
+    if(await getInspectSettings()){
+      (document.querySelector('#maxShowSize') as TextField).value = String((await getInspectSettings())!.maxShowNodeSize);
     }
     if(await getHanashiroSettings<boolean>('hideLoadSnackbar') == true) (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
     if(await getHanashiroSettings<boolean>('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
@@ -59,6 +62,11 @@ export default defineComponent({
         key,preKeys,fastQuery,matchTime,actionMaximum,resetMatch,priorityTime
         action,activityIds,position,matches,exampleUrls,snapshotUrls
       </span>
+    </div>
+    <div>
+      <span>节点阈值：</span>
+      <mdui-text-field variant="filled" id="maxShowSize" type="number" label="节点阈值" placeholder="填入数字"></mdui-text-field>
+      <span class="introduction">最大节点展示数量，超出的节点将被丢弃</span>
     </div>
     <div>
       <span>隐藏加载成功提示：</span>
