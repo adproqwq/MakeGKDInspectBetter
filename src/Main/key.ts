@@ -4,12 +4,12 @@ import { RawApp, IArray, RawAppRule } from '@gkd-kit/api';
 import iArrayToArray from '../utils/iArrayToArray';
 
 export default () => {
-  const mode = (document.querySelector('#mode') as RadioGroup).value;
+  const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
   const key = (document.querySelector('#key') as TextField).value;
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
   if(key){
-    if(mode == 'rules'){
+    if(copyDepth == 'rules'){
       const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       rule.key = Number(key);
       origin.groups[0].rules = [rule];
