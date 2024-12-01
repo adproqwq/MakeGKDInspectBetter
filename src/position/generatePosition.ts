@@ -1,18 +1,9 @@
 import type { Position } from '@gkd-kit/api';
 import { Dialog } from 'mdui';
-import { getScreenshot, getNodeAttr, getScreenInfo } from './indexedDB';
-import getSnapshotId from './getSnapshotId';
-import getCurrentNodeId from './getCurrentNodeId';
-
-const arrayBufferToImage = (arrayBuffer: ArrayBuffer): HTMLImageElement => {
-  const arrayBufferView = new Uint8Array(arrayBuffer);
-  const blob = new Blob([arrayBufferView], { type: 'image/png' });
-  const src = (window.URL || window.webkitURL).createObjectURL(blob);
-  const img = document.createElement('img');
-  img.src = src;
-
-  return img;
-};
+import { getScreenshot, getNodeAttr, getScreenInfo } from '../utils/indexedDB';
+import getSnapshotId from '../utils/getSnapshotId';
+import getCurrentNodeId from '../utils/getCurrentNodeId';
+import arrayBufferToImage from '../utils/arrayBufferToImage';
 
 export const getInfo = async (): Promise<[
   HTMLCanvasElement,
