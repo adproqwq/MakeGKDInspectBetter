@@ -65,7 +65,7 @@ pnpm build
 
 ## 贡献
 
-本项目要求使用`VSCode`和`pnpm`，使用`TypeScript`编写
+本项目IDE要求使用`VSCode`或`WebStorm`，包管理器要求使用`pnpm`，使用`TypeScript`编写
 
 你需要fork本仓库，完成修改后，向本仓库发起`Pull Request`，等待`Review`后即可合并
 
