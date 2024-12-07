@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:stable": "vite build",
+    "build": "vite build",
     "build:beta": "vite build --config vite.beta.config.ts",
     "preview": "vite preview"
   },
