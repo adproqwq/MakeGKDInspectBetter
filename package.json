@@ -27,7 +27,7 @@
     "vite": "^6.0.3",
     "vite-plugin-monkey": "^4.0.6"
   },
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@9.15.0",
   "web-types": [
     "./node_modules/mdui/web-types.zh-cn.json"
   ]
