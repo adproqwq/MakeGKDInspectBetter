@@ -1,6 +1,8 @@
 # MakeGKDInspectBetter
 
-当前版本：Uranus 2.10.1
+**脚本于即日起进入维护更新，网页审查工具没有出现影响脚本功能实现或表现的变动，不会进行任何功能性变动。新功能Issue将视实用情况处理，欢迎PR！**
+
+当前版本：Uranus 2.11.0
 
 Powered By Vite + Vue + TypeScript
 
@@ -80,7 +82,7 @@ pnpm build
 
 ## 致谢
 
-感谢 @AIsouler 对本项目提出的宝贵建议和问题反馈
+感谢 [@AIsouler](https://github.com/AIsouler) 对本项目提出的宝贵建议和问题反馈
 
 ## 许可证
 

@@ -49,7 +49,7 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '梅花不肯傍春光，自向深冬著艳阳。',
+    message: '残日东风，不放岁华去。',
     autoCloseDelay: 2000,
     placement: 'top',
   });
