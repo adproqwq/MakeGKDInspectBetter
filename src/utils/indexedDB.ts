@@ -25,10 +25,12 @@ const hanashiroStorage = localforage.createInstance({
 
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+  const activityId = snapshotInfo?.activityId;
 
-  if(snapshotInfo?.activityId){
-    if(snapshotInfo?.activityId.startsWith(snapshotInfo.appId)){
-      const simplyActivityIds = snapshotInfo.activityId.replace(snapshotInfo.appId, '');
+  if(activityId){
+    const appId = snapshotInfo.appId;
+    if(activityId.startsWith(appId) && activityId[appId.length] === '.'){
+      const simplyActivityIds = activityId.replace(appId, '');
 
       return simplyActivityIds;
     }
