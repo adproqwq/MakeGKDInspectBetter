@@ -1,7 +1,7 @@
 import { TextField, Switch } from 'mdui';
 import json5 from 'json5';
 import { setHanashiroSettings, getInspectSettings, setInspectSettings } from '../utils/indexedDB';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 export default async () => {
   const categories = (document.querySelector('#categories') as TextField).value;

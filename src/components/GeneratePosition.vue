@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { Dialog, TextField } from 'mdui';
 import json5 from 'json5';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import generatePosition, { getInfo, partialView, globalView } from '../position/generatePosition';
 
 export default defineComponent({

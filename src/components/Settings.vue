@@ -6,7 +6,7 @@ import json5 from 'json5';
 import settings from '../Settings/settings';
 import _import from '../Settings/import';
 import _export from '../Settings/export';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import { getHanashiroSettings, getInspectSettings } from '../utils/indexedDB';
 import type { RulesKeyOrder } from '../utils/sort';
 

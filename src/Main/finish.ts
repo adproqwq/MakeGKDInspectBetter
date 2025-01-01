@@ -3,7 +3,7 @@ import { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
 import { constructPositionArray } from './position';
 import iArrayToArray from '../utils/iArrayToArray';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import sort from '../utils/sort';
 import { simplyActivityIds, getHanashiroSettings } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';

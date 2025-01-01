@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import type { Dialog, Switch } from 'mdui';
 import inspect from '../Settings/inspect';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import { getInspectSettings } from '../utils/indexedDB';
 
 export default defineComponent({

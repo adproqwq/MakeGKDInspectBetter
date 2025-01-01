@@ -1,6 +1,6 @@
 import type { Switch } from 'mdui';
 import { getInspectSettings, setInspectSettings } from '../utils/indexedDB';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 export default async () => {
   const currentInspectSettings = (await getInspectSettings())!;

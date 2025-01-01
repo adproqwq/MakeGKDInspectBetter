@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 export default defineComponent({
   methods: {

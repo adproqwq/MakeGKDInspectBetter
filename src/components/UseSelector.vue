@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
 import { generateSelectors, search } from '../selectors/use';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 export default defineComponent({
   methods: {

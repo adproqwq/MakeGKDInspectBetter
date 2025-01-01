@@ -1,6 +1,6 @@
 import { snackbar } from 'mdui';
 import observeElement from '../utils/observeElement';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 observeElement('.n-button.n-button--default-type.n-button--medium-type', () => {
   const settingsButton = document.querySelectorAll('.n-button.n-button--default-type.n-button--medium-type')[1] as HTMLButtonElement;

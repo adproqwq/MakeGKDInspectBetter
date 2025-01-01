@@ -7,7 +7,7 @@ import finish from '../Main/finish';
 import key from '../Main/key';
 import { onChange } from '../Main/position';
 import renderedCategories from '../Main/renderedCategories';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 
 export default defineComponent({
   methods: {

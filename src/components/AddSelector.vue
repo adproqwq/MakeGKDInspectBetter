@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { prompt, snackbar } from 'mdui';
 import { encodeURI } from 'js-base64';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 

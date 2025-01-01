@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { snackbar } from 'mdui';
 import { fileOpen } from 'browser-fs-access';
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import { replaceScreenshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 

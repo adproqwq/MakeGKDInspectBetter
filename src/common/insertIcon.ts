@@ -1,5 +1,6 @@
-import { send } from '../utils/communicate';
+import { send } from '../utils/event';
 import observeElement from '../utils/observeElement';
+import { createBarIcon } from '../utils/createIcon';
 import replaceNodeInfo from '../utils/replaceNodeInfo';
 
 observeElement('.n-input-group', () => {
@@ -9,58 +10,34 @@ observeElement('.n-input-group', () => {
     iconBar.id = 'iconBar';
 
     // 搜索选择器按钮
-    const UseSelectorIcon = document.createElement('mdui-button-icon');
-    UseSelectorIcon.icon = 'search';
-    UseSelectorIcon.style.height = '36px';
-    UseSelectorIcon.style.width = '36px';
-    UseSelectorIcon.onclick = () => {
+    const UseSelectorIcon = createBarIcon('search', () => {
       send('openUseSelector');
-    };
+    });
 
     // 添加选择器按钮
-    const AddSelectorIcon = document.createElement('mdui-button-icon');
-    AddSelectorIcon.icon = 'add';
-    AddSelectorIcon.style.height = '36px';
-    AddSelectorIcon.style.width = '36px';
-    AddSelectorIcon.onclick = () => {
+    const AddSelectorIcon = createBarIcon('add', () => {
       send('openAddSelector');
-    };
+    });
 
     // 管理选择器按钮
-    const ManageSelectorsIcon = document.createElement('mdui-button-icon');
-    ManageSelectorsIcon.icon = 'edit';
-    ManageSelectorsIcon.style.height = '36px';
-    ManageSelectorsIcon.style.width = '36px';
-    ManageSelectorsIcon.onclick = () => {
+    const ManageSelectorsIcon = createBarIcon('edit', () => {
       send('openManageSelectors');
-    };
+    });
 
     // 更换截图按钮
-    const ChangeScreenshotIcon = document.createElement('mdui-button-icon');
-    ChangeScreenshotIcon.icon = 'photo';
-    ChangeScreenshotIcon.style.height = '36px';
-    ChangeScreenshotIcon.style.width = '36px';
-    ChangeScreenshotIcon.onclick = () => {
+    const ChangeScreenshotIcon = createBarIcon('photo', () => {
       send('openChangeScreenshot');
-    };
+    });
 
     // 设置按钮
-    const SettingsIcon = document.createElement('mdui-button-icon');
-    SettingsIcon.icon = 'settings';
-    SettingsIcon.style.height = '36px';
-    SettingsIcon.style.width = '36px';
-    SettingsIcon.onclick = () => {
+    const SettingsIcon = createBarIcon('settings', () => {
       send('openSettings');
-    };
+    });
 
     // 帮助按钮
-    const HelpIcon = document.createElement('mdui-button-icon');
-    HelpIcon.icon = 'help';
-    HelpIcon.style.height = '36px';
-    HelpIcon.style.width = '36px';
-    HelpIcon.onclick = () => {
+    const HelpIcon = createBarIcon('help', () => {
       send('openHelp');
-    };
+    });
 
     iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, ChangeScreenshotIcon, SettingsIcon, HelpIcon);
     inputGroup.insertAdjacentElement('beforebegin', iconBar);

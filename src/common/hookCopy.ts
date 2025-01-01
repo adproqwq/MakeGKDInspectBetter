@@ -1,6 +1,6 @@
 import { snackbar, prompt } from 'mdui';
 import { attrList } from './attrList';
-import { receive, send } from '../utils/communicate';
+import { receive, send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
 
