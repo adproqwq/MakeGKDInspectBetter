@@ -52,7 +52,7 @@ window.HatsuneMiku.utils.icon.createBarIcon(icon, onclick);
 |onclick|Function|触发点击时的回调函数|是||
 
 |返回值名称|返回值类型|说明|
-|----|----|----|----|----|
+|----|----|----|
 |icon|ButtonIcon|图标对应的元素，使用`insertBarIcon`函数插入。|
 
 #### insertBarIcon
@@ -98,7 +98,7 @@ window.HatsuneMiku.utils.storage.getHanashiroSettings<T>(item: string);
 |item|string|要获取的项目名称|是|具体可通过网页控制台-存储-indexedDB页查看|
 
 |返回值名称|返回值类型|说明|
-|----|----|----|----|----|
+|----|----|----|
 |value|Promise<T \| null>|对应项目的值，不存在的项目返回`Promise<null>`|
 
 #### setHanashiroSettings
@@ -123,7 +123,7 @@ window.HatsuneMiku.utils.storage.getInspectSettings();
 ```
 
 |返回值名称|返回值类型|说明|
-|----|----|----|----|----|
+|----|----|----|
 |inspectSettings|Promise<IInspectSettings \| null>|网页审查工具的设置，不存在返回`Promise<null>`|
 
 #### setHanashiroSettings
