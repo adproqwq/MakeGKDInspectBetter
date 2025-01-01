@@ -18,6 +18,7 @@ window.HatsuneMiku.event.send(eventName);
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 ### receive
 
@@ -37,6 +38,7 @@ window.HatsuneMiku.event.receive(eventName, callback, once);
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 ## utils
 
@@ -75,6 +77,7 @@ window.HatsuneMiku.utils.icon.insertBarIcon(icon);
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 ### common
 
@@ -94,6 +97,7 @@ window.HatsuneMiku.utils.common.observeElement(selector, callback, continuous = 
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 ### storage
 
@@ -128,6 +132,7 @@ window.HatsuneMiku.utils.storage.setHanashiroSettings(item, value);
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 #### getInspectSettings
 
@@ -139,6 +144,7 @@ window.HatsuneMiku.utils.storage.getInspectSettings();
 
 |参数名称|参数类型|说明|是否必需|备注|
 |----|----|----|----|----|
+||||||
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
@@ -158,6 +164,7 @@ window.HatsuneMiku.utils.storage.setInspectSettings(newSettings);
 
 |返回值名称|返回值类型|说明|
 |----|----|----|----|----|
+|||
 
 ### ui
 
