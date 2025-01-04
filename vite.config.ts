@@ -17,7 +17,7 @@ export default defineConfig({
         icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgNDggNDgiPjxwYXRoIGZpbGw9IiNhOGQ5ZTUiIHN0cm9rZT0iI2E4ZDllNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjQiIGQ9Ik01IDI0TDI0IDZsMTkgMThIMzF2MThIMTdWMjR6Ii8+PC9zdmc+',
         namespace: 'https://blog.adproqwq.xyz',
         match: ['https://i.gkd.li/*'],
-        exclude: ['https://i.gkd.li'],
+        exclude: ['https://i.gkd.li/'],
         name: {
           '': 'GKD网页审查工具增强',
           'en-US': 'Make GKDInspect Better',
