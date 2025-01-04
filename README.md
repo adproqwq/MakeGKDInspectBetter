@@ -2,7 +2,7 @@
 
 **脚本于即日起进入维护更新，网页审查工具没有出现影响脚本功能实现或表现的变动，不会进行任何功能性变动。新功能Issue将视实用情况处理，欢迎PR！**
 
-当前版本：Neptune 2.12.1
+当前版本：Neptune 2.12.2
 
 Powered By Vite + Vue + TypeScript
 

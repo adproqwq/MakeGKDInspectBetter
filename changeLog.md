@@ -1,2 +1,1 @@
-1. 修改部分文字
-2. 给图标按钮添加tooltip
+1. 修复在TemperMonkey中由于exclude匹配机制导致的在首页错误注入问题
