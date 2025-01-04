@@ -62,7 +62,7 @@ export default defineComponent({
     <div>
       <span>排序优先值：</span>
       <mdui-text-field variant="filled" id="order" label="排序优先值" type="number" @change="editSelector"></mdui-text-field>
-      <span class="introduction">数字越大，排序越前，最小为1。失焦保存</span>
+      <span class="introduction">数字越大，排序越前。失焦保存</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="close">关闭</mdui-button>
