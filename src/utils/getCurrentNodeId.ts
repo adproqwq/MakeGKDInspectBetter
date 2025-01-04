@@ -1,5 +1,3 @@
-import { snackbar } from 'mdui';
-
 export default (): number => {
   const currentSelectedNode = document.querySelector('.n-tree-node-wrapper .n-tree-node--selected') as HTMLDivElement | null;
 
