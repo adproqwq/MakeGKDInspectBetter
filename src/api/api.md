@@ -43,17 +43,18 @@ window.HatsuneMiku.event.receive(eventName, callback, once);
 在输入框上方的图标栏中添加图标。
 
 ```typescript
-window.HatsuneMiku.utils.icon.createBarIcon(icon, onclick);
+window.HatsuneMiku.utils.icon.createBarIcon(icon, tooltip, onclick);
 ```
 
 |参数名称|参数类型|说明|是否必需|备注|
 |----|----|----|----|----|
 |icon|string|图标名称|是|在[此处](https://www.mdui.org/zh-cn/docs/2/libraries/icons#search)搜索图标名称|
+|tooltip|string|悬浮在图标上时的标签，用于解释按钮用途|是|仅可传入文本|
 |onclick|Function|触发点击时的回调函数|是||
 
 |返回值名称|返回值类型|说明|
 |----|----|----|
-|icon|ButtonIcon|图标对应的元素，使用`insertBarIcon`函数插入。|
+|icon|Tooltip|图标对应的元素，使用`insertBarIcon`函数插入。|
 
 #### insertBarIcon
 
@@ -65,7 +66,7 @@ window.HatsuneMiku.utils.icon.insertBarIcon(icon);
 
 |参数名称|参数类型|说明|是否必需|备注|
 |----|----|----|----|----|
-|icon|ButtonIcon|图标元素|是|使用`createBarIcon`函数获得|
+|icon|Tooltip|图标元素|是|使用`createBarIcon`函数获得|
 
 ### common
 

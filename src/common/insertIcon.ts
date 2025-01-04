@@ -10,32 +10,32 @@ observeElement('.n-input-group', () => {
     iconBar.id = 'iconBar';
 
     // 搜索选择器按钮
-    const UseSelectorIcon = createBarIcon('search', () => {
+    const UseSelectorIcon = createBarIcon('search', '搜索选择器', () => {
       send('openUseSelector');
     });
 
     // 添加选择器按钮
-    const AddSelectorIcon = createBarIcon('add', () => {
+    const AddSelectorIcon = createBarIcon('add', '添加选择器', () => {
       send('openAddSelector');
     });
 
     // 管理选择器按钮
-    const ManageSelectorsIcon = createBarIcon('edit', () => {
+    const ManageSelectorsIcon = createBarIcon('edit', '管理选择器', () => {
       send('openManageSelectors');
     });
 
     // 更换截图按钮
-    const ChangeScreenshotIcon = createBarIcon('photo', () => {
+    const ChangeScreenshotIcon = createBarIcon('photo', '更换截图', () => {
       send('openChangeScreenshot');
     });
 
     // 设置按钮
-    const SettingsIcon = createBarIcon('settings', () => {
+    const SettingsIcon = createBarIcon('settings', '脚本设置', () => {
       send('openSettings');
     });
 
     // 帮助按钮
-    const HelpIcon = createBarIcon('help', () => {
+    const HelpIcon = createBarIcon('help', '帮助', () => {
       send('openHelp');
     });
 

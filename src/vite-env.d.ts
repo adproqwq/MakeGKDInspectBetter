@@ -286,8 +286,8 @@ declare interface Window {
     },
     utils: {
       icon: {
-        createBarIcon: (icon: string, onclick: () => void) => import('mdui').ButtonIcon;
-        insertBarIcon: (icon: import('mdui').ButtonIcon) => void;
+        createBarIcon: (icon: string, tooltip: string, onclick: () => void) => import('mdui').Tooltip;
+        insertBarIcon: (icon: import('mdui').Tooltip) => void;
       },
       common: {
         observeElement: (selector: string, callback: () => void, continuous = false) => void;
