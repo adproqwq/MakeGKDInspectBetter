@@ -8,7 +8,7 @@ import sort from '../utils/sort';
 import { simplyActivityIds, getHanashiroSettings } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 
-const checkPositionLegal = (position: Position): boolean => {
+const checkPositionLegality = (position: Position): boolean => {
   const { top, left, right, bottom } = position;
 
   if(top){
@@ -132,7 +132,7 @@ export default async () => {
       }
     });
 
-    if(!checkPositionLegal(positionObject)) return;
+    if(!checkPositionLegality(positionObject)) return;
 
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
     rule.position = positionObject;
