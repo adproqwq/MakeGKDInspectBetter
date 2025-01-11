@@ -53,7 +53,7 @@ const checkPositionLegal = (position: Position): boolean => {
 
 export default async () => {
   const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
-  const action = (document.querySelector('#action') as RadioGroup).value as 'clickCenter' | 'back' | undefined;
+  const action = (document.querySelector('#action') as RadioGroup).value as 'clickCenter' | 'back' | 'longClick' | undefined;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.Hanashiro.currentCategory;

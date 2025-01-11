@@ -63,6 +63,7 @@ export default defineComponent({
       <mdui-radio-group id="action">
         <mdui-radio value="clickCenter">clickCenter</mdui-radio>
         <mdui-radio value="back">back</mdui-radio>
+        <mdui-radio value="longClick">longClick</mdui-radio>
       </mdui-radio-group>
     </div>
     <div>
