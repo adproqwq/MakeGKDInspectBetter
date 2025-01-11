@@ -34,12 +34,17 @@ observeElement('.n-input-group', () => {
       send('openSettings');
     });
 
+    // 自动行为编辑按钮
+    const autoActionIcon = createBarIcon('edit_note', '自动动作管理', () => {
+      send('openAutoAction');
+    });
+
     // 帮助按钮
     const HelpIcon = createBarIcon('help', '帮助', () => {
       send('openHelp');
     });
 
-    iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, ChangeScreenshotIcon, SettingsIcon, HelpIcon);
+    iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, ChangeScreenshotIcon, SettingsIcon, autoActionIcon, HelpIcon);
     inputGroup.insertAdjacentElement('beforebegin', iconBar);
   }
 }, true);
