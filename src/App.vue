@@ -77,7 +77,7 @@ export default defineComponent({
     });
   },
   mounted(){
-    setColorScheme('#a8d9e5');
+    setColorScheme('#39C5BB');
   },
 });
 </script>
