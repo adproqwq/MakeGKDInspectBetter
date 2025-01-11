@@ -1,1 +1,2 @@
-1. 修复在TemperMonkey中由于exclude匹配机制导致的在首页错误注入问题
+1. 排除在设备页的匹配
+2. 支持longClick action的插入
