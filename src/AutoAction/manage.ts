@@ -16,6 +16,7 @@ export const manage = async () => {
 
   const autoSearchSelector = (document.querySelector('#autoSearchSelector') as TextField).value;
 
+  // eslint-disable-next-line no-useless-escape
   if(autoSearchSelector) autoAction.autoSearchSelector = autoSearchSelector.replaceAll('"', '\"');
 
   await setAutoAction(getSnapshotId(), autoAction);

@@ -85,7 +85,7 @@ export const getNodeAttr = async (snapshotId: string, nodeId: number, target: At
 
 export const downloadSnapshot = async (snapshotId: string) => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
-  const screenshot = await screenshotStorage.getItem<ArrayBuffer>(snapshotId);
+  const screenshot = (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 
   const jszip = new JSZip();
   jszip.file(`snapshot-${snapshotId}.json`, JSON.stringify(snapshotInfo, undefined, 2));
@@ -112,7 +112,7 @@ export const setAutoAction = async (snapshotId: string, autoAction: AutoActionTe
   await snapshotStorage.setItem(snapshotId, snapshotInfo);
 };
 
-export const setHanashiroSettings = async (item: string, value: any) => {
+export const setHanashiroSettings = async <T>(item: string, value: T) => {
   await hanashiroStorage.setItem(item, value);
 };
 
