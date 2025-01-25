@@ -7,25 +7,23 @@ const replaceNodeInfo = async () => {
   const snapshotId = getSnapshotId();
   const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
 
-  const text = await getNodeAttr(snapshotId, nodeId, 'text') as string | null;
-  const desc = await getNodeAttr(snapshotId, nodeId, 'desc') as string | null;
+  const text = (await getNodeAttr(snapshotId, nodeId, 'text')) as string | null;
+  const desc = (await getNodeAttr(snapshotId, nodeId, 'desc')) as string | null;
 
   let newText: string | null, newDesc: string | null;
 
-  if(text !== null){
+  if (text !== null) {
     newText = '';
-    for(let i = 0;i < text.length;i++){
+    for (let i = 0; i < text.length; i++) {
       newText += '*';
     }
-  }
-  else newText = null;
-  if(desc !== null){
+  } else newText = null;
+  if (desc !== null) {
     newDesc = '';
-    for(let i = 0;i < desc.length;i++){
+    for (let i = 0; i < desc.length; i++) {
       newDesc += '*';
     }
-  }
-  else newDesc = null;
+  } else newDesc = null;
 
   editNode(snapshotId, nodeId, [
     {
@@ -37,17 +35,19 @@ const replaceNodeInfo = async () => {
       value: newDesc,
     },
   ]).then((result) => {
-    if(result) snackbar({
-      message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
-      placement: 'top',
-    });
+    if (result)
+      snackbar({
+        message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
+        placement: 'top',
+      });
   });
 };
 
 export default () => {
   dialog({
     headline: '确认要对该节点打码吗？',
-    description: '进行打码操作会对导入的快照造成无法恢复的修改，如需恢复，需要删除当前快照重新导入。建议你先下载备份！',
+    description:
+      '进行打码操作会对导入的快照造成无法恢复的修改，如需恢复，需要删除当前快照重新导入。建议你先下载备份！',
     actions: [
       {
         text: '我再想想',

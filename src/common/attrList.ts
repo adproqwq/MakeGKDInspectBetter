@@ -23,22 +23,22 @@ export const attrList = [
 ];
 
 export type AttrList =
-  'id'|
-  'vid'|
-  'text'|
-  'desc'|
-  'clickable'|
-  'focusable'|
-  'checkable'|
-  'checked'|
-  'editable'|
-  'longClickable'|
-  'visibleToUser'|
-  'left'|
-  'top'|
-  'right'|
-  'bottom'|
-  'width'|
-  'height'|
-  'childCount'|
-  'index';
+  | 'id'
+  | 'vid'
+  | 'text'
+  | 'desc'
+  | 'clickable'
+  | 'focusable'
+  | 'checkable'
+  | 'checked'
+  | 'editable'
+  | 'longClickable'
+  | 'visibleToUser'
+  | 'left'
+  | 'top'
+  | 'right'
+  | 'bottom'
+  | 'width'
+  | 'height'
+  | 'childCount'
+  | 'index';

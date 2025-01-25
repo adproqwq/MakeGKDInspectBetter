@@ -3,4 +3,4 @@ export interface IInspectSettings {
   ignoreUploadWarn: boolean;
   ignoreWasmWarn: boolean;
   maxShowNodeSize: number;
-};
+}

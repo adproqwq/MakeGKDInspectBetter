@@ -1,5 +1,5 @@
 export interface ISelectors {
-  name: string,
-  base64: string,
-  order: number,
-};
+  name: string;
+  base64: string;
+  order: number;
+}

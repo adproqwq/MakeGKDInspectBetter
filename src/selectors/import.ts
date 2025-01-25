@@ -4,13 +4,15 @@ import { ISelectors } from '../types/selectors';
 import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
 
 const setValue = async (selectors: ISelectors[]) => {
-  try{
-    if(window.Hanashiro.selectorsImportWay == 0) await setHanashiroSettings('selectors', selectors);
-    else{
-      const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+  try {
+    if (window.Hanashiro.selectorsImportWay == 0)
+      await setHanashiroSettings('selectors', selectors);
+    else {
+      const hadSelectors =
+        (await getHanashiroSettings<ISelectors[]>('selectors'))!;
       await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
     }
-  } catch{
+  } catch {
     snackbar({
       message: '应用设置失败',
       placement: 'top',
@@ -21,9 +23,9 @@ const setValue = async (selectors: ISelectors[]) => {
 
 const getRemoteSelectors = async (url: string) => {
   let remoteSelectors: ISelectors[];
-  try{
+  try {
     remoteSelectors = json5.parse(await (await fetch(url)).text());
-  } catch{
+  } catch {
     snackbar({
       message: '请求失败！',
       placement: 'top',
@@ -39,13 +41,16 @@ const getRemoteSelectors = async (url: string) => {
   });
 };
 
-const showFilePicker = () => (document.querySelector('input#localImport') as HTMLInputElement).click();
+const showFilePicker = () =>
+  (document.querySelector('input#localImport') as HTMLInputElement).click();
 
 export const getLocalSelectors = async () => {
-  const inputElement = document.querySelector('input#localImport') as HTMLInputElement;
+  const inputElement = document.querySelector(
+    'input#localImport',
+  ) as HTMLInputElement;
 
   const fileList = inputElement.files;
-  if(!fileList) return;
+  if (!fileList) return;
 
   const file = fileList[0];
 
@@ -104,15 +109,14 @@ export default () => {
             confirmText: '导入',
             cancelText: '取消',
             onConfirm: async (value) => {
-              if(!value){
+              if (!value) {
                 snackbar({
                   message: '请输入链接！',
                   placement: 'top',
                 });
 
                 return new Promise((_, reject) => reject(false));
-              }
-              else await getRemoteSelectors(value);
+              } else await getRemoteSelectors(value);
             },
           });
         },

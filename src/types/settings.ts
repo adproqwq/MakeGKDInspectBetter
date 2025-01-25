@@ -8,4 +8,4 @@ export interface ISettings {
   simplyName: boolean;
   autoAddSelector: boolean;
   activityIdsSimply: boolean;
-};
+}

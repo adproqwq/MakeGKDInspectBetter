@@ -8,13 +8,14 @@ export default () => {
   const key = (document.querySelector('#key') as TextField).value;
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
-  if(key){
-    if(copyDepth == 'rules'){
-      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
+  if (key) {
+    if (copyDepth == 'rules') {
+      const rule = iArrayToArray(
+        origin.groups[0].rules as IArray<RawAppRule>,
+      )[0];
       rule.key = Number(key);
       origin.groups[0].rules = [rule];
-    }
-    else origin.groups[0].key = Number(key);
+    } else origin.groups[0].key = Number(key);
 
     window.Hanashiro.originRule = json5.stringify(origin, null, 2);
 

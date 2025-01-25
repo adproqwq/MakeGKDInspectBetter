@@ -5,16 +5,18 @@ import getSnapshotId from '../utils/getSnapshotId';
 import getCurrentNodeId from '../utils/getCurrentNodeId';
 import arrayBufferToImage from '../utils/arrayBufferToImage';
 
-export const getInfo = async (): Promise<[
-  HTMLCanvasElement,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  HTMLImageElement,
-]> => {
+export const getInfo = async (): Promise<
+  [
+    HTMLCanvasElement,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    HTMLImageElement,
+  ]
+> => {
   const canvas = document.querySelector('#canvas')! as HTMLCanvasElement;
 
   const snapshotId = getSnapshotId();
@@ -23,10 +25,10 @@ export const getInfo = async (): Promise<[
 
   const screenWidth = (await getScreenInfo(getSnapshotId())).width;
   const screenHeight = (await getScreenInfo(getSnapshotId())).height;
-  const left = await getNodeAttr(snapshotId, nodeId, 'left')! as number;
-  const top = await getNodeAttr(snapshotId, nodeId, 'top')! as number;
-  const width = await getNodeAttr(snapshotId, nodeId, 'width')! as number;
-  const height = await getNodeAttr(snapshotId, nodeId, 'height')! as number;
+  const left = (await getNodeAttr(snapshotId, nodeId, 'left')!) as number;
+  const top = (await getNodeAttr(snapshotId, nodeId, 'top')!) as number;
+  const width = (await getNodeAttr(snapshotId, nodeId, 'width')!) as number;
+  const height = (await getNodeAttr(snapshotId, nodeId, 'height')!) as number;
 
   const fullImg = arrayBufferToImage(screenshot);
 
@@ -79,14 +81,26 @@ export const globalView = (
 };
 
 export default async () => {
-  const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] = await getInfo();
+  const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] =
+    await getInfo();
 
-  fullImg.onload = () => partialView(canvas, screenWidth, screenHeight, left, top, width, height, fullImg);
+  fullImg.onload = () =>
+    partialView(
+      canvas,
+      screenWidth,
+      screenHeight,
+      left,
+      top,
+      width,
+      height,
+      fullImg,
+    );
 
   canvas.onclick = (e) => {
-    let x = e.offsetX, y = e.offsetY;
+    let x = e.offsetX,
+      y = e.offsetY;
 
-    if(window.Hanashiro.currentPositionView == 'global'){
+    if (window.Hanashiro.currentPositionView == 'global') {
       x -= left;
       y -= top;
     }

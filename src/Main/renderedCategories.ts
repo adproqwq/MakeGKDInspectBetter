@@ -4,9 +4,9 @@ import { getHanashiroSettings } from '../utils/indexedDB';
 
 export default async () => {
   const categories = (await getHanashiroSettings<RawCategory[]>('categories'))!;
-  const categoriesGroup = (document.querySelector('#category') as RadioGroup);
+  const categoriesGroup = document.querySelector('#category') as RadioGroup;
 
-  if(categories){
+  if (categories) {
     let innerHtmlString = '';
 
     categories.forEach((category) => {

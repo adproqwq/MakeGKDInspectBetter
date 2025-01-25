@@ -4,14 +4,14 @@ import { ISettings } from '../types/settings';
 import { setHanashiroSettings } from '../utils/indexedDB';
 
 const setValue = async (settings: ISettings) => {
-  try{
+  try {
     await setHanashiroSettings('activityIdsSimply', settings.activityIdsSimply);
     await setHanashiroSettings('autoAddSelector', settings.autoAddSelector);
     await setHanashiroSettings('categories', settings.categories);
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
     await setHanashiroSettings('simplyName', settings.simplyName);
-  } catch{
+  } catch {
     snackbar({
       message: '应用设置失败',
       placement: 'top',
@@ -22,9 +22,9 @@ const setValue = async (settings: ISettings) => {
 
 const getRemoteSettings = async (url: string) => {
   let remoteSettings: ISettings;
-  try{
+  try {
     remoteSettings = json5.parse(await (await fetch(url)).text());
-  } catch{
+  } catch {
     snackbar({
       message: '请求失败！',
       placement: 'top',
@@ -40,13 +40,16 @@ const getRemoteSettings = async (url: string) => {
   });
 };
 
-const showFilePicker = () => (document.querySelector('input#localImport') as HTMLInputElement).click();
+const showFilePicker = () =>
+  (document.querySelector('input#localImport') as HTMLInputElement).click();
 
 export const getLocalSettings = async () => {
-  const inputElement = document.querySelector('input#localImport') as HTMLInputElement;
+  const inputElement = document.querySelector(
+    'input#localImport',
+  ) as HTMLInputElement;
 
   const fileList = inputElement.files;
-  if(!fileList) return;
+  if (!fileList) return;
 
   const file = fileList[0];
 
@@ -82,15 +85,14 @@ export default () => {
             confirmText: '导入',
             cancelText: '取消',
             onConfirm: async (value) => {
-              if(!value){
+              if (!value) {
                 snackbar({
                   message: '请输入链接！',
                   placement: 'top',
                 });
 
                 return new Promise((_, reject) => reject(false));
-              }
-              else await getRemoteSettings(value);
+              } else await getRemoteSettings(value);
             },
           });
         },

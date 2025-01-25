@@ -5,12 +5,12 @@ import { ISelectors } from '../types/selectors';
 
 export const generateSelectors = async () => {
   const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
-  const selectorsGroup = (document.querySelector('#selectors') as RadioGroup);
+  const selectorsGroup = document.querySelector('#selectors') as RadioGroup;
 
   let innerHtmlString = '';
 
   selectors.sort((a, b) => {
-    if(a.order > b.order) return -1;
+    if (a.order > b.order) return -1;
     else if (a.order == b.order) return 0;
     else return 1;
   });
@@ -24,7 +24,9 @@ export const generateSelectors = async () => {
   document.querySelectorAll('#selectorRadio').forEach((radio) => {
     radio.addEventListener('click', (e) => {
       const nameTextField = document.querySelector('#name')! as TextField;
-      const selectorTextField = document.querySelector('#selector')! as TextField;
+      const selectorTextField = document.querySelector(
+        '#selector',
+      )! as TextField;
       const orderTextField = document.querySelector('#order')! as TextField;
 
       nameTextField.value = (e.target as Radio).innerText;
@@ -41,19 +43,18 @@ export const generateSelectors = async () => {
 };
 
 export const editSelector = async () => {
-  let selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const nameTextField = document.querySelector('#name')! as TextField;
   const selectorTextField = document.querySelector('#selector')! as TextField;
   const orderTextField = document.querySelector('#order')! as TextField;
 
-  if(selectorTextField.value){
+  if (selectorTextField.value) {
     selectors[window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
       base64: encodeURI(selectorTextField.value),
       order: Number(orderTextField.value == '' ? 1 : orderTextField.value),
     };
-  }
-  else selectors.splice(window.Hanashiro.currentSelector.index, 1);
+  } else selectors.splice(window.Hanashiro.currentSelector.index, 1);
 
   await setHanashiroSettings('selectors', selectors);
 

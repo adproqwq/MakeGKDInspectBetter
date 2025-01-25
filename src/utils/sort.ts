@@ -40,7 +40,8 @@ export const groupsKeyOrder: GroupsKeyOrder = [
 ];
 
 export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
-  const rulesKeyOrder = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
+  const rulesKeyOrder =
+    (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const groupsKeyValue: any[] = [];
@@ -48,11 +49,12 @@ export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
   const rulesKeyValue: any[] = [];
 
   groupsKeyOrder.forEach((groupsKey) => {
-    if(groups[groupsKey] !== undefined) groupsKeyValue.push(groups[groupsKey]);
+    if (groups[groupsKey] !== undefined) groupsKeyValue.push(groups[groupsKey]);
     else groupsKeyValue.push(undefined);
   });
   rulesKeyOrder.forEach((rulesKey) => {
-    if((groups.rules as RawAppRule[])[0][rulesKey] !== undefined) rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
+    if ((groups.rules as RawAppRule[])[0][rulesKey] !== undefined)
+      rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
     else rulesKeyValue.push(undefined);
   });
 

@@ -6,7 +6,8 @@ import type { AutoActionTerms } from '../types/autoAction';
 export const showAutoAction = async () => {
   const autoAction = await getAutoAction(getSnapshotId());
 
-  (document.querySelector('#autoSearchSelector') as TextField).value = autoAction.autoSearchSelector;
+  (document.querySelector('#autoSearchSelector') as TextField).value =
+    autoAction.autoSearchSelector;
 };
 
 export const manage = async () => {
@@ -14,9 +15,12 @@ export const manage = async () => {
     autoSearchSelector: '',
   };
 
-  const autoSearchSelector = (document.querySelector('#autoSearchSelector') as TextField).value;
+  const autoSearchSelector = (
+    document.querySelector('#autoSearchSelector') as TextField
+  ).value;
 
-  if(autoSearchSelector) autoAction.autoSearchSelector = autoSearchSelector.replaceAll('"', '\"');
+  if (autoSearchSelector)
+    autoAction.autoSearchSelector = autoSearchSelector.replaceAll('"', '\"');
 
   await setAutoAction(getSnapshotId(), autoAction);
 

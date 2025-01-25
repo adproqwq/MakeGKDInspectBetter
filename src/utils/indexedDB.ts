@@ -9,7 +9,7 @@ import { AttrList } from '../common/attrList';
 interface EditNodeOption {
   target: AttrList;
   value: PrimitiveType;
-};
+}
 
 const localStorage = localforage.createInstance({
   name: 'localforage',
@@ -24,30 +24,36 @@ const hanashiroStorage = localforage.createInstance({
   name: 'Hanashiro',
 });
 
-export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
+export const simplyActivityIds = async (
+  snapshotId: string,
+): Promise<string | false> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
   const activityId = snapshotInfo?.activityId;
 
-  if(activityId){
+  if (activityId) {
     const appId = snapshotInfo.appId;
-    if(activityId.startsWith(appId) && activityId[appId.length] === '.'){
+    if (activityId.startsWith(appId) && activityId[appId.length] === '.') {
       const simplyActivityIds = activityId.replace(appId, '');
 
       return simplyActivityIds;
-    }
-    else return false;
-  }
-  else return false;
+    } else return false;
+  } else return false;
 };
 
-export const editNode = async (snapshotId: string, nodeId: number, options: EditNodeOption[]): Promise<boolean> => {
-  try{
+export const editNode = async (
+  snapshotId: string,
+  nodeId: number,
+  options: EditNodeOption[],
+): Promise<boolean> => {
+  try {
     const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
 
     const nodes = snapshotInfo!.nodes;
     const nodeAttr = nodes[nodeId].attr;
 
-    options.forEach((option) => (nodeAttr[option.target] as PrimitiveType) = option.value);
+    options.forEach(
+      (option) => ((nodeAttr[option.target] as PrimitiveType) = option.value),
+    );
 
     nodes[nodeId].attr = nodeAttr;
     snapshotInfo!.nodes = nodes;
@@ -55,26 +61,37 @@ export const editNode = async (snapshotId: string, nodeId: number, options: Edit
     await snapshotStorage.setItem(snapshotId, snapshotInfo);
 
     return true;
-  } catch{
+  } catch {
     return false;
   }
 };
 
-export const getScreenInfo = async (snapshotId: string): Promise<{ width: number, height: number }> => {
+export const getScreenInfo = async (
+  snapshotId: string,
+): Promise<{ width: number; height: number }> => {
   const snapshotInfo = (await snapshotStorage.getItem<Snapshot>(snapshotId))!;
 
   return { width: snapshotInfo.screenWidth, height: snapshotInfo.screenHeight };
 };
 
-export const getScreenshot = async (snapshotId: string): Promise<ArrayBuffer> => {
+export const getScreenshot = async (
+  snapshotId: string,
+): Promise<ArrayBuffer> => {
   return (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 };
 
-export const replaceScreenshot = async (snapshotId: string, image: ArrayBuffer) => {
+export const replaceScreenshot = async (
+  snapshotId: string,
+  image: ArrayBuffer,
+) => {
   await screenshotStorage.setItem<ArrayBuffer>(snapshotId, image);
 };
 
-export const getNodeAttr = async (snapshotId: string, nodeId: number, target: AttrList): Promise<PrimitiveType> => {
+export const getNodeAttr = async (
+  snapshotId: string,
+  nodeId: number,
+  target: AttrList,
+): Promise<PrimitiveType> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
 
   const nodes = snapshotInfo!.nodes;
@@ -85,26 +102,35 @@ export const getNodeAttr = async (snapshotId: string, nodeId: number, target: At
 
 export const downloadSnapshot = async (snapshotId: string) => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
-  const screenshot = (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
+  const screenshot =
+    (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 
   const jszip = new JSZip();
-  jszip.file(`snapshot-${snapshotId}.json`, JSON.stringify(snapshotInfo, undefined, 2));
+  jszip.file(
+    `snapshot-${snapshotId}.json`,
+    JSON.stringify(snapshotInfo, undefined, 2),
+  );
   jszip.file(`screenshot-${snapshotId}.png`, screenshot);
   jszip.generateAsync({ type: 'blob' }).then((snapshotFile) => {
     saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
   });
 };
 
-export const getAutoAction = async (snapshotId: string): Promise<AutoActionTerms> => {
+export const getAutoAction = async (
+  snapshotId: string,
+): Promise<AutoActionTerms> => {
   const snapshotInfo = await snapshotStorage.getItem<AutoAction>(snapshotId);
   let autoActions = snapshotInfo!.autoAction;
 
-  if(!autoActions) autoActions = { autoSearchSelector: '' };
+  if (!autoActions) autoActions = { autoSearchSelector: '' };
 
   return autoActions;
 };
 
-export const setAutoAction = async (snapshotId: string, autoAction: AutoActionTerms) => {
+export const setAutoAction = async (
+  snapshotId: string,
+  autoAction: AutoActionTerms,
+) => {
   const snapshotInfo = await snapshotStorage.getItem<AutoAction>(snapshotId);
 
   snapshotInfo!.autoAction = autoAction;
@@ -116,13 +142,16 @@ export const setHanashiroSettings = async <T>(item: string, value: T) => {
   await hanashiroStorage.setItem(item, value);
 };
 
-export const getHanashiroSettings = async <T>(item: string): Promise<T | null> => {
+export const getHanashiroSettings = async <T>(
+  item: string,
+): Promise<T | null> => {
   return await hanashiroStorage.getItem(item);
 };
 
-export const getInspectSettings = async (): Promise<IInspectSettings | null> => {
-  return await localStorage.getItem('settings');
-};
+export const getInspectSettings =
+  async (): Promise<IInspectSettings | null> => {
+    return await localStorage.getItem('settings');
+  };
 
 export const setInspectSettings = async (newSettings: IInspectSettings) => {
   await localStorage.setItem('settings', newSettings);

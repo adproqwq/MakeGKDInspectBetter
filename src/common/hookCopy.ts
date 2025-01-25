@@ -8,7 +8,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
   apply: async (target, thisArg, args) => {
     const data: string = args[0];
 
-    if(data.startsWith('{') && data.endsWith('}')){
+    if (data.startsWith('{') && data.endsWith('}')) {
       window.Hanashiro.originRule = args[0];
 
       // 发送复制事件
@@ -16,35 +16,40 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
 
       // 等待 modifyEnd
       await new Promise((resolve) => {
-        receive('modifyEnd', async () => {
-          await Reflect.apply(target, thisArg, [window.Hanashiro.returnResult]);
-          snackbar({
-            message: '注入修改成功',
-            placement: 'top',
-            onClosed: () => resolve(true),
-          });
-        }, true);
+        receive(
+          'modifyEnd',
+          async () => {
+            await Reflect.apply(target, thisArg, [
+              window.Hanashiro.returnResult,
+            ]);
+            snackbar({
+              message: '注入修改成功',
+              placement: 'top',
+              onClosed: () => resolve(true),
+            });
+          },
+          true,
+        );
       });
-    }
-    else if(data.startsWith('name=')){
-      if(await getHanashiroSettings('simplyName') == true){
+    } else if (data.startsWith('name=')) {
+      if ((await getHanashiroSettings('simplyName')) == true) {
         const fullname = data.split('"')[1];
         const splitedName = fullname.split('.');
         const name = splitedName[splitedName.length - 1];
         await Reflect.apply(target, thisArg, [name]);
-      }
-      else await Reflect.apply(target, thisArg, [data]);
-    }
-    else if(attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0){
+      } else await Reflect.apply(target, thisArg, [data]);
+    } else if (
+      attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0
+    ) {
       await Reflect.apply(target, thisArg, [`[${data}]`]);
-    }
-    else if(data.startsWith(window.origin)){
-      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+    } else if (data.startsWith(window.origin)) {
+      const selectors =
+        (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
-      if(selectors.length != 0){
+      if (selectors.length != 0) {
         const copiedUrl = new URL(data);
 
-        if(copiedUrl.searchParams.has('gkd')){
+        if (copiedUrl.searchParams.has('gkd')) {
           const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
 
           prompt({
@@ -62,7 +67,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
               });
 
               selectors.sort((a, b) => {
-                if(a.order > b.order) return -1;
+                if (a.order > b.order) return -1;
                 else if (a.order == b.order) return 0;
                 else return 1;
               });
@@ -74,8 +79,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       }
 
       await Reflect.apply(target, thisArg, [data]);
-    }
-    else await Reflect.apply(target, thisArg, [data]);
+    } else await Reflect.apply(target, thisArg, [data]);
   },
 });
 navigator.clipboard.writeText = copyProxy;
