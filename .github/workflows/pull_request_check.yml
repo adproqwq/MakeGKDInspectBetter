@@ -1,0 +1,30 @@
+name: pull_request_check
+
+on: pull_request
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: pnpm/action-setup@v4
+
+      - run: pnpm install
+
+      - run: pnpm format
+
+      - run: pnpm lint
+
+      - name: check format status
+        run: |
+          status=$(git status --porcelain)
+          if [ -n "$status" ]; then
+            echo "Something wasn’t formatted properly"
+            git --no-pager diff
+            exit 1
+          fi
