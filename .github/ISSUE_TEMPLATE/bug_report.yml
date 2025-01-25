@@ -1,0 +1,32 @@
+name: 报告 Bug
+title: '[Bug] '
+description: 报告脚本bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 在提交issue之前，请您务必完成以下操作，否则你的issue可能会根据情况直接被关闭！！！
+        ## 在提交issue之前，请您务必完成以下操作，否则你的issue可能会根据情况直接被关闭！！！
+        ## 在提交issue之前，请您务必完成以下操作，否则你的issue可能会根据情况直接被关闭！！！
+
+        1. 确认的确是脚本导致的问题，而非用户个人操作不当或非脚本使用导致的问题
+        2. 如果你的issue被受理，受理者提出的问题、要求，应在3日内予以回复，否则会被关闭
+        3. 上传文件时请等待文件名前面的 Uploading 消失后再提交，否则文件将会上传失败
+  - type: textarea
+    id: bug-1
+    attributes:
+      label: |
+        请提供bug的详细描述
+      description: |
+        这有助于维护者快速定位问题
+    validations:
+      required: true
+  - type: textarea
+    id: bug-2
+    attributes:
+      label: |
+        补充说明
+      description: |
+        复现操作（文字、图片或视频）
+    validations:
+      required: true
