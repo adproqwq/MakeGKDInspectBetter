@@ -27,9 +27,6 @@ export default defineComponent({
         Telegram群组：<a href="https://t.me/+P4y5kLo3UrUxMWY1">Telegram群组</a><br>
         Telegram频道：<a href="https://t.me/adproqwq">Telegram频道</a><br>
         <br>
-        如果你觉得脚本好用，可以通过赞助支持我：<br>
-        <a href="https://afdian.com/a/Adpro">爱发电</a><br>
-        <br>
         在这里推荐AIsouler的GKD订阅，特别好用，受到用户广泛好评！<a href="https://github.com/AIsouler/GKD_subscription">Github仓库</a>
       </p>
     </div>

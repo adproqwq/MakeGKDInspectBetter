@@ -44,7 +44,21 @@ observeElement('.n-input-group', () => {
       send('openHelp');
     });
 
-    iconBar.append(UseSelectorIcon, AddSelectorIcon, ManageSelectorsIcon, ChangeScreenshotIcon, SettingsIcon, autoActionIcon, HelpIcon);
+    // 捐赠按钮
+    const SponsorIcon = createBarIcon('coffee', '捐赠', () => {
+      window.open('https://afdian.com/a/Adpro');
+    });
+
+    iconBar.append(
+      UseSelectorIcon,
+      AddSelectorIcon,
+      ManageSelectorsIcon,
+      ChangeScreenshotIcon,
+      SettingsIcon,
+      autoActionIcon,
+      HelpIcon,
+      SponsorIcon,
+    );
     inputGroup.insertAdjacentElement('beforebegin', iconBar);
   }
 }, true);
