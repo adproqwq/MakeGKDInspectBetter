@@ -274,6 +274,7 @@ declare interface Window {
     currentSelector: ISelectorsExtend;
     currentUseSelectorIndex: number;
     currentPositionView: 'partial' | 'global';
+    selectorsImportWay: 0 | 1;
     nodePosition: {
       absolute: IPosition,
       relative: IPosition,

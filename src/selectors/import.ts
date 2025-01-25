@@ -1,12 +1,11 @@
 import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
-import { fileOpen } from 'browser-fs-access';
 import { ISelectors } from '../types/selectors';
 import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
 
-const setValue = async (selectors: ISelectors[], importWay: number) => {
+const setValue = async (selectors: ISelectors[]) => {
   try{
-    if(importWay == 0) await setHanashiroSettings('selectors', selectors);
+    if(window.Hanashiro.selectorsImportWay == 0) await setHanashiroSettings('selectors', selectors);
     else{
       const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
       await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
@@ -20,7 +19,7 @@ const setValue = async (selectors: ISelectors[], importWay: number) => {
   }
 };
 
-const getRemoteSelectors = async (url: string, importWay: number) => {
+const getRemoteSelectors = async (url: string) => {
   let remoteSelectors: ISelectors[];
   try{
     remoteSelectors = json5.parse(await (await fetch(url)).text());
@@ -32,7 +31,7 @@ const getRemoteSelectors = async (url: string, importWay: number) => {
     return;
   }
 
-  await setValue(remoteSelectors, importWay);
+  await setValue(remoteSelectors);
 
   snackbar({
     message: '设置应用成功！重新打开页面即可看见更改',
@@ -40,16 +39,19 @@ const getRemoteSelectors = async (url: string, importWay: number) => {
   });
 };
 
-const getLocalSelectors = async (importWay: number) => {
-  const file = await fileOpen({
-    description: '选择器清单文件',
-    extensions: ['.json5'],
-    excludeAcceptAllOption: true,
-  });
+const showFilePicker = () => (document.querySelector('input#localImport') as HTMLInputElement).click();
+
+export const getLocalSelectors = async () => {
+  const inputElement = document.querySelector('input#localImport') as HTMLInputElement;
+
+  const fileList = inputElement.files;
+  if(!fileList) return;
+
+  const file = fileList[0];
 
   const localSelectors = json5.parse<ISelectors[]>(await file.text());
 
-  await setValue(localSelectors, importWay);
+  await setValue(localSelectors);
 
   snackbar({
     message: '设置应用成功！重新打开页面即可看见更改',
@@ -58,24 +60,23 @@ const getLocalSelectors = async (importWay: number) => {
 };
 
 export default () => {
-  let importWay = 0;
-
   dialog({
     headline: '选择导入方式',
     description: '选择覆盖导入或者添加导入',
     closeOnEsc: true,
     closeOnOverlayClick: true,
+    queue: 'selectors',
     actions: [
       {
         text: '覆盖导入',
         onClick: () => {
-          importWay = 0;
+          window.Hanashiro.selectorsImportWay = 0;
         },
       },
       {
         text: '添加导入',
         onClick: () => {
-          importWay = 1;
+          window.Hanashiro.selectorsImportWay = 1;
         },
       },
     ],
@@ -86,10 +87,11 @@ export default () => {
     description: '选择从本地导入或者远程导入',
     closeOnEsc: true,
     closeOnOverlayClick: true,
+    queue: 'selectors',
     actions: [
       {
         text: '本地导入',
-        onClick: async () => await getLocalSelectors(importWay),
+        onClick: showFilePicker,
       },
       {
         text: '远程导入',
@@ -110,7 +112,7 @@ export default () => {
 
                 return new Promise((_, reject) => reject(false));
               }
-              else await getRemoteSelectors(value, importWay);
+              else await getRemoteSelectors(value);
             },
           });
         },

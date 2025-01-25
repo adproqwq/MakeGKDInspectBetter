@@ -4,7 +4,7 @@ import { TextField, Switch, Dialog } from 'mdui';
 import { RawCategory } from '@gkd-kit/api';
 import json5 from 'json5';
 import settings from '../Settings/settings';
-import _import from '../Settings/import';
+import _import, { getLocalSettings } from '../Settings/import';
 import _export from '../Settings/export';
 import { send } from '../utils/event';
 import { getHanashiroSettings, getInspectSettings } from '../utils/indexedDB';
@@ -20,6 +20,9 @@ export default defineComponent({
     },
     importSettings(){
       _import();
+    },
+    async getLocalSettingsFile(){
+      await getLocalSettings();
     },
     closeDialog(){
       send('closePage');
@@ -92,6 +95,7 @@ export default defineComponent({
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>
     </div>
   </mdui-dialog>
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSettingsFile"></input>
 </template>
 
 <style>
@@ -102,5 +106,9 @@ mdui-dialog > * > span {
 
 #categories {
   width: 500px;
+}
+
+input#localImport {
+  display: none;
 }
 </style>

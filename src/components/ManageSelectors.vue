@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import { Dialog } from 'mdui';
 import { generateSelectors, editSelector } from '../selectors/manage';
-import _import from '../selectors/import';
+import _import, { getLocalSelectors } from '../selectors/import';
 import _export from '../selectors/export';
 import { send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
@@ -29,6 +29,9 @@ export default defineComponent({
     },
     importSelectors(){
       _import();
+    },
+    async getLocalSelectorsFile(){
+      await getLocalSelectors();
     },
   },
   async mounted(){
@@ -68,11 +71,16 @@ export default defineComponent({
       <mdui-button slot="action" variant="tonal" @click="close">关闭</mdui-button>
     </div>
   </mdui-dialog>
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSelectorsFile"></input>
 </template>
 
 <style>
 mdui-dialog > * > span {
   display: flex;
   font-size: var(--mdui-typescale-body-large-size);
+}
+
+input#localImport {
+  display: none;
 }
 </style>

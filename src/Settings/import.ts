@@ -1,6 +1,5 @@
 import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
-import { fileOpen } from 'browser-fs-access';
 import { ISettings } from '../types/settings';
 import { setHanashiroSettings } from '../utils/indexedDB';
 
@@ -41,12 +40,15 @@ const getRemoteSettings = async (url: string) => {
   });
 };
 
-const getLocalSettings = async () => {
-  const file = await fileOpen({
-    description: '设置文件',
-    extensions: ['.json5'],
-    excludeAcceptAllOption: true,
-  });
+const showFilePicker = () => (document.querySelector('input#localImport') as HTMLInputElement).click();
+
+export const getLocalSettings = async () => {
+  const inputElement = document.querySelector('input#localImport') as HTMLInputElement;
+
+  const fileList = inputElement.files;
+  if(!fileList) return;
+
+  const file = fileList[0];
 
   const localSettings = json5.parse<ISettings>(await file.text());
 
@@ -67,7 +69,7 @@ export default () => {
     actions: [
       {
         text: '本地导入',
-        onClick: async () => await getLocalSettings(),
+        onClick: showFilePicker,
       },
       {
         text: '远程导入',
