@@ -15,12 +15,14 @@ export default ts.config(
   {
     rules: {
       quotes: ['error', 'single', { allowTemplateLiterals: false }],
-      'keyword-spacing': 0,
       'no-unused-vars': 'off',
       'no-useless-escape': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': 'error',
     },
+  },
+  {
+    ignores: ['dist'],
   },
 );

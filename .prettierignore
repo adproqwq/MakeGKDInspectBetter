@@ -4,6 +4,8 @@ LICENCE
 
 dist
 
+vite.config.ts
+
 README.md
 changeLog.md
 src/api/api.md
