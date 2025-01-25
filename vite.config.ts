@@ -37,7 +37,7 @@ export default defineConfig({
       },
       build: {
         externalGlobals: {
-          vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
+          vue: cdn.npmmirror('Vue', 'dist/vue.global.prod.js'),
         },
       },
     }),
