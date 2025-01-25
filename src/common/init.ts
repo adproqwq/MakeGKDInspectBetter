@@ -49,7 +49,7 @@ Object.defineProperty(window, 'Hanashiro', {
 
 if((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false){
   snackbar({
-    message: '问春何苦匆匆，带风伴雨如驰骤。',
+    message: '世界第一公主殿下已经降下魔法~',
     autoCloseDelay: 2000,
     placement: 'top',
   });

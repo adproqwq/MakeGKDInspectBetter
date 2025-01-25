@@ -19,7 +19,7 @@ export default defineComponent({
   <mdui-dialog id="page" headline="帮助" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <p>
-        本脚本已开源至Github，欢迎反馈：<a href="https://github.com/adproqwq/MakeGKDInspectBetter">Github仓库</a><br>
+        本脚本已开源至Github，欢迎反馈：<a href="https://github.com/adproqwq/MikuMagicWand">Github仓库</a><br>
         <br>
         你可以通过以下方式联系我：<br>
         QQ群：494273126<br>

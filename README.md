@@ -1,8 +1,10 @@
-# MakeGKDInspectBetter
+# 米库的神奇魔法棒
+
+![logo](./logo.png)
 
 **脚本于即日起进入维护更新，网页审查工具没有出现影响脚本功能实现或表现的变动，不会进行任何功能性变动。新功能Issue将视实用情况处理，欢迎PR！**
 
-当前版本：Miku 2.13.0
+当前版本：2.13.1
 
 Powered By Vite + Vue + TypeScript
 
@@ -22,8 +24,8 @@ Powered By Vite + Vue + TypeScript
 
 ### Github
 
-1. 打开[`Latest Release`](https://github.com/adproqwq/MakeGKDInspectBetter/releases/latest)
-2. 点击下方`Assets`中的`make-gkd_inspect-better.user.js`，等待跳转后即可。
+1. 打开[`Latest Release`](https://github.com/adproqwq/MikuMagicWand/releases/latest)
+2. 点击下方`Assets`中的`miku-magic-wand.user.js`，等待跳转后即可。
 
 > [!IMPORTANT]
 > 有且仅有以上3种分发渠道由仓库维护者直接管理。使用其他渠道的分发将面临一定的风险，请谨慎使用！
@@ -38,7 +40,7 @@ Powered By Vite + Vue + TypeScript
 1. Clone仓库
 
 ```shell
-git clone https://github.com/adproqwq/MakeGKDInspectBetter.git
+git clone https://github.com/adproqwq/MikuMagicWand.git
 ```
 
 2. 安装依赖
