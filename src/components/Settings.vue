@@ -74,7 +74,7 @@ export default defineComponent({
     <div>
       <span>隐藏加载成功提示：</span>
       <mdui-switch id="hideLoadSnackbar"></mdui-switch>
-      <span class="introduction">每次脚本加载时会弹出一句诗句，此选项可选择是否弹出</span>
+      <span class="introduction">每次脚本加载时会弹出一个snackbar，此选项可选择是否弹出</span>
     </div>
     <div>
       <span>name属性复制优化：</span>
