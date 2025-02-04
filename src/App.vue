@@ -1,6 +1,7 @@
 <script lang="ts">
-import { setColorScheme } from 'mdui';
+import '@fontsource/material-icons';
 import 'mdui/mdui.css';
+import { setColorScheme } from 'mdui';
 import { defineComponent } from 'vue';
 import './common/init';
 import './api/api';

@@ -24,10 +24,6 @@ export default defineComponent({
     async getLocalSettingsFile(){
       await getLocalSettings();
     },
-    async requestIcons(){
-      const responce = await fetch('https://fonts.font.im/icon?family=Material+Icons');
-      if(responce.ok) location.reload();
-    },
     closeDialog(){
       send('closePage');
     },
@@ -94,11 +90,6 @@ export default defineComponent({
       <span>activityIds规则复制优化：</span>
       <mdui-switch id="activityIdsSimply"></mdui-switch>
       <span class="introduction">在复制规则代码时，若activityIds满足简写条件时，使用简写</span>
-    </div>
-    <div>
-      <span>重新请求图标：</span>
-      <mdui-button variant="tonal" @click="requestIcons">点击重新请求</mdui-button>
-      <span class="introduction">当图标未被正确加载时，重新发起网络请求请求图标包</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>

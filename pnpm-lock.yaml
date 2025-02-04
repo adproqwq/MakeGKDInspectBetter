@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/material-icons':
+        specifier: ^5.1.1
+        version: 5.1.1
       file-saver:
         specifier: ^2.0.5
         version: 2.0.5
@@ -275,6 +278,9 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@fontsource/material-icons@5.1.1':
+    resolution: {integrity: sha512-l1EhBIh9US1RMiiKEJ+/FTFvHZIU3cpn0MmxSZA6Ip2C/Szwca6h2xqNg/OTIOFWADune7b/rhtypeDbjHrZzA==}
 
   '@gkd-kit/api@0.6.0':
     resolution: {integrity: sha512-QRzbC3FRVUbsabKRr02QfzKPcez4JAPJqytK+jo8Ts8F0CX5+65Akh3gV/R2tqqzaelvdHjzrgL4j3O6v9KpKQ==}
@@ -1327,6 +1333,8 @@ snapshots:
       levn: 0.4.1
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@fontsource/material-icons@5.1.1': {}
 
   '@gkd-kit/api@0.6.0': {}
 
