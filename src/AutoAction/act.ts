@@ -3,7 +3,7 @@ import getSnapshotId from '../utils/getSnapshotId';
 import { getAutoAction } from '../utils/indexedDB';
 
 const intervalId = setInterval(async () => {
-  if(window.location.href.includes('sanpshot')){
+  if (window.location.href.includes('sanpshot')) {
     const autoAction = await getAutoAction(getSnapshotId());
 
     if (autoAction.autoSearchSelector) {
