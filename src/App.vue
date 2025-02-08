@@ -8,7 +8,6 @@ import './api/api';
 import './common/hookCopy';
 import './common/enableSettings';
 import './common/insertIcon';
-import './AutoAction/act';
 import { receive } from './utils/event';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
