@@ -36,11 +36,6 @@ observeElement(
         send('openSettings');
       });
 
-      // 自动行为编辑按钮
-      const autoActionIcon = createBarIcon('edit_note', '自动动作管理', () => {
-        send('openAutoAction');
-      });
-
       // 帮助按钮
       const HelpIcon = createBarIcon('help', '帮助', () => {
         send('openHelp');
@@ -57,7 +52,6 @@ observeElement(
         ManageSelectorsIcon,
         ChangeScreenshotIcon,
         SettingsIcon,
-        autoActionIcon,
         HelpIcon,
         SponsorIcon,
       );

@@ -19,7 +19,6 @@ import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
 import ChangeScreenshot from './components/ChangeScreenshot.vue';
 import GeneratePosition from './components/GeneratePosition.vue';
-import AutoAction from './components/AutoAction.vue';
 
 export default defineComponent({
   components: {
@@ -32,7 +31,6 @@ export default defineComponent({
     ManageSelectors,
     ChangeScreenshot,
     GeneratePosition,
-    AutoAction,
   },
   data(){
     return {
@@ -74,10 +72,6 @@ export default defineComponent({
 
     receive('openInspectSettings', () => {
       this.currentComponent = 'InspectSettings';
-    });
-
-    receive('openAutoAction', () => {
-      this.currentComponent = 'AutoAction';
     });
 
     receive('closePage', () => {

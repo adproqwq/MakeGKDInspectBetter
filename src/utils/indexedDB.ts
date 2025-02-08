@@ -3,7 +3,6 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { Snapshot, PrimitiveType } from '../types/snapshot';
 import { IInspectSettings } from '../types/inspectSettings';
-import { AutoAction, AutoActionTerms } from '../types/autoAction';
 import { AttrList } from '../common/attrList';
 
 interface EditNodeOption {
@@ -114,28 +113,6 @@ export const downloadSnapshot = async (snapshotId: string) => {
   jszip.generateAsync({ type: 'blob' }).then((snapshotFile) => {
     saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
   });
-};
-
-export const getAutoAction = async (
-  snapshotId: string,
-): Promise<AutoActionTerms> => {
-  const snapshotInfo = await snapshotStorage.getItem<AutoAction>(snapshotId);
-  let autoActions = snapshotInfo!.autoAction;
-
-  if (!autoActions) autoActions = { autoSearchSelector: '' };
-
-  return autoActions;
-};
-
-export const setAutoAction = async (
-  snapshotId: string,
-  autoAction: AutoActionTerms,
-) => {
-  const snapshotInfo = await snapshotStorage.getItem<AutoAction>(snapshotId);
-
-  snapshotInfo!.autoAction = autoAction;
-
-  await snapshotStorage.setItem(snapshotId, snapshotInfo);
 };
 
 export const setHanashiroSettings = async <T>(item: string, value: T) => {
