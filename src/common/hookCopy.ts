@@ -11,37 +11,41 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
     if (data.startsWith('{') && data.endsWith('}')) {
       window.Hanashiro.originRule = args[0];
 
-      // 发送复制事件
-      send('copyEvent');
+      const result = await new Promise<string>((resolve, reject) => {
+        try {
+          // 注册modifyEnd监听器
+          receive(
+            'modifyEnd',
+            () => resolve(window.Hanashiro.returnResult),
+            true,
+          );
 
-      // 等待 modifyEnd
-      await new Promise((resolve) => {
-        receive(
-          'modifyEnd',
-          async () => {
-            await Reflect.apply(target, thisArg, [
-              window.Hanashiro.returnResult,
-            ]);
-            snackbar({
-              message: '注入修改成功',
-              placement: 'top',
-              onClosed: () => resolve(true),
-            });
-          },
-          true,
-        );
+          // 发送复制事件
+          send('copyEvent');
+        } catch {
+          reject();
+        }
       });
+
+      if (result) {
+        snackbar({
+          message: '注入修改成功',
+          placement: 'top',
+        });
+
+        return await Reflect.apply(target, thisArg, [result]);
+      }
     } else if (data.startsWith('name=')) {
       if ((await getHanashiroSettings('simplyName')) == true) {
         const fullname = data.split('"')[1];
         const splitedName = fullname.split('.');
         const name = splitedName[splitedName.length - 1];
-        await Reflect.apply(target, thisArg, [name]);
-      } else await Reflect.apply(target, thisArg, [data]);
+        return await Reflect.apply(target, thisArg, [name]);
+      } else return await Reflect.apply(target, thisArg, [data]);
     } else if (
       attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0
     ) {
-      await Reflect.apply(target, thisArg, [`[${data}]`]);
+      return await Reflect.apply(target, thisArg, [`[${data}]`]);
     } else if (data.startsWith(window.origin)) {
       const selectors =
         (await getHanashiroSettings<ISelectors[]>('selectors'))!;
@@ -78,8 +82,8 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
         }
       }
 
-      await Reflect.apply(target, thisArg, [data]);
-    } else await Reflect.apply(target, thisArg, [data]);
+      return await Reflect.apply(target, thisArg, [data]);
+    } else return await Reflect.apply(target, thisArg, [data]);
   },
 });
 navigator.clipboard.writeText = copyProxy;
