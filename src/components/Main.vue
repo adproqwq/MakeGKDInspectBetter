@@ -73,7 +73,7 @@ export default defineComponent({
     </div>
     <div>
       <span>去除exampleUrls：</span>
-      <mdui-switch id="noExample"></mdui-switch>
+      <mdui-switch id="noExample" checked></mdui-switch>
     </div>
     <div>
       <span>修改key值为：</span>
