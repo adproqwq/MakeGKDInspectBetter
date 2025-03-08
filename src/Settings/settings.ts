@@ -1,11 +1,13 @@
-import { TextField, Switch } from 'mdui';
+import { TextField, Switch, snackbar } from 'mdui';
 import json5 from 'json5';
+import { z } from 'zod';
 import {
   setHanashiroSettings,
   getInspectSettings,
   setInspectSettings,
 } from '../utils/indexedDB';
 import { send } from '../utils/event';
+import { RawCategoryZod } from '../types/categoryZod';
 
 export default async () => {
   const categories = (document.querySelector('#categories') as TextField).value;
@@ -27,10 +29,27 @@ export default async () => {
 
   const inspectSettings = (await getInspectSettings())!;
 
-  await setHanashiroSettings(
-    'categories',
-    json5.parse(categories ? categories : '[]'),
-  );
+  let isCategoriesLegal = true;
+
+  try {
+    json5
+      .parse<z.infer<typeof RawCategoryZod>[]>(categories ? categories : '[]')
+      .forEach((category) => {
+        RawCategoryZod.parse(category);
+      });
+  } catch {
+    isCategoriesLegal = false;
+    snackbar({
+      message: '分类格式错误！分类设置已跳过！',
+      placement: 'top',
+    });
+  }
+
+  if (isCategoriesLegal)
+    await setHanashiroSettings(
+      'categories',
+      json5.parse(categories ? categories : '[]'),
+    );
   await setHanashiroSettings(
     'rulesKeySort',
     json5.parse(rulesKeySort ? rulesKeySort : '[]'),

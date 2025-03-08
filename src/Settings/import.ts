@@ -1,13 +1,25 @@
 import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
 import { ISettings } from '../types/settings';
+import { RawCategoryZod } from '../types/categoryZod';
 import { setHanashiroSettings } from '../utils/indexedDB';
 
 const setValue = async (settings: ISettings) => {
   try {
+    let isCategoriesLegal = true;
+    try {
+      settings.categories.forEach((category) => RawCategoryZod.parse(category));
+    } catch {
+      isCategoriesLegal = false;
+      snackbar({
+        message: '分类格式错误，已跳过分类设置！',
+        placement: 'top',
+      });
+    }
     await setHanashiroSettings('activityIdsSimply', settings.activityIdsSimply);
     await setHanashiroSettings('autoAddSelector', settings.autoAddSelector);
-    await setHanashiroSettings('categories', settings.categories);
+    if (isCategoriesLegal)
+      await setHanashiroSettings('categories', settings.categories);
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
     await setHanashiroSettings('simplyName', settings.simplyName);
