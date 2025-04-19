@@ -37,7 +37,10 @@ if (
 for (const rulesKey of (await getHanashiroSettings<Array<string>>(
   'rulesKeySort',
 ))!) {
-  if (!rulesKeySort.includes(rulesKey) || window.Hanashiro.defaultRulesKeySortOrder != rulesKeySort)
+  if (
+    !rulesKeySort.includes(rulesKey) ||
+    window.Hanashiro.defaultRulesKeySortOrder != rulesKeySort
+  )
     confirm({
       headline: '同步最新rulesKey排序',
       description:
