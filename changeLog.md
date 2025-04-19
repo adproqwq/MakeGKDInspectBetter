@@ -1,2 +1,1 @@
-1. 修复matchRoot在groups层被过滤的问题
-2. 优化rulesKey排序同步检测逻辑
+1. 调整全局对象注册时机
