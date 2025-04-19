@@ -1,1 +1,2 @@
-1. 修复matchRoot被字段排序模块过滤的问题(#25)
+1. 修复matchRoot在groups层被过滤的问题
+2. 优化rulesKey排序同步检测逻辑
