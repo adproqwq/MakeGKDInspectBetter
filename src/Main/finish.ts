@@ -112,7 +112,7 @@ export default async () => {
     }
   }
 
-  if(isMatchRoot){
+  if (isMatchRoot) {
     if (copyDepth == 'rules') {
       const rule = iArrayToArray(
         origin.groups[0].rules as IArray<RawAppRule>,
