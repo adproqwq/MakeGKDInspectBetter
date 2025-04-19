@@ -73,6 +73,7 @@ export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
     actionMaximum: groupsKeyValue[4],
     resetMatch: groupsKeyValue[5],
     priorityTime: groupsKeyValue[6],
+    matchRoot: groupsKeyValue[7],
     rules: [sortedRules],
   };
 
