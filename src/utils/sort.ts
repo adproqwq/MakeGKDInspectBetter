@@ -9,6 +9,7 @@ type GroupsKeyOrder = [
   'actionMaximum',
   'resetMatch',
   'priorityTime',
+  'matchRoot',
   'rules',
 ];
 
@@ -20,6 +21,7 @@ export type RulesKeyOrder = [
   'actionMaximum',
   'resetMatch',
   'priorityTime',
+  'matchRoot',
   'action',
   'activityIds',
   'position',
@@ -36,6 +38,7 @@ export const groupsKeyOrder: GroupsKeyOrder = [
   'actionMaximum',
   'resetMatch',
   'priorityTime',
+  'matchRoot',
   'rules',
 ];
 

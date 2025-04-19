@@ -14,6 +14,7 @@ const rulesKeySort = [
   'actionMaximum',
   'resetMatch',
   'priorityTime',
+  'matchRoot',
   'action',
   'activityIds',
   'position',

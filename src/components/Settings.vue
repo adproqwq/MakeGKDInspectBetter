@@ -63,7 +63,7 @@ export default defineComponent({
       <span class="introduction">
         接受一个字符串数组，目前支持的字段有：
         key,preKeys,fastQuery,matchTime,actionMaximum,resetMatch,priorityTime
-        action,activityIds,position,matches,exampleUrls,snapshotUrls
+        matchRoot,action,activityIds,position,matches,exampleUrls,snapshotUrls
       </span>
     </div>
     <div>
