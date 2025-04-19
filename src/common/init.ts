@@ -22,6 +22,7 @@ const rulesKeySort = [
   'exampleUrls',
   'snapshotUrls',
 ];
+window.Hanashiro.defaultRulesKeySortOrder = rulesKeySort;
 
 if (!(await getHanashiroSettings('selectors')))
   await setHanashiroSettings('selectors', []);
@@ -36,7 +37,7 @@ if (
 for (const rulesKey of (await getHanashiroSettings<Array<string>>(
   'rulesKeySort',
 ))!) {
-  if (!rulesKeySort.includes(rulesKey))
+  if (!rulesKeySort.includes(rulesKey) || window.Hanashiro.defaultRulesKeySortOrder != rulesKeySort)
     confirm({
       headline: '同步最新rulesKey排序',
       description:

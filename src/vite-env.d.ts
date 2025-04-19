@@ -283,6 +283,7 @@ declare interface Window {
     currentUseSelectorIndex: number;
     currentPositionView: 'partial' | 'global';
     selectorsImportWay: 0 | 1;
+    defaultRulesKeySortOrder: string[];
     nodePosition: {
       absolute: IPosition;
       relative: IPosition;
