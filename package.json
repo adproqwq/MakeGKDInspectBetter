@@ -1,7 +1,7 @@
 {
   "name": "miku-magic-wand",
   "private": true,
-  "version": "2.14.3",
+  "version": "2.14.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
