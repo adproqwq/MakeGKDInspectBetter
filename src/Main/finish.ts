@@ -62,6 +62,7 @@ export default async () => {
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.Hanashiro.currentCategory;
   const isLimit = (document.querySelector('#limit') as Switch).checked;
+  const isMatchRoot = (document.querySelector('#matchRoot') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const position =
@@ -109,6 +110,16 @@ export default async () => {
       origin.groups[0].resetMatch = 'app';
       origin.groups[0].matchTime = 10000;
     }
+  }
+
+  if(isMatchRoot){
+    if (copyDepth == 'rules') {
+      const rule = iArrayToArray(
+        origin.groups[0].rules as IArray<RawAppRule>,
+      )[0];
+      rule.matchRoot = true;
+      origin.groups[0].rules = [rule];
+    } else origin.groups[0].matchRoot = true;
   }
 
   if (isNoExample) {

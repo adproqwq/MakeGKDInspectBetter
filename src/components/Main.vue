@@ -119,6 +119,11 @@ export default defineComponent({
       <span class="introduction">插入matchTime、resetMatch和actionMaximum</span>
     </div>
     <div>
+      <span>插入matchRoot：</span>
+      <mdui-switch id="matchRoot"></mdui-switch>
+      <span class="introduction">插入matchRoot</span>
+    </div>
+    <div>
       <span>去除exampleUrls：</span>
       <mdui-switch id="noExample" checked></mdui-switch>
     </div>
