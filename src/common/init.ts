@@ -6,6 +6,11 @@ import {
   setInspectSettings,
 } from '../utils/indexedDB';
 
+Object.defineProperty(window, 'Hanashiro', {
+  value: {},
+  writable: true,
+});
+
 const rulesKeySort = [
   'key',
   'preKeys',
@@ -61,11 +66,6 @@ if (!(await getInspectSettings()))
     ignoreWasmWarn: false,
     maxShowNodeSize: 2000,
   });
-
-Object.defineProperty(window, 'Hanashiro', {
-  value: {},
-  writable: true,
-});
 
 if ((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false) {
   snackbar({
