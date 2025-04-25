@@ -11,6 +11,8 @@ Object.defineProperty(window, 'Hanashiro', {
   writable: true,
 });
 
+const userRulesKeySort =
+  (await getHanashiroSettings<Array<string>>('rulesKeySort'))!;
 const rulesKeySort = [
   'key',
   'preKeys',
@@ -27,36 +29,45 @@ const rulesKeySort = [
   'exampleUrls',
   'snapshotUrls',
 ];
-window.Hanashiro.defaultRulesKeySortOrder = rulesKeySort;
 
 if (!(await getHanashiroSettings('selectors')))
   await setHanashiroSettings('selectors', []);
 
 if (
   !(await getHanashiroSettings('rulesKeySort')) ||
-  (await getHanashiroSettings<Array<string>>('rulesKeySort'))!.length == 0
+  userRulesKeySort.length == 0
 ) {
   await setHanashiroSettings('rulesKeySort', rulesKeySort);
 }
 
-for (const rulesKey of (await getHanashiroSettings<Array<string>>(
-  'rulesKeySort',
-))!) {
-  if (
-    !rulesKeySort.includes(rulesKey) ||
-    window.Hanashiro.defaultRulesKeySortOrder != rulesKeySort
-  )
-    confirm({
-      headline: '同步最新rulesKey排序',
-      description:
-        '检测你的rulesKey排序有多余或缺失字段，可能无法使用最新的功能。是否同步？注意：这会丢失你现有的排序设置。',
-      closeOnEsc: true,
-      closeOnOverlayClick: true,
-      confirmText: '同步',
-      cancelText: '取消',
-      onConfirm: async () =>
-        await setHanashiroSettings('rulesKeySort', rulesKeySort),
-    });
+if (userRulesKeySort.length != rulesKeySort.length)
+  confirm({
+    headline: '同步最新rulesKey排序',
+    description:
+      '检测你的rulesKey排序有多余或缺失字段，可能无法使用最新的功能。是否同步？注意：这会丢失你现有的排序设置。',
+    closeOnEsc: true,
+    closeOnOverlayClick: true,
+    confirmText: '同步',
+    cancelText: '取消',
+    onConfirm: async () =>
+      await setHanashiroSettings('rulesKeySort', rulesKeySort),
+  });
+else {
+  for (const rulesKey of userRulesKeySort) {
+    if (!rulesKeySort.includes(rulesKey))
+      confirm({
+        headline: '同步最新rulesKey排序',
+        description:
+          '检测你的rulesKey排序有多余或缺失字段，可能无法使用最新的功能。是否同步？注意：这会丢失你现有的排序设置。',
+        closeOnEsc: true,
+        closeOnOverlayClick: true,
+        confirmText: '同步',
+        cancelText: '取消',
+        onConfirm: async () =>
+          await setHanashiroSettings('rulesKeySort', rulesKeySort),
+      });
+    break;
+  }
 }
 
 if (!(await getInspectSettings()))
