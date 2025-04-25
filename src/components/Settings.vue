@@ -41,6 +41,7 @@ export default defineComponent({
     if(await getHanashiroSettings<boolean>('hideLoadSnackbar') == true) (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
     if(await getHanashiroSettings<boolean>('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
     if(await getHanashiroSettings<boolean>('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
+    if(await getHanashiroSettings<boolean>('readClipboard') == true) (document.querySelector('#readClipboard') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -90,6 +91,11 @@ export default defineComponent({
       <span>activityIds规则复制优化：</span>
       <mdui-switch id="activityIdsSimply"></mdui-switch>
       <span class="introduction">在复制规则代码时，若activityIds满足简写条件时，使用简写</span>
+    </div>
+    <div>
+      <span>自动读取剪贴板：</span>
+      <mdui-switch id="readClipboard"></mdui-switch>
+      <span class="introduction">当进入网页审查工具首页时，自动读取剪贴板。如果存在以.zip结尾的链接时，自动粘贴以唤起快捷导入窗口。火狐内核不可用。</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>

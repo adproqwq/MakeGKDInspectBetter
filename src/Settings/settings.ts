@@ -26,6 +26,8 @@ export default async () => {
   const isActivityIdsSimply = (
     document.querySelector('#activityIdsSimply') as Switch
   ).checked;
+  const isReadClipboard = (document.querySelector('#readClipboard') as Switch)
+    .checked;
 
   const inspectSettings = (await getInspectSettings())!;
 
@@ -58,6 +60,7 @@ export default async () => {
   await setHanashiroSettings('simplyName', isSimplyName);
   await setHanashiroSettings('autoAddSelector', isAutoAddSelector);
   await setHanashiroSettings('activityIdsSimply', isActivityIdsSimply);
+  await setHanashiroSettings('readClipboard', isReadClipboard);
 
   inspectSettings.maxShowNodeSize = Number(maxShowSize);
   await setInspectSettings(inspectSettings);
