@@ -4,10 +4,10 @@ import { createBarIcon } from '../utils/createIcon';
 import replaceNodeInfo from '../utils/replaceNodeInfo';
 
 observeElement(
-  '.n-input-group',
+  '.DraggableCard > * > .n-input-group',
   () => {
     if (!document.querySelector('#iconBar')) {
-      const inputGroup = document.querySelector('.n-input-group')!;
+      const inputGroup = document.querySelector('.DraggableCard > * > .n-input-group')!;
       const iconBar = document.createElement('div');
       iconBar.id = 'iconBar';
 
@@ -61,7 +61,7 @@ observeElement(
   true,
 );
 
-observeElement('#app', () => {
+observeElement('#iconBar', () => {
   const app = document.querySelector('#app')!;
 
   // 节点打码按钮
