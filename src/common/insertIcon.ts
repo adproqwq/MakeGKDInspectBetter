@@ -7,7 +7,9 @@ observeElement(
   '.DraggableCard > * > .n-input-group',
   () => {
     if (!document.querySelector('#iconBar')) {
-      const inputGroup = document.querySelector('.DraggableCard > * > .n-input-group')!;
+      const inputGroup = document.querySelector(
+        '.DraggableCard > * > .n-input-group',
+      )!;
       const iconBar = document.createElement('div');
       iconBar.id = 'iconBar';
 
