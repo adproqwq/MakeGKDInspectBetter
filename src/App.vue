@@ -6,13 +6,11 @@ import { defineComponent } from 'vue';
 import './common/init';
 import './api/api';
 import './common/hookCopy';
-import './common/enableSettings';
 import './common/insertIcon';
 import './common/readClipboard';
 import { receive } from './utils/event';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
-import InspectSettings from './components/InspectSettings.vue';
 import Help from './components/Help.vue';
 import UseSelector from './components/UseSelector.vue';
 import AddSelector from './components/AddSelector.vue';
@@ -24,7 +22,6 @@ export default defineComponent({
   components: {
     Main,
     Settings,
-    InspectSettings,
     Help,
     UseSelector,
     AddSelector,
@@ -68,10 +65,6 @@ export default defineComponent({
 
     receive('openGeneratePosition', () => {
       this.currentComponent = 'GeneratePosition';
-    });
-
-    receive('openInspectSettings', () => {
-      this.currentComponent = 'InspectSettings';
     });
 
     receive('closePage', () => {
