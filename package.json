@@ -33,8 +33,8 @@
     "jiti": "^2.4.2",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.0",
-    "vite": "^6.3.3",
+    "typescript-eslint": "^8.31.1",
+    "vite": "^6.3.4",
     "vite-plugin-monkey": "5.0.8"
   },
   "packageManager": "pnpm@10.9.0",
