@@ -1,5 +1,4 @@
 import { RawCategory } from '@gkd-kit/api';
-import json5 from 'json5';
 import { saveAs } from 'file-saver';
 import { getHanashiroSettings } from '../utils/indexedDB';
 import { ISettings } from '../types/settings';
@@ -16,6 +15,7 @@ export default async () => {
   const rulesKeySort =
     (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
   const simplyName = await getHanashiroSettings<boolean>('simplyName');
+  const readClipboard = await getHanashiroSettings<boolean>('readClipboard');
 
   const settings: ISettings = {
     activityIdsSimply: activityIdsSimply ? activityIdsSimply : false,
@@ -24,8 +24,9 @@ export default async () => {
     hideLoadSnackbar: hideLoadSnackbar ? hideLoadSnackbar : false,
     rulesKeySort: rulesKeySort,
     simplyName: simplyName ? simplyName : false,
+    readClipboard: readClipboard ? readClipboard : false,
   };
 
-  const settingsFile = new Blob([json5.stringify(settings, undefined, 2)]);
+  const settingsFile = new Blob([JSON.stringify(settings, undefined, 2)]);
   saveAs(settingsFile, 'settings.json5');
 };

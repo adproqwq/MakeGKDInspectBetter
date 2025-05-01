@@ -23,6 +23,7 @@ const setValue = async (settings: ISettings) => {
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
     await setHanashiroSettings('simplyName', settings.simplyName);
+    await setHanashiroSettings('readClipboard', settings.readClipboard);
   } catch {
     snackbar({
       message: '应用设置失败',
