@@ -19,7 +19,7 @@
     "localforage": "^1.10.0",
     "mdui": "^2.1.3",
     "vue": "^3.5.13",
-    "zod": "4.0.0-beta.20250411T232125"
+    "zod": "4.0.0-beta.20250503T014749"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",

@@ -33,8 +33,8 @@ importers:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
       zod:
-        specifier: 4.0.0-beta.20250411T232125
-        version: 4.0.0-beta.20250411T232125
+        specifier: 4.0.0-beta.20250503T014749
+        version: 4.0.0-beta.20250503T014749
     devDependencies:
       '@eslint/js':
         specifier: ^9.26.0
@@ -571,8 +571,8 @@ packages:
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
-  '@zod/core@0.4.1':
-    resolution: {integrity: sha512-oM9ioynl8iyvMOjXg7Zhavr7GDR44YJbXAtw4c/XtkftP3m1Ah73fobTjq3eO6aa/yaqgFb3d+L6kcoN6VKkAA==}
+  '@zod/core@0.10.1':
+    resolution: {integrity: sha512-EmgYiJLMfZ3Dop9Wp7SadkEGYxbjGvrB/qRCT6PhGft9Eh1TbtNQYO9wEBgw4RE9JsmkolZ5Ah+tHu0EwoIy5g==}
 
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
@@ -1512,8 +1512,8 @@ packages:
   zod@3.24.3:
     resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
 
-  zod@4.0.0-beta.20250411T232125:
-    resolution: {integrity: sha512-heRw5a9JF+LiEfj8nzVuxLqgUzIxT5IX0s5DBpLdEHGFt2f11gN3iG92ozSfYfcBmJNVNvUnjJr8ho9GRJswNw==}
+  zod@4.0.0-beta.20250503T014749:
+    resolution: {integrity: sha512-ND9JjNpf2IaTZlHr4xgvWbOmzOwjDzrlCqBlhpnYSpXcx6DFzmLJrWhCZc4xgNGieD7MCx/ZoWIHDGZzmg/gnA==}
 
 snapshots:
 
@@ -1958,7 +1958,7 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@zod/core@0.4.1': {}
+  '@zod/core@0.10.1': {}
 
   accepts@2.0.0:
     dependencies:
@@ -2940,6 +2940,6 @@ snapshots:
 
   zod@3.24.3: {}
 
-  zod@4.0.0-beta.20250411T232125:
+  zod@4.0.0-beta.20250503T014749:
     dependencies:
-      '@zod/core': 0.4.1
+      '@zod/core': 0.10.1
