@@ -38,6 +38,11 @@ observeElement(
         send('openSettings');
       });
 
+      // 统计按钮
+      const CountIcon = createBarIcon('bar_chart', '统计', () => {
+        send('openCount');
+      });
+
       // 帮助按钮
       const HelpIcon = createBarIcon('help', '帮助', () => {
         send('openHelp');
@@ -54,6 +59,7 @@ observeElement(
         ManageSelectorsIcon,
         ChangeScreenshotIcon,
         SettingsIcon,
+        CountIcon,
         HelpIcon,
         SponsorIcon,
       );

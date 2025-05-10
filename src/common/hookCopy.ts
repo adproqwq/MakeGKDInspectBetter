@@ -3,6 +3,7 @@ import { attrList } from './attrList';
 import { receive, send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
+import { ICount } from '../types/count';
 
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
   apply: async (target, thisArg, args) => {
@@ -16,7 +17,13 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
           // 注册modifyEnd监听器
           receive(
             'modifyEnd',
-            () => resolve(window.Hanashiro.returnResult),
+            async () => {
+              const count = (await getHanashiroSettings<ICount>('count'))!;
+              count.rejectRules++;
+              await setHanashiroSettings<ICount>('count', count);
+
+              resolve(window.Hanashiro.returnResult);
+            },
             true,
           );
 

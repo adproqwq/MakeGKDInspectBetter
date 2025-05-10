@@ -17,6 +17,7 @@ import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
 import ChangeScreenshot from './components/ChangeScreenshot.vue';
 import GeneratePosition from './components/GeneratePosition.vue';
+import Count from './components/Count.vue';
 
 export default defineComponent({
   components: {
@@ -28,6 +29,7 @@ export default defineComponent({
     ManageSelectors,
     ChangeScreenshot,
     GeneratePosition,
+    Count,
   },
   data(){
     return {
@@ -65,6 +67,10 @@ export default defineComponent({
 
     receive('openGeneratePosition', () => {
       this.currentComponent = 'GeneratePosition';
+    });
+
+    receive('openCount', () => {
+      this.currentComponent = 'Count';
     });
 
     receive('closePage', () => {

@@ -5,6 +5,7 @@ import {
   getInspectSettings,
   setInspectSettings,
 } from '../utils/indexedDB';
+import { ICount } from '../types/count';
 
 Object.defineProperty(window, 'Hanashiro', {
   value: {},
@@ -77,6 +78,16 @@ if (!(await getInspectSettings()))
     ignoreWasmWarn: false,
     maxShowNodeSize: 2000,
   });
+
+if (!(await getHanashiroSettings<ICount>('count')))
+  await setHanashiroSettings<ICount>('count', {
+    rejectRules: 0,
+    loaded: 0,
+  });
+
+const count = (await getHanashiroSettings<ICount>('count'))!;
+count.loaded++;
+await setHanashiroSettings<ICount>('count', count);
 
 if ((await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false) {
   snackbar({
