@@ -7,7 +7,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('mdui-'),
+          isCustomElement: tag => tag.startsWith('mdui-'),
         },
       },
     }),
@@ -28,7 +28,7 @@ export default defineConfig({
           '': '世界第一公主殿下赠予的魔法棒，给网页审查工具施加神奇魔法！',
           'en-US':
             'A magic wand gifted by Her Royal Highness, the First Princess of the World, to cast a magical spell on the GKD Inspect!',
-          ja: '世界で一番おひめさまがGKDインスペクトに魔法の呪文をかけるために贈った魔法の杖！',
+          ja: '世界で一番お姫様がGKDインスペクトに魔法の呪文をかけるために贈った魔法の杖！',
         },
         license: 'MIT',
         homepage: 'https://github.com/adproqwq/MikuMagicWand',
