@@ -70,7 +70,9 @@ observeElement(
 );
 
 observeElement('#iconBar', () => {
-  const app = document.querySelector('#app')!;
+  // const app = document.querySelector('#app')!;
+  // 查找新的根元素（网站把 #app 改成了 body 的最后一个 div）
+  const app = document.querySelector('body > div:last-child') || document.body;
 
   // 节点打码按钮
   const editNodeIcon = document.createElement('mdui-fab');
