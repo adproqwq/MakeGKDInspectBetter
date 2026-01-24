@@ -1,14 +1,14 @@
 {
   "name": "miku-magic-wand",
-  "private": true,
   "version": "2.15.3",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier --cache --write ./**/*.{js,cjs,mjs,ts,jsx,tsx,json}",
-    "lint": "eslint --cache --fix ./**/*.{js,cjs,mjs,ts,jsx,tsx}"
+    "format": "oxfmt --write --no-error-on-unmatched-pattern",
+    "lint": "oxlint --fix --type-aware ./**/*.{js,cjs,mjs,ts,jsx,tsx}"
   },
   "dependencies": {
     "@fontsource/material-icons": "^5.2.7",
@@ -18,26 +18,22 @@
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "mdui": "^2.1.4",
-    "vue": "^3.5.24",
-    "zod": "4.1.12"
+    "vue": "^3.5.27",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@gkd-kit/api": "^0.8.0",
-    "@types/eslint-config-prettier": "^6.11.3",
     "@types/file-saver": "^2.0.7",
-    "@vitejs/plugin-vue": "^6.0.1",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
+    "@vitejs/plugin-vue": "^6.0.3",
     "eslint-plugin-unused-imports": "^4.3.0",
-    "jiti": "^2.6.1",
-    "prettier": "^3.6.2",
+    "oxfmt": "^0.26.0",
+    "oxlint": "^1.41.0",
+    "oxlint-tsgolint": "^0.11.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.2",
-    "vite-plugin-monkey": "7.1.5"
+    "vite": "^7.3.1",
+    "vite-plugin-monkey": "7.1.9"
   },
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.28.1",
   "web-types": [
     "./node_modules/mdui/web-types.zh-cn.json"
   ]

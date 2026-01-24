@@ -1,8 +1,8 @@
-name: stable-release
+name: stable_release
 on:
   push:
     tags:
-      - "v*.*.*"
+      - 'v*.*.*'
 jobs:
   build:
     runs-on: ubuntu-latest
