@@ -1,29 +1,42 @@
-import { snackbar, dialog } from 'mdui';
+import { snackbar, dialog, prompt } from 'mdui';
 import { getNodeAttr, editNode, downloadSnapshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 import getCurrentNodeId from './getCurrentNodeId';
 
-const replaceNodeInfo = async () => {
+const calcLength = (reg: RegExp, str: string): number[] => {
+  const length: number[] = [];
+  const matches = Array.from(str.matchAll(reg));
+
+  matches.forEach(([text]) => length.push(text.length));
+
+  return length;
+};
+
+const replaceNodeInfo = async (reg: RegExp = /./g) => {
   const snapshotId = getSnapshotId();
   const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
 
   const text = (await getNodeAttr(snapshotId, nodeId, 'text')) as string | null;
   const desc = (await getNodeAttr(snapshotId, nodeId, 'desc')) as string | null;
 
-  let newText: string | null, newDesc: string | null;
+  let newText = text,
+    newDesc = desc;
 
-  if (text !== null) {
-    newText = '';
-    for (let i = 0; i < text.length; i++) {
-      newText += '*';
+  if (newText) {
+    const lengths = calcLength(reg, newText);
+
+    for (let i = 0; i < lengths.length; i++) {
+      newText = newText.replace(reg, '*'.repeat(lengths[i]));
     }
-  } else newText = null;
-  if (desc !== null) {
-    newDesc = '';
-    for (let i = 0; i < desc.length; i++) {
-      newDesc += '*';
+  }
+
+  if (newDesc) {
+    const lengths = calcLength(reg, newDesc);
+
+    for (let i = 0; i < lengths.length; i++) {
+      newText = newDesc.replace(reg, '*'.repeat(lengths[i]));
     }
-  } else newDesc = null;
+  }
 
   editNode(snapshotId, nodeId, [
     {
@@ -63,7 +76,16 @@ export default () => {
             downloadSnapshot(getSnapshotId())
               .then(() => {
                 resolve();
-                replaceNodeInfo();
+                prompt({
+                  headline: '请输入一个正则表达式',
+                  description: '已默认使用 g 修饰符，暂不支持其他修饰符！留空则全部打码。',
+                  confirmText: '确认',
+                  cancelText: '取消',
+                  onConfirm: value =>
+                    replaceNodeInfo(!value ? undefined : new RegExp(value, 'g')),
+                  closeOnEsc: true,
+                  closeOnOverlayClick: true,
+                });
               })
               .catch(() => {
                 snackbar({
@@ -77,7 +99,17 @@ export default () => {
       },
       {
         text: '直接打码',
-        onClick: () => replaceNodeInfo(),
+        onClick: () => {
+          prompt({
+            headline: '请输入一个正则表达式',
+            description: '已默认使用 g 修饰符，暂不支持其他修饰符！留空则全部打码。',
+            confirmText: '确认',
+            cancelText: '取消',
+            onConfirm: value => replaceNodeInfo(!value ? undefined : new RegExp(value, 'g')),
+            closeOnEsc: true,
+            closeOnOverlayClick: true,
+          });
+        },
       },
     ],
     closeOnEsc: true,

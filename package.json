@@ -30,7 +30,7 @@
     "oxlint": "^1.41.0",
     "oxlint-tsgolint": "^0.11.1",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1",
+    "vite": "^8.0.0-beta.10",
     "vite-plugin-monkey": "7.1.9"
   },
   "packageManager": "pnpm@10.28.1",
