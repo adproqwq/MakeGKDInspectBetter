@@ -10,9 +10,7 @@ if (
       if (firstClipboardText.endsWith('.zip')) {
         const dataTransfer = new DataTransfer();
         dataTransfer.setData('text', firstClipboardText);
-        document.body.dispatchEvent(
-          new ClipboardEvent('paste', { clipboardData: dataTransfer }),
-        );
+        document.body.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dataTransfer }));
       }
     });
   } catch {

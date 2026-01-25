@@ -28,10 +28,7 @@ export const search = async () => {
 
   const target = new URL(window.location.href);
 
-  target.searchParams.set(
-    'gkd',
-    selectors[window.Hanashiro.currentUseSelectorIndex].base64,
-  );
+  target.searchParams.set('gkd', selectors[window.Hanashiro.currentUseSelectorIndex].base64);
 
   window.location.href = target.toString();
 };

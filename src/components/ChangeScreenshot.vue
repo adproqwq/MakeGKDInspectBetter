@@ -7,7 +7,7 @@ import getSnapshotId from '../utils/getSnapshotId';
 
 export default defineComponent({
   methods: {
-    async getImg(){
+    async getImg() {
       const inputElement = document.querySelector('#img') as HTMLInputElement;
 
       const fileList = inputElement.files!;
@@ -22,22 +22,22 @@ export default defineComponent({
 
       send('closePage');
     },
-    cancel(){
+    cancel() {
       send('closePage');
     },
   },
-  async mounted(){
+  async mounted() {
     (document.querySelector('#img') as HTMLInputElement).click();
   },
 });
 </script>
 
 <template>
-  <input type="file" id="img" accept=".png" @change="getImg" @cancel="cancel">
+  <input type="file" id="img" accept=".png" @change="getImg" @cancel="cancel" />
 </template>
 
 <style>
-input#img{
+input#img {
   display: none;
 }
 </style>

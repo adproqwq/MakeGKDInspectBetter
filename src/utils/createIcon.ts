@@ -1,10 +1,6 @@
 import { Tooltip } from 'mdui';
 
-export const createBarIcon = (
-  icon: string,
-  tooltip: string,
-  onclick: () => void,
-): Tooltip => {
+export const createBarIcon = (icon: string, tooltip: string, onclick: () => void): Tooltip => {
   const iconTooltip = document.createElement('mdui-tooltip');
   iconTooltip.content = tooltip;
 

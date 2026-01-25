@@ -5,15 +5,11 @@ import { ISettings } from '../types/settings';
 import type { RulesKeyOrder } from '../utils/sort';
 
 export default async () => {
-  const activityIdsSimply =
-    await getHanashiroSettings<boolean>('activityIdsSimply');
-  const autoAddSelector =
-    await getHanashiroSettings<boolean>('autoAddSelector');
+  const activityIdsSimply = await getHanashiroSettings<boolean>('activityIdsSimply');
+  const autoAddSelector = await getHanashiroSettings<boolean>('autoAddSelector');
   const categories = await getHanashiroSettings<RawCategory[]>('categories');
-  const hideLoadSnackbar =
-    await getHanashiroSettings<boolean>('hideLoadSnackbar');
-  const rulesKeySort =
-    (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
+  const hideLoadSnackbar = await getHanashiroSettings<boolean>('hideLoadSnackbar');
+  const rulesKeySort = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
   const simplyName = await getHanashiroSettings<boolean>('simplyName');
   const readClipboard = await getHanashiroSettings<boolean>('readClipboard');
 

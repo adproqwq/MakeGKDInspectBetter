@@ -10,13 +10,13 @@ import { ISelectors } from '../types/selectors';
 
 export default defineComponent({
   methods: {
-    async editSelector(){
+    async editSelector() {
       await editSelector();
     },
-    async close(){
+    async close() {
       const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
       selectors.sort((a, b) => {
-        if(a.order > b.order) return -1;
+        if (a.order > b.order) return -1;
         else if (a.order == b.order) return 0;
         else return 1;
       });
@@ -24,17 +24,17 @@ export default defineComponent({
 
       send('closePage');
     },
-    async exportSelectors(){
+    async exportSelectors() {
       await _export();
     },
-    importSelectors(){
+    importSelectors() {
       _import();
     },
-    async getLocalSelectorsFile(){
+    async getLocalSelectorsFile() {
       await getLocalSelectors();
     },
   },
-  async mounted(){
+  async mounted() {
     await generateSelectors();
 
     (document.querySelector('#page') as Dialog).open = true;
@@ -54,24 +54,40 @@ export default defineComponent({
     </div>
     <div>
       <span>备注：</span>
-      <mdui-text-field variant="filled" id="name" label="备注" @change="editSelector"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="name"
+        label="备注"
+        @change="editSelector"
+      ></mdui-text-field>
       <span class="introduction">失焦保存</span>
     </div>
     <div>
       <span>选择器：</span>
-      <mdui-text-field variant="filled" id="selector" label="选择器" @change="editSelector"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="selector"
+        label="选择器"
+        @change="editSelector"
+      ></mdui-text-field>
       <span class="introduction">留空删除。失焦保存</span>
     </div>
     <div>
       <span>排序优先值：</span>
-      <mdui-text-field variant="filled" id="order" label="排序优先值" type="number" @change="editSelector"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="order"
+        label="排序优先值"
+        type="number"
+        @change="editSelector"
+      ></mdui-text-field>
       <span class="introduction">数字越大，排序越前。失焦保存</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="close">关闭</mdui-button>
     </div>
   </mdui-dialog>
-  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSelectorsFile">
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSelectorsFile" />
 </template>
 
 <style>

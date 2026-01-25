@@ -65,8 +65,7 @@ export default async () => {
   const isMatchRoot = (document.querySelector('#matchRoot') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
-  const position =
-    constructPositionArray().length != 0 ? constructPositionArray() : false;
+  const position = constructPositionArray().length != 0 ? constructPositionArray() : false;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
@@ -82,9 +81,7 @@ export default async () => {
 
     if (category == '开屏广告') {
       origin.groups[0].priorityTime = 10000;
-      const rule = iArrayToArray(
-        origin.groups[0].rules as IArray<RawAppRule>,
-      )[0];
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       delete rule.activityIds;
       origin.groups[0].rules = [rule];
     }
@@ -98,9 +95,7 @@ export default async () => {
 
   if (isLimit) {
     if (copyDepth == 'rules') {
-      const rule = iArrayToArray(
-        origin.groups[0].rules as IArray<RawAppRule>,
-      )[0];
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       rule.actionMaximum = 1;
       rule.resetMatch = 'app';
       rule.matchTime = 10000;
@@ -114,9 +109,7 @@ export default async () => {
 
   if (isMatchRoot) {
     if (copyDepth == 'rules') {
-      const rule = iArrayToArray(
-        origin.groups[0].rules as IArray<RawAppRule>,
-      )[0];
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       rule.matchRoot = true;
       origin.groups[0].rules = [rule];
     } else origin.groups[0].matchRoot = true;
@@ -142,12 +135,7 @@ export default async () => {
   }
 
   if (position) {
-    const positionName: ['top', 'left', 'right', 'bottom'] = [
-      'top',
-      'left',
-      'right',
-      'bottom',
-    ];
+    const positionName: ['top', 'left', 'right', 'bottom'] = ['top', 'left', 'right', 'bottom'];
     const positionObject: Position = {};
 
     position.forEach((position, index) => {

@@ -81,7 +81,7 @@ export default () => {
                   description: '已默认使用 g 修饰符，暂不支持其他修饰符！留空则全部打码。',
                   confirmText: '确认',
                   cancelText: '取消',
-                  onConfirm: value =>
+                  onConfirm: (value) =>
                     replaceNodeInfo(!value ? undefined : new RegExp(value, 'g')),
                   closeOnEsc: true,
                   closeOnOverlayClick: true,
@@ -105,7 +105,7 @@ export default () => {
             description: '已默认使用 g 修饰符，暂不支持其他修饰符！留空则全部打码。',
             confirmText: '确认',
             cancelText: '取消',
-            onConfirm: value => replaceNodeInfo(!value ? undefined : new RegExp(value, 'g')),
+            onConfirm: (value) => replaceNodeInfo(!value ? undefined : new RegExp(value, 'g')),
             closeOnEsc: true,
             closeOnOverlayClick: true,
           });

@@ -16,13 +16,7 @@ declare interface SnackbarOptions {
    * * `bottom-start`：位于底部，左对齐
    * * `bottom-end`：位于底部，右对齐
    */
-  placement?:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end';
+  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end';
   /**
    * 操作按钮的文本
    */
@@ -63,9 +57,7 @@ declare interface SnackbarOptions {
    * 默认点击后会关闭 snackbar；若返回值为 false，则不关闭 snackbar；若返回值为 promise，则将在 promise 被 resolve 后，关闭 snackbar。
    * @param snackbar
    */
-  onActionClick?: (
-    snackbar: import('mdui').Snackbar,
-  ) => void | boolean | Promise<void>;
+  onActionClick?: (snackbar: import('mdui').Snackbar) => void | boolean | Promise<void>;
   /**
    * Snackbar 开始显示时的回调函数。
    * 函数参数为 snackbar 实例，`this` 也指向 snackbar 实例。
@@ -292,11 +284,7 @@ declare interface Window {
   HatsuneMiku: {
     event: {
       send: (eventName: string) => void;
-      receive: (
-        eventName: string,
-        callback: () => void,
-        once?: boolean,
-      ) => void;
+      receive: (eventName: string, callback: () => void, once?: boolean) => void;
     };
     utils: {
       icon: {
@@ -308,11 +296,7 @@ declare interface Window {
         insertBarIcon: (icon: import('mdui').Tooltip) => void;
       };
       common: {
-        observeElement: (
-          selector: string,
-          callback: () => void,
-          continuous = false,
-        ) => void;
+        observeElement: (selector: string, callback: () => void, continuous = false) => void;
       };
       storage: {
         getHanashiroSettings: <T>(item: string) => Promise<T | null>;

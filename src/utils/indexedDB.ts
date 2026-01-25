@@ -23,9 +23,7 @@ const hanashiroStorage = localforage.createInstance({
   name: 'Hanashiro',
 });
 
-export const simplyActivityIds = async (
-  snapshotId: string,
-): Promise<string | false> => {
+export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
   const activityId = snapshotInfo?.activityId;
 
@@ -50,9 +48,7 @@ export const editNode = async (
     const nodes = snapshotInfo!.nodes;
     const nodeAttr = nodes[nodeId].attr;
 
-    options.forEach(
-      (option) => ((nodeAttr[option.target] as PrimitiveType) = option.value),
-    );
+    options.forEach((option) => ((nodeAttr[option.target] as PrimitiveType) = option.value));
 
     nodes[nodeId].attr = nodeAttr;
     snapshotInfo!.nodes = nodes;
@@ -73,16 +69,11 @@ export const getScreenInfo = async (
   return { width: snapshotInfo.screenWidth, height: snapshotInfo.screenHeight };
 };
 
-export const getScreenshot = async (
-  snapshotId: string,
-): Promise<ArrayBuffer> => {
+export const getScreenshot = async (snapshotId: string): Promise<ArrayBuffer> => {
   return (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 };
 
-export const replaceScreenshot = async (
-  snapshotId: string,
-  image: ArrayBuffer,
-) => {
+export const replaceScreenshot = async (snapshotId: string, image: ArrayBuffer) => {
   await screenshotStorage.setItem<ArrayBuffer>(snapshotId, image);
 };
 
@@ -101,14 +92,10 @@ export const getNodeAttr = async (
 
 export const downloadSnapshot = async (snapshotId: string) => {
   const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
-  const screenshot =
-    (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
+  const screenshot = (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 
   const jszip = new JSZip();
-  jszip.file(
-    `snapshot-${snapshotId}.json`,
-    JSON.stringify(snapshotInfo, undefined, 2),
-  );
+  jszip.file(`snapshot-${snapshotId}.json`, JSON.stringify(snapshotInfo, undefined, 2));
   jszip.file(`screenshot-${snapshotId}.png`, screenshot);
   jszip.generateAsync({ type: 'blob' }).then((snapshotFile) => {
     saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
@@ -119,16 +106,13 @@ export const setHanashiroSettings = async <T>(item: string, value: T) => {
   await hanashiroStorage.setItem(item, value);
 };
 
-export const getHanashiroSettings = async <T>(
-  item: string,
-): Promise<T | null> => {
+export const getHanashiroSettings = async <T>(item: string): Promise<T | null> => {
   return await hanashiroStorage.getItem(item);
 };
 
-export const getInspectSettings =
-  async (): Promise<IInspectSettings | null> => {
-    return await localStorage.getItem('settings');
-  };
+export const getInspectSettings = async (): Promise<IInspectSettings | null> => {
+  return await localStorage.getItem('settings');
+};
 
 export const setInspectSettings = async (newSettings: IInspectSettings) => {
   await localStorage.setItem('settings', newSettings);

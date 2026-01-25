@@ -31,12 +31,12 @@ export default defineComponent({
     GeneratePosition,
     Count,
   },
-  data(){
+  data() {
     return {
       currentComponent: '',
     };
   },
-  created(){
+  created() {
     receive('copyEvent', () => {
       this.currentComponent = 'Main';
     });
@@ -77,7 +77,7 @@ export default defineComponent({
       this.currentComponent = '';
     });
   },
-  mounted(){
+  mounted() {
     setColorScheme('#39C5BB');
   },
 });

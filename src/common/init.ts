@@ -12,8 +12,7 @@ Object.defineProperty(window, 'Hanashiro', {
   writable: true,
 });
 
-const userRulesKeySort =
-  (await getHanashiroSettings<Array<string>>('rulesKeySort'))!;
+const userRulesKeySort = (await getHanashiroSettings<Array<string>>('rulesKeySort'))!;
 const rulesKeySort = [
   'key',
   'preKeys',
@@ -31,13 +30,9 @@ const rulesKeySort = [
   'snapshotUrls',
 ];
 
-if (!(await getHanashiroSettings('selectors')))
-  await setHanashiroSettings('selectors', []);
+if (!(await getHanashiroSettings('selectors'))) await setHanashiroSettings('selectors', []);
 
-if (
-  !(await getHanashiroSettings('rulesKeySort')) ||
-  userRulesKeySort.length == 0
-) {
+if (!(await getHanashiroSettings('rulesKeySort')) || userRulesKeySort.length == 0) {
   await setHanashiroSettings('rulesKeySort', rulesKeySort);
 }
 
@@ -50,8 +45,7 @@ if (userRulesKeySort.length != rulesKeySort.length)
     closeOnOverlayClick: true,
     confirmText: '同步',
     cancelText: '取消',
-    onConfirm: async () =>
-      await setHanashiroSettings('rulesKeySort', rulesKeySort),
+    onConfirm: async () => await setHanashiroSettings('rulesKeySort', rulesKeySort),
   });
 else {
   for (const rulesKey of userRulesKeySort) {
@@ -64,8 +58,7 @@ else {
         closeOnOverlayClick: true,
         confirmText: '同步',
         cancelText: '取消',
-        onConfirm: async () =>
-          await setHanashiroSettings('rulesKeySort', rulesKeySort),
+        onConfirm: async () => await setHanashiroSettings('rulesKeySort', rulesKeySort),
       });
     break;
   }

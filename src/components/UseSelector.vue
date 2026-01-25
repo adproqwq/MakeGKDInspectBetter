@@ -6,14 +6,14 @@ import { send } from '../utils/event';
 
 export default defineComponent({
   methods: {
-    async search(){
+    async search() {
       await search();
     },
-    closeDialog(){
+    closeDialog() {
       send('closePage');
     },
   },
-  async mounted(){
+  async mounted() {
     await generateSelectors();
 
     (document.querySelector('#page') as Dialog).open = true;
@@ -22,7 +22,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="使用选择器" close-on-overlay-click close-on-esc @closed="closeDialog">
+  <mdui-dialog
+    id="page"
+    headline="使用选择器"
+    close-on-overlay-click
+    close-on-esc
+    @closed="closeDialog"
+  >
     <div>
       <span>选择选择器：</span>
       <mdui-radio-group id="selectors"></mdui-radio-group>

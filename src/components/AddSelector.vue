@@ -22,8 +22,7 @@ export default defineComponent({
             placement: 'top',
           });
           return false;
-        }
-        else {
+        } else {
           prompt({
             headline: '请输入选择器',
             description: '输入选择器',
@@ -38,8 +37,7 @@ export default defineComponent({
                   placement: 'top',
                 });
                 return new Promise((_, reject) => reject(false));
-              }
-              else {
+              } else {
                 const savedSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
                 savedSelectors.push({
@@ -49,7 +47,7 @@ export default defineComponent({
                 });
 
                 savedSelectors.sort((a, b) => {
-                  if(a.order > b.order) return -1;
+                  if (a.order > b.order) return -1;
                   else if (a.order == b.order) return 0;
                   else return 1;
                 });

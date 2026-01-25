@@ -49,13 +49,10 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
         const name = splitedName[splitedName.length - 1];
         return await Reflect.apply(target, thisArg, [name]);
       } else return await Reflect.apply(target, thisArg, [data]);
-    } else if (
-      attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0
-    ) {
+    } else if (attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0) {
       return await Reflect.apply(target, thisArg, [`[${data}]`]);
     } else if (data.startsWith(window.origin)) {
-      const selectors =
-        (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
 
       if (selectors.length != 0) {
         const copiedUrl = new URL(data);

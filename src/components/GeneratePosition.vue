@@ -7,30 +7,41 @@ import generatePosition, { getInfo, partialView, globalView } from '../position/
 
 export default defineComponent({
   methods: {
-    closeDialog(){
+    closeDialog() {
       send('closePage');
     },
-    closeResult(){
+    closeResult() {
       const result = document.querySelector('#result')! as Dialog;
       result.open = false;
     },
-    async partialView(){
-      const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] = await getInfo();
-      fullImg.onload = () => partialView(canvas, screenWidth, screenHeight, left, top, width, height, fullImg);
+    async partialView() {
+      const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] =
+        await getInfo();
+      fullImg.onload = () =>
+        partialView(canvas, screenWidth, screenHeight, left, top, width, height, fullImg);
     },
-    async globalView(){
-      const [canvas, screenWidth, screenHeight, _left, _top, _width, _height, fullImg] = await getInfo();
+    async globalView() {
+      const [canvas, screenWidth, screenHeight, _left, _top, _width, _height, fullImg] =
+        await getInfo();
       fullImg.onload = () => globalView(canvas, screenWidth, screenHeight, fullImg);
     },
-    getNewPosition(){
+    getNewPosition() {
       const absolute = window.Hanashiro.nodePosition.absolute;
       const relative = window.Hanashiro.nodePosition.relative;
 
-      (document.querySelector('#absolute') as TextField).value = json5.stringify({ position:  absolute}, undefined, 2);
-      (document.querySelector('#relative') as TextField).value = json5.stringify({ position:  relative}, undefined, 2);
+      (document.querySelector('#absolute') as TextField).value = json5.stringify(
+        { position: absolute },
+        undefined,
+        2,
+      );
+      (document.querySelector('#relative') as TextField).value = json5.stringify(
+        { position: relative },
+        undefined,
+        2,
+      );
     },
   },
-  async mounted(){
+  async mounted() {
     await generatePosition();
 
     (document.querySelector('#page') as Dialog).open = true;
@@ -39,7 +50,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="选择点击坐标" fullscreen close-on-overlay-click close-on-esc @closed="closeDialog">
+  <mdui-dialog
+    id="page"
+    headline="选择点击坐标"
+    fullscreen
+    close-on-overlay-click
+    close-on-esc
+    @closed="closeDialog"
+  >
     <div>
       <canvas id="canvas"></canvas>
     </div>
@@ -51,7 +69,13 @@ export default defineComponent({
       <mdui-button slot="action" variant="tonal" @click="closeDialog">关闭</mdui-button>
     </div>
   </mdui-dialog>
-  <mdui-dialog id="result" headline="计算结果" close-on-esc close-on-overlay-click @open="getNewPosition">
+  <mdui-dialog
+    id="result"
+    headline="计算结果"
+    close-on-esc
+    close-on-overlay-click
+    @open="getNewPosition"
+  >
     <div>
       <span>绝对坐标：</span>
       <mdui-text-field id="absolute" variant="filled" label="绝对坐标" rows="8"></mdui-text-field>

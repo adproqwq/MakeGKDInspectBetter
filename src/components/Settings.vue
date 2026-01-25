@@ -12,36 +12,46 @@ import type { RulesKeyOrder } from '../utils/sort';
 
 export default defineComponent({
   methods: {
-    settings(){
+    settings() {
       settings();
     },
-    async exportSettings(){
+    async exportSettings() {
       await _export();
     },
-    importSettings(){
+    importSettings() {
       _import();
     },
-    async getLocalSettingsFile(){
+    async getLocalSettingsFile() {
       await getLocalSettings();
     },
-    closeDialog(){
+    closeDialog() {
       send('closePage');
     },
   },
-  async mounted(){
-    if(await getHanashiroSettings('categories')){
-      (document.querySelector('#categories') as TextField).value = json5.stringify((await getHanashiroSettings<RawCategory[]>('categories'))!);
+  async mounted() {
+    if (await getHanashiroSettings('categories')) {
+      (document.querySelector('#categories') as TextField).value = json5.stringify(
+        (await getHanashiroSettings<RawCategory[]>('categories'))!,
+      );
     }
-    if(await getHanashiroSettings('rulesKeySort')){
-      (document.querySelector('#rulesKeySort') as TextField).value = json5.stringify((await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!);
+    if (await getHanashiroSettings('rulesKeySort')) {
+      (document.querySelector('#rulesKeySort') as TextField).value = json5.stringify(
+        (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!,
+      );
     }
-    if(await getInspectSettings()){
-      (document.querySelector('#maxShowSize') as TextField).value = String((await getInspectSettings())!.maxShowNodeSize);
+    if (await getInspectSettings()) {
+      (document.querySelector('#maxShowSize') as TextField).value = String(
+        (await getInspectSettings())!.maxShowNodeSize,
+      );
     }
-    if(await getHanashiroSettings<boolean>('hideLoadSnackbar') == true) (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
-    if(await getHanashiroSettings<boolean>('simplyName') == true) (document.querySelector('#simplyName') as Switch).checked = true;
-    if(await getHanashiroSettings<boolean>('activityIdsSimply') == true) (document.querySelector('#activityIdsSimply') as Switch).checked = true;
-    if(await getHanashiroSettings<boolean>('readClipboard') == true) (document.querySelector('#readClipboard') as Switch).checked = true;
+    if ((await getHanashiroSettings<boolean>('hideLoadSnackbar')) == true)
+      (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
+    if ((await getHanashiroSettings<boolean>('simplyName')) == true)
+      (document.querySelector('#simplyName') as Switch).checked = true;
+    if ((await getHanashiroSettings<boolean>('activityIdsSimply')) == true)
+      (document.querySelector('#activityIdsSimply') as Switch).checked = true;
+    if ((await getHanashiroSettings<boolean>('readClipboard')) == true)
+      (document.querySelector('#readClipboard') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -56,11 +66,23 @@ export default defineComponent({
     </div>
     <div>
       <span>分类设置：</span>
-      <mdui-text-field variant="filled" id="categories" label="分类" placeholder="填入合法的分类" rows="10"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="categories"
+        label="分类"
+        placeholder="填入合法的分类"
+        rows="10"
+      ></mdui-text-field>
     </div>
     <div>
       <span>字段排序设置：</span>
-      <mdui-text-field variant="filled" id="rulesKeySort" label="字段排序" placeholder="目前仅支持rules内字段" rows="10"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="rulesKeySort"
+        label="字段排序"
+        placeholder="目前仅支持rules内字段"
+        rows="10"
+      ></mdui-text-field>
       <span class="introduction">
         接受一个字符串数组，目前支持的字段有：
         key,preKeys,fastQuery,matchTime,actionMaximum,resetMatch,priorityTime
@@ -69,7 +91,13 @@ export default defineComponent({
     </div>
     <div>
       <span>节点阈值：</span>
-      <mdui-text-field variant="filled" id="maxShowSize" type="number" label="节点阈值" placeholder="填入数字"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        id="maxShowSize"
+        type="number"
+        label="节点阈值"
+        placeholder="填入数字"
+      ></mdui-text-field>
       <span class="introduction">最大节点展示数量，超出的节点将被丢弃</span>
     </div>
     <div>
@@ -80,7 +108,10 @@ export default defineComponent({
     <div>
       <span>name属性复制优化：</span>
       <mdui-switch id="simplyName"></mdui-switch>
-      <span class="introduction">在复制name属性时，会自动优化复制的内容。如复制 android.widget.TextView 时会优化为 TextView</span>
+      <span class="introduction"
+        >在复制name属性时，会自动优化复制的内容。如复制 android.widget.TextView 时会优化为
+        TextView</span
+      >
     </div>
     <div>
       <span>选择器分享自动添加快捷搜索：</span>
@@ -95,13 +126,15 @@ export default defineComponent({
     <div>
       <span>自动读取剪贴板：</span>
       <mdui-switch id="readClipboard"></mdui-switch>
-      <span class="introduction">当进入网页审查工具首页时，自动读取剪贴板。如果存在以.zip结尾的链接时，自动粘贴以唤起快捷导入窗口。火狐内核不可用。</span>
+      <span class="introduction"
+        >当进入网页审查工具首页时，自动读取剪贴板。如果存在以.zip结尾的链接时，自动粘贴以唤起快捷导入窗口。火狐内核不可用。</span
+      >
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>
     </div>
   </mdui-dialog>
-  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSettingsFile">
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSettingsFile" />
 </template>
 
 <style>

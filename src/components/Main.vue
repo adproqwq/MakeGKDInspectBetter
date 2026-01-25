@@ -12,16 +12,16 @@ import { PositionZod } from '../types/positionZod';
 
 export default defineComponent({
   methods: {
-    async finish(){
+    async finish() {
       await finish();
     },
-    key(){
+    key() {
       key();
     },
-    onPositionChange(event: Event){
+    onPositionChange(event: Event) {
       onChange(event.target as TextField);
     },
-    readPosition(){
+    readPosition() {
       prompt({
         headline: '坐标快捷填入',
         description: '请输入从生成坐标处获得的坐标',
@@ -48,35 +48,33 @@ export default defineComponent({
         onConfirm: (value) => {
           const position = json5.parse<{ position: Position }>(value).position;
 
-          if(position.left){
+          if (position.left) {
             (document.querySelector('#left') as TextField).value = String(position.left);
             onChange(document.querySelector('#left') as TextField);
-          }
-          else if(position.right){
+          } else if (position.right) {
             (document.querySelector('#right') as TextField).value = String(position.right);
             onChange(document.querySelector('#right') as TextField);
           }
-          if(position.top){
+          if (position.top) {
             (document.querySelector('#top') as TextField).value = String(position.top);
             onChange(document.querySelector('#top') as TextField);
-          }
-          else if(position.bottom){
+          } else if (position.bottom) {
             (document.querySelector('#bottom') as TextField).value = String(position.bottom);
             onChange(document.querySelector('#bottom') as TextField);
           }
         },
       });
     },
-    closeDialog(){
+    closeDialog() {
       send('closePage');
     },
   },
-  data(){
+  data() {
     return {
       originRule: <RawApp>json5.parse(window.Hanashiro.originRule),
     };
   },
-  async mounted(){
+  async mounted() {
     window.Hanashiro.currentCategory = '';
 
     await renderedCategories();
@@ -129,34 +127,77 @@ export default defineComponent({
     </div>
     <div>
       <span>修改key值为：</span>
-      <mdui-text-field id="key" variant="filled" type="number" label="key" placeholder="填写一个数字"
-        helper="rules模式修改ruleKey，其余修改groupKey。请提前选好模式，失焦保存！" @change="key">
+      <mdui-text-field
+        id="key"
+        variant="filled"
+        type="number"
+        label="key"
+        placeholder="填写一个数字"
+        helper="rules模式修改ruleKey，其余修改groupKey。请提前选好模式，失焦保存！"
+        @change="key"
+      >
       </mdui-text-field>
     </div>
     <div>
       <span>修改preKeys值为：</span>
-      <mdui-text-field id="preKeys" variant="filled" label="preKeys" placeholder="填写多个以英文逗号分隔的数字" helper="失焦保存"></mdui-text-field>
+      <mdui-text-field
+        id="preKeys"
+        variant="filled"
+        label="preKeys"
+        placeholder="填写多个以英文逗号分隔的数字"
+        helper="失焦保存"
+      ></mdui-text-field>
     </div>
     <div>
       <span>坐标：</span>
       <mdui-chip variant="input">左</mdui-chip>
-      <mdui-text-field variant="filled" class="position" id="left" @change="onPositionChange"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        class="position"
+        id="left"
+        @change="onPositionChange"
+      ></mdui-text-field>
       <mdui-chip variant="input">右</mdui-chip>
-      <mdui-text-field variant="filled" class="position" id="right" @change="onPositionChange"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        class="position"
+        id="right"
+        @change="onPositionChange"
+      ></mdui-text-field>
       <mdui-chip variant="input">上</mdui-chip>
-      <mdui-text-field variant="filled" class="position" id="top" @change="onPositionChange"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        class="position"
+        id="top"
+        @change="onPositionChange"
+      ></mdui-text-field>
       <mdui-chip variant="input">下</mdui-chip>
-      <mdui-text-field variant="filled" class="position" id="bottom" @change="onPositionChange"></mdui-text-field>
+      <mdui-text-field
+        variant="filled"
+        class="position"
+        id="bottom"
+        @change="onPositionChange"
+      ></mdui-text-field>
       <mdui-button variant="tonal" class="position" @click="readPosition">快捷填入</mdui-button>
       <span class="introduction">快捷填入可将从获取坐标功能中获取的position字段一键填入</span>
     </div>
     <div>
       <span>规则组名称：</span>
-      <mdui-text-field id="ruleName" variant="filled" label="名称" :placeholder="originRule.groups[0].name"></mdui-text-field>
+      <mdui-text-field
+        id="ruleName"
+        variant="filled"
+        label="名称"
+        :placeholder="originRule.groups[0].name"
+      ></mdui-text-field>
     </div>
     <div>
       <span>规则组描述：</span>
-      <mdui-text-field id="ruleDesc" variant="filled" label="描述" placeholder="没有描述不填"></mdui-text-field>
+      <mdui-text-field
+        id="ruleDesc"
+        variant="filled"
+        label="描述"
+        placeholder="没有描述不填"
+      ></mdui-text-field>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="finish">确定</mdui-button>

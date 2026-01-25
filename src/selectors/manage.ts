@@ -24,9 +24,7 @@ export const generateSelectors = async () => {
   document.querySelectorAll('#selectorRadio').forEach((radio) => {
     radio.addEventListener('click', (e) => {
       const nameTextField = document.querySelector('#name')! as TextField;
-      const selectorTextField = document.querySelector(
-        '#selector',
-      )! as TextField;
+      const selectorTextField = document.querySelector('#selector')! as TextField;
       const orderTextField = document.querySelector('#order')! as TextField;
 
       nameTextField.value = (e.target as Radio).innerText;

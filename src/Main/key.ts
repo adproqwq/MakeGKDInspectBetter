@@ -10,9 +10,7 @@ export default () => {
 
   if (key) {
     if (copyDepth == 'rules') {
-      const rule = iArrayToArray(
-        origin.groups[0].rules as IArray<RawAppRule>,
-      )[0];
+      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
       rule.key = Number(key);
       origin.groups[0].rules = [rule];
     } else origin.groups[0].key = Number(key);

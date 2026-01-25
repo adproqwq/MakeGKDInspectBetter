@@ -7,7 +7,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: tag => tag.startsWith('mdui-'),
+          isCustomElement: (tag) => tag.startsWith('mdui-'),
         },
       },
     }),
@@ -19,7 +19,7 @@ export default defineConfig({
         match: ['https://i.gkd.li/*'],
         name: {
           '': '米库的神奇魔法棒',
-          'en-US': 'Miku\'s Magic Wand',
+          'en-US': "Miku's Magic Wand",
           ja: 'ミクの魔法の杖',
         },
         author: 'Adpro',

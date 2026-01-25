@@ -6,16 +6,7 @@ import getCurrentNodeId from '../utils/getCurrentNodeId';
 import arrayBufferToImage from '../utils/arrayBufferToImage';
 
 export const getInfo = async (): Promise<
-  [
-    HTMLCanvasElement,
-    number,
-    number,
-    number,
-    number,
-    number,
-    number,
-    HTMLImageElement,
-  ]
+  [HTMLCanvasElement, number, number, number, number, number, number, HTMLImageElement]
 > => {
   const canvas = document.querySelector('#canvas')! as HTMLCanvasElement;
 
@@ -81,20 +72,10 @@ export const globalView = (
 };
 
 export default async () => {
-  const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] =
-    await getInfo();
+  const [canvas, screenWidth, screenHeight, left, top, width, height, fullImg] = await getInfo();
 
   fullImg.onload = () =>
-    partialView(
-      canvas,
-      screenWidth,
-      screenHeight,
-      left,
-      top,
-      width,
-      height,
-      fullImg,
-    );
+    partialView(canvas, screenWidth, screenHeight, left, top, width, height, fullImg);
 
   canvas.onclick = (e) => {
     let x = e.offsetX,

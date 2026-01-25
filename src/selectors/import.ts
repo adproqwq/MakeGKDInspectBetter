@@ -8,8 +8,7 @@ const setValue = async (selectors: ISelectors[]) => {
     if (window.Hanashiro.selectorsImportWay == 0)
       await setHanashiroSettings('selectors', selectors);
     else {
-      const hadSelectors =
-        (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
       await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
     }
   } catch {
@@ -45,9 +44,7 @@ const showFilePicker = () =>
   (document.querySelector('input#localImport') as HTMLInputElement).click();
 
 export const getLocalSelectors = async () => {
-  const inputElement = document.querySelector(
-    'input#localImport',
-  ) as HTMLInputElement;
+  const inputElement = document.querySelector('input#localImport') as HTMLInputElement;
 
   const fileList = inputElement.files;
   if (!fileList) return;

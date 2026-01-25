@@ -2,27 +2,22 @@ import type { TextField } from 'mdui';
 
 export const onChange = (element: TextField) => {
   if (element.id == 'left') {
-    if (element.value != '')
-      document.querySelector<TextField>('.position#right')!.disabled = true;
+    if (element.value != '') document.querySelector<TextField>('.position#right')!.disabled = true;
     else document.querySelector<TextField>('.position#right')!.disabled = false;
   }
 
   if (element.id == 'right') {
-    if (element.value != '')
-      document.querySelector<TextField>('.position#left')!.disabled = true;
+    if (element.value != '') document.querySelector<TextField>('.position#left')!.disabled = true;
     else document.querySelector<TextField>('.position#left')!.disabled = false;
   }
 
   if (element.id == 'top') {
-    if (element.value != '')
-      document.querySelector<TextField>('.position#bottom')!.disabled = true;
-    else
-      document.querySelector<TextField>('.position#bottom')!.disabled = false;
+    if (element.value != '') document.querySelector<TextField>('.position#bottom')!.disabled = true;
+    else document.querySelector<TextField>('.position#bottom')!.disabled = false;
   }
 
   if (element.id == 'bottom') {
-    if (element.value != '')
-      document.querySelector<TextField>('.position#top')!.disabled = true;
+    if (element.value != '') document.querySelector<TextField>('.position#top')!.disabled = true;
     else document.querySelector<TextField>('.position#top')!.disabled = false;
   }
 };

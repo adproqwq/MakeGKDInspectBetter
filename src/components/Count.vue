@@ -7,14 +7,16 @@ import { ICount } from '../types/count';
 
 export default defineComponent({
   methods: {
-    closeDialog(){
+    closeDialog() {
       send('closePage');
     },
   },
-  async mounted(){
+  async mounted() {
     const count = await getHanashiroSettings<ICount>('count');
 
-    (document.querySelector('#rejectRules') as HTMLSlotElement).textContent = String(count?.rejectRules);
+    (document.querySelector('#rejectRules') as HTMLSlotElement).textContent = String(
+      count?.rejectRules,
+    );
     (document.querySelector('#loaded') as HTMLSlotElement).textContent = String(count?.loaded);
 
     (document.querySelector('#page') as Dialog).open = true;
