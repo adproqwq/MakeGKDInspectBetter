@@ -71,7 +71,7 @@ export default defineComponent({
       <mdui-button slot="action" variant="tonal" @click="close">关闭</mdui-button>
     </div>
   </mdui-dialog>
-  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSelectorsFile"></input>
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSelectorsFile">
 </template>
 
 <style>

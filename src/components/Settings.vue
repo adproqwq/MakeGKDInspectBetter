@@ -101,7 +101,7 @@ export default defineComponent({
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>
     </div>
   </mdui-dialog>
-  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSettingsFile"></input>
+  <input type="file" id="localImport" accept=".json,.json5" @change="getLocalSettingsFile">
 </template>
 
 <style>
