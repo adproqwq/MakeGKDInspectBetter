@@ -52,39 +52,36 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
     } else if (attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0) {
       return await Reflect.apply(target, thisArg, [`[${data}]`]);
     } else if (data.startsWith(window.origin)) {
-      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+      const copiedUrl = new URL(data);
 
-      if (selectors.length != 0) {
-        const copiedUrl = new URL(data);
+      if (copiedUrl.searchParams.has('gkd')) {
+        const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
 
-        if (copiedUrl.searchParams.has('gkd')) {
-          const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
+        prompt({
+          headline: '备注',
+          description: '给该选择器的备注，留空就用默认的了哦~',
+          confirmText: '就决定是你了！',
+          cancelText: '这个不要保存！',
+          closeOnEsc: true,
+          closeOnOverlayClick: true,
+          onConfirm: async (value) => {
+            selectors['本地'].push({
+              name: value ? value : selectorBase64,
+              description: '',
+              base64: selectorBase64,
+              order: 1,
+            });
 
-          prompt({
-            headline: '备注',
-            description: '给该选择器的备注，留空就用默认的了哦~',
-            confirmText: '就决定是你了！',
-            cancelText: '这个不要保存！',
-            closeOnEsc: true,
-            closeOnOverlayClick: true,
-            onConfirm: async (value) => {
-              selectors.push({
-                name: value ? value : selectorBase64,
-                description: '',
-                base64: selectorBase64,
-                order: 1,
-              });
+            selectors['本地'].sort((a, b) => {
+              if (a.order > b.order) return -1;
+              else if (a.order == b.order) return 0;
+              else return 1;
+            });
 
-              selectors.sort((a, b) => {
-                if (a.order > b.order) return -1;
-                else if (a.order == b.order) return 0;
-                else return 1;
-              });
-
-              await setHanashiroSettings('selectors', selectors);
-            },
-          }).catch();
-        }
+            await setHanashiroSettings('selectors', selectors);
+          },
+        }).catch();
       }
 
       return await Reflect.apply(target, thisArg, [data]);

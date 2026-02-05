@@ -21,6 +21,7 @@ const setValue = async (settings: ISettings) => {
     if (isCategoriesLegal) await setHanashiroSettings('categories', settings.categories);
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
+    await setHanashiroSettings('subscriptions', settings.subscriptions);
     await setHanashiroSettings('simplyName', settings.simplyName);
     await setHanashiroSettings('readClipboard', settings.readClipboard);
   } catch {

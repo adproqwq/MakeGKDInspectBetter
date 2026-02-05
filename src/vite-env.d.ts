@@ -255,7 +255,7 @@ declare interface DialogOptions {
   onOverlayClick?: (dialog: import('mdui').Dialog) => void;
 }
 
-declare type ISelectorsExtend = import('./types/selectors').ISelectors & {
+declare type ISelectorsExtend = import('./types/selectors').ISelector & {
   index: number;
 };
 
@@ -272,7 +272,6 @@ declare interface Window {
     currentSelector: ISelectorsExtend;
     currentUseSelectorIndex: number;
     currentPositionView: 'partial' | 'global';
-    selectorsImportWay: 0 | 1;
     defaultRulesKeySortOrder: string[];
     nodePosition: {
       absolute: IPosition;

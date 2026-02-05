@@ -1,7 +1,8 @@
 import { RawCategory } from '@gkd-kit/api';
 import { saveAs } from 'file-saver';
 import { getHanashiroSettings } from '../utils/indexedDB';
-import { ISettings } from '../types/settings';
+import type { ISettings } from '../types/settings';
+import type { ISubscriptionMeta } from '../types/selectors';
 import type { RulesKeyOrder } from '../utils/sort';
 
 export default async () => {
@@ -10,6 +11,7 @@ export default async () => {
   const categories = await getHanashiroSettings<RawCategory[]>('categories');
   const hideLoadSnackbar = await getHanashiroSettings<boolean>('hideLoadSnackbar');
   const rulesKeySort = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
+  const subscriptions = await getHanashiroSettings<ISubscriptionMeta[]>('categories');
   const simplyName = await getHanashiroSettings<boolean>('simplyName');
   const readClipboard = await getHanashiroSettings<boolean>('readClipboard');
 
@@ -19,6 +21,7 @@ export default async () => {
     categories: categories ? categories : [],
     hideLoadSnackbar: hideLoadSnackbar ? hideLoadSnackbar : false,
     rulesKeySort: rulesKeySort,
+    subscriptions: subscriptions ? subscriptions : [],
     simplyName: simplyName ? simplyName : false,
     readClipboard: readClipboard ? readClipboard : false,
   };

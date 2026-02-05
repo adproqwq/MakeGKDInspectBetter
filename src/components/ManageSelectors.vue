@@ -1,12 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Dialog } from 'mdui';
+import { type Dialog, type Tabs, snackbar } from 'mdui';
 import { generateSelectors, editSelector } from '../selectors/manage';
 import _import, { getLocalSelectors } from '../selectors/import';
 import _export from '../selectors/export';
+import subscribe from '../selectors/subscribe';
+import fetchSubscription from '../utils/fetchSubscription';
 import { send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
-import { ISelectors } from '../types/selectors';
+import type { ISelectors, ISubscriptionMeta } from '../types/selectors';
 
 export default defineComponent({
   methods: {
@@ -14,11 +16,13 @@ export default defineComponent({
       await editSelector();
     },
     async close() {
-      const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
-      selectors.sort((a, b) => {
-        if (a.order > b.order) return -1;
-        else if (a.order == b.order) return 0;
-        else return 1;
+      const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+      Object.entries(selectors).forEach(([category, specificSelectors]) => {
+        selectors[category as keyof typeof selectors] = specificSelectors.sort((a, b) => {
+          if (a.order > b.order) return -1;
+          else if (a.order == b.order) return 0;
+          else return 1;
+        });
       });
       await setHanashiroSettings('selectors', selectors);
 
@@ -30,12 +34,53 @@ export default defineComponent({
     importSelectors() {
       _import();
     },
+    subscribeSelectors() {
+      subscribe();
+    },
     async getLocalSelectorsFile() {
       await getLocalSelectors();
     },
+    async generateSelectors() {
+      await generateSelectors();
+    },
+    async updateSubscription() {
+      const metas = (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!;
+
+      metas.forEach(
+        meta => fetchSubscription(meta)
+          .then(() => {
+            snackbar({
+              message: `订阅【${meta.name}】已更新`,
+              placement: 'top',
+            });
+          })
+          .catch(() => {
+            snackbar({
+              message: `订阅【${meta.name}】更新失败`,
+              placement: 'top',
+            });
+          })
+          .finally(async () => {
+            await setHanashiroSettings('subscriptionsLastUpdateTime', Date.now());
+          })
+      );
+    },
   },
   async mounted() {
-    await generateSelectors();
+    const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+    const selectorTabs = document.querySelector('#selectorTabs') as Tabs;
+    Object.keys(selectors).forEach(category => {
+      const tab = document.createElement('mdui-tab');
+      tab.value = category;
+      tab.textContent = category;
+
+      const panel = document.createElement('mdui-tab-panel');
+      panel.slot = 'panel';
+      panel.value = category;
+
+      selectorTabs.append(tab, panel);
+    });
+    selectorTabs.value = '本地';
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -47,10 +92,17 @@ export default defineComponent({
     <div>
       <mdui-button variant="tonal" @click="exportSelectors">导出</mdui-button>
       <mdui-button variant="tonal" @click="importSelectors">导入</mdui-button>
+      <mdui-button variant="tonal" @click="subscribeSelectors">订阅</mdui-button>
+      <mdui-button variant="tonal" @click="updateSubscription">更新</mdui-button>
     </div>
     <div>
       <span>选择选择器：</span>
-      <mdui-radio-group id="selectors"></mdui-radio-group>
+      <mdui-tabs
+        id="selectorTabs"
+        variant="secondary"
+        @change.self="generateSelectors"
+        full-width
+      ></mdui-tabs>
     </div>
     <div>
       <span>名称：</span>
@@ -68,6 +120,7 @@ export default defineComponent({
         variant="filled"
         id="description"
         label="描述"
+        rows="6"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">失焦保存</span>

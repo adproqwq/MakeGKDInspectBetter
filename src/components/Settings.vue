@@ -9,6 +9,7 @@ import _export from '../Settings/export';
 import { send } from '../utils/event';
 import { getHanashiroSettings, getInspectSettings } from '../utils/indexedDB';
 import type { RulesKeyOrder } from '../utils/sort';
+import type { ISubscriptionMeta } from '../types/selectors';
 
 export default defineComponent({
   methods: {
@@ -37,6 +38,11 @@ export default defineComponent({
     if (await getHanashiroSettings('rulesKeySort')) {
       (document.querySelector('#rulesKeySort') as TextField).value = json5.stringify(
         (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!,
+      );
+    }
+    if (await getHanashiroSettings('subscriptions')) {
+      (document.querySelector('#subscriptions') as TextField).value = json5.stringify(
+        (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!,
       );
     }
     if (await getInspectSettings()) {
@@ -88,6 +94,16 @@ export default defineComponent({
         key,preKeys,fastQuery,matchTime,actionMaximum,resetMatch,priorityTime
         matchRoot,action,activityIds,position,matches,exampleUrls,snapshotUrls
       </span>
+    </div>
+    <div>
+      <span>快捷选择器订阅管理：</span>
+      <mdui-text-field
+        variant="filled"
+        id="subscriptions"
+        label="快捷选择器订阅"
+        placeholder="填入合法的快捷选择器订阅 meta"
+        rows="10"
+      ></mdui-text-field>
     </div>
     <div>
       <span>节点阈值：</span>

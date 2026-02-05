@@ -80,6 +80,14 @@ pnpm build
 
 见[API文档](./src/api/api.md)
 
+## 快捷选择器订阅
+
+本脚本已支持订阅远程快捷选择器。
+
+注意：该功能仅基本实现，很多功能尚未实现。可能也会有 Bug，欢迎反馈。
+
+见[快捷选择器订阅文档](./src/selectors/subscription.md)
+
 ## 捐赠
 
 如果你想要给我捐赠的话，点击项目旁的`Sponsor`，或者到我的[爱发电主页](https://afdian.com/a/Adpro)给我捐赠即可

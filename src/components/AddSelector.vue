@@ -15,23 +15,23 @@ export default defineComponent({
 
       if (!name || !selector) {
         snackbar({
-          message: '请不要填写名称或选择器！',
+          message: '请填写名称或选择器！',
           placement: 'top',
         });
 
         return;
       }
 
-      const savedSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+      const savedSelectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
 
-      savedSelectors.push({
+      savedSelectors['本地'].push({
         name: name,
         description: description,
         base64: encodeURI(selector),
         order: 1,
       });
 
-      savedSelectors.sort((a, b) => {
+      savedSelectors['本地'].sort((a, b) => {
         if (a.order > b.order) return -1;
         else if (a.order == b.order) return 0;
         else return 1;

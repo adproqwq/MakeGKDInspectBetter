@@ -1,16 +1,11 @@
 import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
-import { ISelectors } from '../types/selectors';
 import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
+import type { ISelectors } from '../types/selectors';
 
-const setValue = async (selectors: ISelectors[]) => {
+const setValue = async (selectors: ISelectors) => {
   try {
-    if (window.Hanashiro.selectorsImportWay == 0)
-      await setHanashiroSettings('selectors', selectors);
-    else {
-      const hadSelectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
-      await setHanashiroSettings('selectors', hadSelectors.concat(selectors));
-    }
+    await setHanashiroSettings('selectors', selectors);
   } catch {
     snackbar({
       message: '应用设置失败',
@@ -21,7 +16,7 @@ const setValue = async (selectors: ISelectors[]) => {
 };
 
 const getRemoteSelectors = async (url: string) => {
-  let remoteSelectors: ISelectors[];
+  let remoteSelectors: ISelectors;
   try {
     remoteSelectors = json5.parse(await (await fetch(url)).text());
   } catch {
@@ -51,7 +46,7 @@ export const getLocalSelectors = async () => {
 
   const file = fileList[0];
 
-  const localSelectors = json5.parse<ISelectors[]>(await file.text());
+  const localSelectors = json5.parse<ISelectors>(await file.text());
 
   await setValue(localSelectors);
 
@@ -62,28 +57,6 @@ export const getLocalSelectors = async () => {
 };
 
 export default () => {
-  dialog({
-    headline: '选择导入方式',
-    description: '选择覆盖导入或者添加导入',
-    closeOnEsc: true,
-    closeOnOverlayClick: true,
-    queue: 'selectors',
-    actions: [
-      {
-        text: '覆盖导入',
-        onClick: () => {
-          window.Hanashiro.selectorsImportWay = 0;
-        },
-      },
-      {
-        text: '添加导入',
-        onClick: () => {
-          window.Hanashiro.selectorsImportWay = 1;
-        },
-      },
-    ],
-  });
-
   dialog({
     headline: '选择导入渠道',
     description: '选择从本地导入或者远程导入',
@@ -100,7 +73,7 @@ export default () => {
         onClick: () => {
           prompt({
             headline: '远程设置文件链接',
-            description: '请输入远程设置文件的链接以导入',
+            description: '请输入远程选择器文件的链接以导入',
             closeOnEsc: true,
             closeOnOverlayClick: true,
             confirmText: '导入',

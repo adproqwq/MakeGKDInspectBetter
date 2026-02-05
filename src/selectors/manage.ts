@@ -1,32 +1,38 @@
 import { decode, encodeURI } from 'js-base64';
-import { RadioGroup, TextField, Radio, snackbar } from 'mdui';
+import { TextField, Radio, Tabs, snackbar } from 'mdui';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
-import { ISelectors } from '../types/selectors';
+import type { ISelectors } from '../types/selectors';
 
 export const generateSelectors = async () => {
-  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
-  const selectorsGroup = document.querySelector('#selectors') as RadioGroup;
+  const panel = (document.querySelector('#selectorTabs') as Tabs).value!;
+
+  if (document.querySelector(`mdui-tab-panel[value=${panel}] > mdui-radio-group`)) return;
+
+  const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+  const selectorsGroup = document.createElement('mdui-radio-group');
+  selectorsGroup.id = 'selectors';
 
   let innerHtmlString = '';
 
-  selectors.sort((a, b) => {
+  selectors[panel].sort((a, b) => {
     if (a.order > b.order) return -1;
     else if (a.order == b.order) return 0;
     else return 1;
   });
 
-  selectors.forEach(({ name, description, base64, order }, index) => {
+  selectors[panel].forEach(({ name, description, base64, order }, index) => {
     innerHtmlString += `<mdui-radio
     id="selectorRadio"
     value=${base64}
     data-index="${String(index)}"
-    data-description="${description}"
+    data-description="${description ?? ''}"
     data-order="${String(order ?? 1)}">
       ${name}
     </mdui-radio>`;
   });
 
   selectorsGroup.innerHTML = innerHtmlString;
+  document.querySelector(`mdui-tab-panel[value=${panel}]`)!.append(selectorsGroup);
 
   document.querySelectorAll('#selectorRadio').forEach((radio) => {
     radio.addEventListener('click', (e) => {
@@ -52,20 +58,21 @@ export const generateSelectors = async () => {
 };
 
 export const editSelector = async () => {
-  const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
+  const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+  const category = (document.querySelector('#selectorTabs') as Tabs).value!;
   const nameTextField = document.querySelector('#name')! as TextField;
   const descriptionTextField = document.querySelector('#description')! as TextField;
   const selectorTextField = document.querySelector('#selector')! as TextField;
   const orderTextField = document.querySelector('#order')! as TextField;
 
   if (selectorTextField.value) {
-    selectors[window.Hanashiro.currentSelector.index] = {
+    selectors[category][window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
       description: descriptionTextField.value,
       base64: encodeURI(selectorTextField.value),
       order: Number(orderTextField.value == '' ? 1 : orderTextField.value),
     };
-  } else selectors.splice(window.Hanashiro.currentSelector.index, 1);
+  } else selectors[category].splice(window.Hanashiro.currentSelector.index, 1);
 
   await setHanashiroSettings('selectors', selectors);
 
