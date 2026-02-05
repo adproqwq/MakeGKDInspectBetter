@@ -90,5 +90,8 @@ observeElement('#iconBar', () => {
   positionIcon.setAttribute('fixed', '');
   positionIcon.onclick = () => send('openGeneratePosition');
 
-  document.querySelectorAll('div[data-v-app=""]').item(1).firstElementChild!.append(editNodeIcon, positionIcon);
+  document
+    .querySelectorAll('div[data-v-app=""]')
+    .item(1)
+    .firstElementChild!.append(editNodeIcon, positionIcon);
 });
