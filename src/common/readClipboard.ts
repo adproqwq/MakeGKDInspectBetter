@@ -2,7 +2,7 @@ import { snackbar } from 'mdui';
 import { getHanashiroSettings } from '../utils/indexedDB';
 
 if (
-  (await getHanashiroSettings<boolean>('hideLoadSnackbar')) === false &&
+  (await getHanashiroSettings<boolean>('readClipboard')) &&
   document.location.href == `${document.location.origin}/`
 ) {
   try {
