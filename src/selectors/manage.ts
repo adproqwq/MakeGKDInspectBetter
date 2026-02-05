@@ -15,8 +15,15 @@ export const generateSelectors = async () => {
     else return 1;
   });
 
-  selectors.forEach(({ name, base64, order }, index) => {
-    innerHtmlString += `<mdui-radio id="selectorRadio" value=${base64} data-index="${String(index)}" data-order="${String(order ?? 1)}">${name}</mdui-radio>`;
+  selectors.forEach(({ name, description, base64, order }, index) => {
+    innerHtmlString += `<mdui-radio
+    id="selectorRadio"
+    value=${base64}
+    data-index="${String(index)}"
+    data-description="${description}"
+    data-order="${String(order ?? 1)}">
+      ${name}
+    </mdui-radio>`;
   });
 
   selectorsGroup.innerHTML = innerHtmlString;
@@ -24,17 +31,21 @@ export const generateSelectors = async () => {
   document.querySelectorAll('#selectorRadio').forEach((radio) => {
     radio.addEventListener('click', (e) => {
       const nameTextField = document.querySelector('#name')! as TextField;
+      const descriptionTextField = document.querySelector('#description')! as TextField;
       const selectorTextField = document.querySelector('#selector')! as TextField;
       const orderTextField = document.querySelector('#order')! as TextField;
 
       nameTextField.value = (e.target as Radio).innerText;
+      descriptionTextField.value = (e.target as Radio).getAttribute('data-description')!;
       selectorTextField.value = decode((e.target as Radio).value);
       orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
 
       window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
+        description: (e.target as Radio).getAttribute('data-description')!,
         base64: (e.target as Radio).value,
+        order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     });
   });
@@ -43,12 +54,14 @@ export const generateSelectors = async () => {
 export const editSelector = async () => {
   const selectors = (await getHanashiroSettings<ISelectors[]>('selectors'))!;
   const nameTextField = document.querySelector('#name')! as TextField;
+  const descriptionTextField = document.querySelector('#description')! as TextField;
   const selectorTextField = document.querySelector('#selector')! as TextField;
   const orderTextField = document.querySelector('#order')! as TextField;
 
   if (selectorTextField.value) {
     selectors[window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
+      description: descriptionTextField.value,
       base64: encodeURI(selectorTextField.value),
       order: Number(orderTextField.value == '' ? 1 : orderTextField.value),
     };

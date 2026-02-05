@@ -53,11 +53,21 @@ export default defineComponent({
       <mdui-radio-group id="selectors"></mdui-radio-group>
     </div>
     <div>
-      <span>备注：</span>
+      <span>名称：</span>
       <mdui-text-field
         variant="filled"
         id="name"
-        label="备注"
+        label="名称"
+        @change="editSelector"
+      ></mdui-text-field>
+      <span class="introduction">失焦保存</span>
+    </div>
+    <div>
+      <span>描述：</span>
+      <mdui-text-field
+        variant="filled"
+        id="description"
+        label="描述"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">失焦保存</span>

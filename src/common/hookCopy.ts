@@ -70,6 +70,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             onConfirm: async (value) => {
               selectors.push({
                 name: value ? value : selectorBase64,
+                description: '',
                 base64: selectorBase64,
                 order: 1,
               });

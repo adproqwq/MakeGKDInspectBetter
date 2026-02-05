@@ -255,10 +255,8 @@ declare interface DialogOptions {
   onOverlayClick?: (dialog: import('mdui').Dialog) => void;
 }
 
-declare interface ISelectorsExtend {
+declare type ISelectorsExtend = import('./types/selectors').ISelectors & {
   index: number;
-  name: string;
-  base64: string;
 }
 
 declare interface IPosition {
