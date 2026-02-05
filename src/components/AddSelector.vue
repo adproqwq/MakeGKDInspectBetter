@@ -13,7 +13,7 @@ export default defineComponent({
       const description = (document.querySelector('#description') as TextField).value;
       const selector = (document.querySelector('#selector') as TextField).value;
 
-      if(!name || !selector){
+      if (!name || !selector) {
         snackbar({
           message: '请不要填写名称或选择器！',
           placement: 'top',
@@ -52,7 +52,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <mdui-dialog id="page" headline="添加选择器" close-on-overlay-click close-on-esc @closed="closeDialog">
+  <mdui-dialog
+    id="page"
+    headline="添加选择器"
+    close-on-overlay-click
+    close-on-esc
+    @closed="closeDialog"
+  >
     <div>
       <span>选择器名称：</span>
       <mdui-text-field

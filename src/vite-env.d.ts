@@ -257,7 +257,7 @@ declare interface DialogOptions {
 
 declare type ISelectorsExtend = import('./types/selectors').ISelectors & {
   index: number;
-}
+};
 
 declare interface IPosition {
   left?: number | string;
