@@ -19,7 +19,7 @@
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "mdui": "^2.1.4",
-    "vue": "^3.5.27",
+    "vue": "^3.5.28",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -27,15 +27,15 @@
     "@types/file-saver": "^2.0.7",
     "@types/he": "^1.2.3",
     "@vitejs/plugin-vue": "^6.0.4",
-    "eslint-plugin-unused-imports": "^4.3.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "oxfmt": "^0.28.0",
     "oxlint": "^1.43.0",
-    "oxlint-tsgolint": "^0.11.4",
-    "typescript": "^5.9.3",
+    "oxlint-tsgolint": "^0.11.5",
+    "typescript": "6.0.0-dev.20260209",
     "vite": "8.0.0-beta.12",
     "vite-plugin-monkey": "7.1.9"
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "web-types": [
     "./node_modules/mdui/web-types.zh-cn.json"
   ]
