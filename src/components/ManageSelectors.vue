@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { type Dialog, type Tabs, snackbar } from 'mdui';
-import { generateSelectors, editSelector } from '../selectors/manage';
+import { generateSelectorGroups, generateSelectors, editSelector } from '../selectors/manage';
 import _import, { getLocalSelectors } from '../selectors/import';
 import _export from '../selectors/export';
 import subscribe from '../selectors/subscribe';
@@ -82,6 +82,8 @@ export default defineComponent({
     });
     selectorTabs.value = '本地';
 
+    generateSelectorGroups();
+
     (document.querySelector('#page') as Dialog).open = true;
   },
 });
@@ -94,6 +96,10 @@ export default defineComponent({
       <mdui-button variant="tonal" @click="importSelectors">导入</mdui-button>
       <mdui-button variant="tonal" @click="subscribeSelectors">订阅</mdui-button>
       <mdui-button variant="tonal" @click="updateSubscription">更新</mdui-button>
+    </div>
+    <div>
+      <span>管理选择器组：</span>
+      <div id="selectorGroups"></div>
     </div>
     <div>
       <span>选择选择器：</span>
