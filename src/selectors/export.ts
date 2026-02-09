@@ -42,7 +42,7 @@ export default () => {
             closeOnOverlayClick: true,
             confirmText: '确定',
             cancelText: '取消',
-            onConfirm: async value => {
+            onConfirm: async (value) => {
               if (!value) {
                 snackbar({
                   message: '请输入 id！',

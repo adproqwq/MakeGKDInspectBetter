@@ -112,7 +112,7 @@ if (
     60 * 60 * 1000
 ) {
   Array.from((await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!).forEach(
-    meta => {
+    (meta) => {
       fetchSubscription(meta)
         .then(() => {
           snackbar({

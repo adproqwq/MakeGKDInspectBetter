@@ -21,7 +21,7 @@ export default defineComponent({
   async mounted() {
     const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
     const selectorTabs = document.querySelector('#selectorTabs') as Tabs;
-    Object.keys(selectors).forEach(category => {
+    Object.keys(selectors).forEach((category) => {
       const tab = document.createElement('mdui-tab');
       tab.value = category;
       tab.textContent = category;

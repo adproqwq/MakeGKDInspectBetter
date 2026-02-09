@@ -19,9 +19,9 @@ export default () => {
 
         await fetchSubscription(meta);
 
-        if (savedSubscriptions.some(savedSubscription => savedSubscription.id === meta.id)) {
+        if (savedSubscriptions.some((savedSubscription) => savedSubscription.id === meta.id)) {
           savedSubscriptions[
-            savedSubscriptions.findIndex(savedSubscription => savedSubscription.id === meta.id)
+            savedSubscriptions.findIndex((savedSubscription) => savedSubscription.id === meta.id)
           ] = meta;
 
           snackbar({

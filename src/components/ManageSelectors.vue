@@ -46,8 +46,8 @@ export default defineComponent({
     async updateSubscription() {
       const metas = (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!;
 
-      metas.forEach(
-        meta => fetchSubscription(meta)
+      metas.forEach((meta) =>
+        fetchSubscription(meta)
           .then(() => {
             snackbar({
               message: `订阅【${meta.name}】已更新`,
@@ -62,14 +62,14 @@ export default defineComponent({
           })
           .finally(async () => {
             await setHanashiroSettings('subscriptionsLastUpdateTime', Date.now());
-          })
+          }),
       );
     },
   },
   async mounted() {
     const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
     const selectorTabs = document.querySelector('#selectorTabs') as Tabs;
-    Object.keys(selectors).forEach(category => {
+    Object.keys(selectors).forEach((category) => {
       const tab = document.createElement('mdui-tab');
       tab.value = category;
       tab.textContent = category;
