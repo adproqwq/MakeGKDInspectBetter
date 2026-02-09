@@ -1,4 +1,6 @@
 import type { Tabs, Radio } from 'mdui';
+import { encodeURI } from 'js-base64';
+import { encode, decode } from 'he';
 import { getHanashiroSettings } from '../utils/indexedDB';
 import type { ISelectors } from '../types/selectors';
 
@@ -19,10 +21,10 @@ export const generateSelectors = async () => {
     else return 1;
   });
 
-  selectors[panel].forEach(({ name, description, base64, order }, index) => {
+  selectors[panel].forEach(({ name, description, selector, order }, index) => {
     innerHtmlString += `<mdui-radio
     id="selectorRadio"
-    value=${base64}
+    value=${encode(selector)}
     data-index="${String(index)}"
     data-description="${description ?? ''}"
     data-order="${String(order ?? 1)}">
@@ -39,7 +41,7 @@ export const generateSelectors = async () => {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
         description: (e.target as Radio).getAttribute('data-description')!,
-        base64: (e.target as Radio).value,
+        selector: decode((e.target as Radio).value, { isAttributeValue: true }),
         order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     });
@@ -49,7 +51,7 @@ export const generateSelectors = async () => {
 export const search = async () => {
   const target = new URL(window.location.href);
 
-  target.searchParams.set('gkd', window.Hanashiro.currentSelector.base64);
+  target.searchParams.set('gkd', encodeURI(window.Hanashiro.currentSelector.selector));
 
   window.location.href = target.toString();
 };

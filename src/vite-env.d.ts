@@ -270,7 +270,6 @@ declare interface Window {
     returnResult: string;
     currentCategory: string;
     currentSelector: ISelectorsExtend;
-    currentUseSelectorIndex: number;
     currentPositionView: 'partial' | 'global';
     defaultRulesKeySortOrder: string[];
     nodePosition: {

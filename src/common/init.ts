@@ -1,4 +1,5 @@
 import { snackbar, confirm } from 'mdui';
+import { decode } from 'js-base64';
 import {
   getHanashiroSettings,
   setHanashiroSettings,
@@ -38,12 +39,36 @@ if (Array.isArray(await getHanashiroSettings('selectors'))) {
     本地: [],
   };
 
-  console.log(await getHanashiroSettings<ISelector[]>('selectors'));
   Array.from((await getHanashiroSettings<ISelector[]>('selectors'))!).forEach((selector) => {
     selectorRecord['本地'].push(selector);
   });
 
   await setHanashiroSettings('selectors', selectorRecord);
+}
+if (
+  Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!)
+    .some(
+      ([_, selectors]) => selectors.some(
+        (selector) => Object.hasOwn(selector, 'base64')
+      )
+    )
+) {
+  const oldSelectors = Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!);
+  let newSelectors: ISelectors = {};
+
+  oldSelectors.forEach(([category, selectors]) => {
+    selectors.forEach((selector, index) => {
+      if(Object.hasOwn(selector, 'base64')){
+        selector.selector = decode((selector as ISelector & { base64?: string }).base64!);
+        delete (selector as ISelector & { base64?: string }).base64;
+        selectors[index] = selector;
+      }
+    });
+
+    newSelectors[category] = selectors;
+  });
+
+  await setHanashiroSettings('selectors', newSelectors);
 }
 
 if (!(await getHanashiroSettings('subscriptions'))) await setHanashiroSettings('subscriptions', []);

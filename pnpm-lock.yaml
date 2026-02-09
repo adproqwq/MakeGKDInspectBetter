@@ -14,6 +14,9 @@ importers:
       file-saver:
         specifier: ^2.0.5
         version: 2.0.5
+      he:
+        specifier: ^1.2.0
+        version: 1.2.0
       js-base64:
         specifier: ^3.7.8
         version: 3.7.8
@@ -42,6 +45,9 @@ importers:
       '@types/file-saver':
         specifier: ^2.0.7
         version: 2.0.7
+      '@types/he':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@vitejs/plugin-vue':
         specifier: ^6.0.4
         version: 6.0.4(vite@8.0.0-beta.12(esbuild@0.27.2)(jiti@2.6.1))(vue@3.5.27(typescript@5.9.3))
@@ -556,6 +562,9 @@ packages:
   '@types/file-saver@2.0.7':
     resolution: {integrity: sha512-dNKVfHd/jk0SkR/exKGj2ggkB45MAkzvWCaqLUUgkyjITkGNzH8H+yUwr+BLJUBjZOe9w8X3wgmXhZDRg1ED6A==}
 
+  '@types/he@1.2.3':
+    resolution: {integrity: sha512-q67/qwlxblDzEDvzHhVkwc1gzVWxaNxeyHUBF4xElrvjL11O+Ytze+1fGpBHlr/H9myiBUaUXNnNPmBHxxfAcA==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -830,6 +839,10 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  he@1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
 
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
@@ -1622,6 +1635,8 @@ snapshots:
 
   '@types/file-saver@2.0.7': {}
 
+  '@types/he@1.2.3': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/trusted-types@2.0.7': {}
@@ -1932,6 +1947,8 @@ snapshots:
   globals@14.0.0: {}
 
   has-flag@4.0.0: {}
+
+  he@1.2.0: {}
 
   htmlparser2@10.1.0:
     dependencies:

@@ -1,6 +1,6 @@
 import { dialog, prompt, snackbar } from 'mdui';
 import json5 from 'json5';
-import { setHanashiroSettings, getHanashiroSettings } from '../utils/indexedDB';
+import { setHanashiroSettings } from '../utils/indexedDB';
 import type { ISelectors } from '../types/selectors';
 
 const setValue = async (selectors: ISelectors) => {

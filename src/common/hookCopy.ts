@@ -1,4 +1,5 @@
 import { snackbar, prompt } from 'mdui';
+import { decode } from 'js-base64';
 import { attrList } from './attrList';
 import { receive, send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
@@ -69,7 +70,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             selectors['本地'].push({
               name: value ? value : selectorBase64,
               description: '',
-              base64: selectorBase64,
+              selector: decode(selectorBase64),
               order: 1,
             });
 

@@ -1,6 +1,6 @@
-import { decode, encodeURI } from 'js-base64';
 import { TextField, Radio, Tabs, snackbar } from 'mdui';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
+import { encode, decode } from 'he';
 import type { ISelectors } from '../types/selectors';
 
 export const generateSelectors = async () => {
@@ -20,10 +20,10 @@ export const generateSelectors = async () => {
     else return 1;
   });
 
-  selectors[panel].forEach(({ name, description, base64, order }, index) => {
+  selectors[panel].forEach(({ name, description, selector, order }, index) => {
     innerHtmlString += `<mdui-radio
     id="selectorRadio"
-    value=${base64}
+    value=${encode(selector)}
     data-index="${String(index)}"
     data-description="${description ?? ''}"
     data-order="${String(order ?? 1)}">
@@ -43,14 +43,14 @@ export const generateSelectors = async () => {
 
       nameTextField.value = (e.target as Radio).innerText;
       descriptionTextField.value = (e.target as Radio).getAttribute('data-description')!;
-      selectorTextField.value = decode((e.target as Radio).value);
+      selectorTextField.value = decode((e.target as Radio).value, { isAttributeValue: true });
       orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
 
       window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
         description: (e.target as Radio).getAttribute('data-description')!,
-        base64: (e.target as Radio).value,
+        selector: (e.target as Radio).value,
         order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     });
@@ -69,7 +69,7 @@ export const editSelector = async () => {
     selectors[category][window.Hanashiro.currentSelector.index] = {
       name: nameTextField.value,
       description: descriptionTextField.value,
-      base64: encodeURI(selectorTextField.value),
+      selector: selectorTextField.value,
       order: Number(orderTextField.value == '' ? 1 : orderTextField.value),
     };
   } else selectors[category].splice(window.Hanashiro.currentSelector.index, 1);

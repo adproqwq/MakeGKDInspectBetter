@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/material-icons": "^5.2.7",
     "file-saver": "^2.0.5",
+    "he": "^1.2.0",
     "js-base64": "^3.7.8",
     "json5": "^2.2.3",
     "jszip": "^3.10.1",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@gkd-kit/api": "^0.8.0",
     "@types/file-saver": "^2.0.7",
+    "@types/he": "^1.2.3",
     "@vitejs/plugin-vue": "^6.0.4",
     "eslint-plugin-unused-imports": "^4.3.0",
     "oxfmt": "^0.28.0",

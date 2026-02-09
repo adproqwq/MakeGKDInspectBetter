@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { snackbar, TextField, Dialog } from 'mdui';
-import { encodeURI } from 'js-base64';
 import { send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ISelectors } from '../types/selectors';
@@ -27,7 +26,7 @@ export default defineComponent({
       savedSelectors['本地'].push({
         name: name,
         description: description,
-        base64: encodeURI(selector),
+        selector: selector,
         order: 1,
       });
 
