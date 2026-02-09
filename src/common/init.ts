@@ -46,19 +46,16 @@ if (Array.isArray(await getHanashiroSettings('selectors'))) {
   await setHanashiroSettings('selectors', selectorRecord);
 }
 if (
-  Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!)
-    .some(
-      ([_, selectors]) => selectors.some(
-        (selector) => Object.hasOwn(selector, 'base64')
-      )
-    )
+  Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!).some(([_, selectors]) =>
+    selectors.some((selector) => Object.hasOwn(selector, 'base64')),
+  )
 ) {
   const oldSelectors = Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!);
   let newSelectors: ISelectors = {};
 
   oldSelectors.forEach(([category, selectors]) => {
     selectors.forEach((selector, index) => {
-      if(Object.hasOwn(selector, 'base64')){
+      if (Object.hasOwn(selector, 'base64')) {
         selector.selector = decode((selector as ISelector & { base64?: string }).base64!);
         delete (selector as ISelector & { base64?: string }).base64;
         selectors[index] = selector;
