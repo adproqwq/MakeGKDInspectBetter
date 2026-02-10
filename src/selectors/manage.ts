@@ -1,6 +1,6 @@
 import { type TextField, type Radio, type Tabs, type Chip, snackbar } from 'mdui';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
-import { encode, decode } from 'he';
+import { encodeURI, decode } from 'js-base64';
 import type { ISelectors } from '../types/selectors';
 
 export const generateSelectorGroups = async () => {
@@ -52,7 +52,7 @@ export const generateSelectors = async () => {
   selectors[panel].forEach(({ name, description, selector, order }, index) => {
     innerHtmlString += `<mdui-radio
     id="selectorRadio"
-    value=${encode(selector)}
+    value=${encodeURI(selector)}
     data-index="${String(index)}"
     data-description="${description ?? ''}"
     data-order="${String(order ?? 1)}">
@@ -72,14 +72,14 @@ export const generateSelectors = async () => {
 
       nameTextField.value = (e.target as Radio).innerText;
       descriptionTextField.value = (e.target as Radio).getAttribute('data-description')!;
-      selectorTextField.value = decode((e.target as Radio).value, { isAttributeValue: true });
+      selectorTextField.value = decode((e.target as Radio).value);
       orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
 
       window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
         description: (e.target as Radio).getAttribute('data-description')!,
-        selector: (e.target as Radio).value,
+        selector: decode((e.target as Radio).value),
         order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     });

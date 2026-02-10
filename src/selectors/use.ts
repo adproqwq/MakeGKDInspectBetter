@@ -1,6 +1,5 @@
 import type { Tabs, Radio } from 'mdui';
-import { encodeURI } from 'js-base64';
-import { encode, decode } from 'he';
+import { encodeURI, decode } from 'js-base64';
 import { getHanashiroSettings } from '../utils/indexedDB';
 import type { ISelectors } from '../types/selectors';
 
@@ -24,7 +23,7 @@ export const generateSelectors = async () => {
   selectors[panel].forEach(({ name, description, selector, order }, index) => {
     innerHtmlString += `<mdui-radio
     id="selectorRadio"
-    value=${encode(selector)}
+    value=${encodeURI(selector)}
     data-index="${String(index)}"
     data-description="${description ?? ''}"
     data-order="${String(order ?? 1)}">
@@ -41,7 +40,7 @@ export const generateSelectors = async () => {
         index: Number((e.target as Radio).getAttribute('data-index')!),
         name: (e.target as Radio).innerText,
         description: (e.target as Radio).getAttribute('data-description')!,
-        selector: decode((e.target as Radio).value, { isAttributeValue: true }),
+        selector: decode((e.target as Radio).value),
         order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     });
