@@ -7,7 +7,7 @@ import type { ISelectors } from '../types/selectors';
 export const generateSelectors = async () => {
   const panel = (document.querySelector('#selectorTabs') as Tabs).value!;
 
-  if (document.querySelector(`mdui-tab-panel[value=${panel}] > mdui-radio-group`)) return;
+  if (document.querySelector(`mdui-tab-panel[value="${panel}"] > mdui-radio-group`)) return;
 
   const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
   const selectorsGroup = document.createElement('mdui-radio-group');
@@ -33,7 +33,7 @@ export const generateSelectors = async () => {
   });
 
   selectorsGroup.innerHTML = innerHtmlString;
-  document.querySelector(`mdui-tab-panel[value=${panel}]`)!.append(selectorsGroup);
+  document.querySelector(`mdui-tab-panel[value="${panel}"]`)!.append(selectorsGroup);
 
   document.querySelectorAll('#selectorRadio')!.forEach((radio) => {
     radio.addEventListener('click', (e) => {
