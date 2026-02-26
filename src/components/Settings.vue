@@ -58,6 +58,8 @@ export default defineComponent({
       (document.querySelector('#activityIdsSimply') as Switch).checked = true;
     if ((await getHanashiroSettings<boolean>('readClipboard')) == true)
       (document.querySelector('#readClipboard') as Switch).checked = true;
+    if ((await getHanashiroSettings<boolean>('quickReplaceNodeInfo')) == true)
+      (document.querySelector('#quickReplaceNodeInfo') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -138,6 +140,11 @@ export default defineComponent({
       <span>activityIds规则复制优化：</span>
       <mdui-switch id="activityIdsSimply"></mdui-switch>
       <span class="introduction">在复制规则代码时，若activityIds满足简写条件时，使用简写</span>
+    </div>
+    <div>
+      <span>节点快速打码：</span>
+      <mdui-switch id="quickReplaceNodeInfo"></mdui-switch>
+      <span class="introduction">开启后，在点击节点打码后，直接进行打码，默认行为为直接全部打码。修改该选项后请刷新页面。</span>
     </div>
     <div>
       <span>自动读取剪贴板：</span>

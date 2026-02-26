@@ -10,20 +10,22 @@ export default async () => {
   const autoAddSelector = await getHanashiroSettings<boolean>('autoAddSelector');
   const categories = await getHanashiroSettings<RawCategory[]>('categories');
   const hideLoadSnackbar = await getHanashiroSettings<boolean>('hideLoadSnackbar');
+  const quickReplaceNodeInfo = await getHanashiroSettings<boolean>('quickReplaceNodeInfo');
   const rulesKeySort = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
   const subscriptions = await getHanashiroSettings<ISubscriptionMeta[]>('categories');
   const simplyName = await getHanashiroSettings<boolean>('simplyName');
   const readClipboard = await getHanashiroSettings<boolean>('readClipboard');
 
   const settings: ISettings = {
-    activityIdsSimply: activityIdsSimply ? activityIdsSimply : false,
-    autoAddSelector: autoAddSelector ? autoAddSelector : false,
-    categories: categories ? categories : [],
-    hideLoadSnackbar: hideLoadSnackbar ? hideLoadSnackbar : false,
+    activityIdsSimply: activityIdsSimply ?? false,
+    autoAddSelector: autoAddSelector ?? false,
+    categories: categories ?? [],
+    hideLoadSnackbar: hideLoadSnackbar ?? false,
+    quickReplaceNodeInfo: quickReplaceNodeInfo ?? false,
     rulesKeySort: rulesKeySort,
-    subscriptions: subscriptions ? subscriptions : [],
-    simplyName: simplyName ? simplyName : false,
-    readClipboard: readClipboard ? readClipboard : false,
+    subscriptions: subscriptions ?? [],
+    simplyName: simplyName ?? false,
+    readClipboard: readClipboard ?? false,
   };
 
   const settingsFile = new Blob([JSON.stringify(settings, undefined, 2)]);

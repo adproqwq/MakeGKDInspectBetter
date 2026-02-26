@@ -12,7 +12,7 @@ const calcLength = (reg: RegExp, str: string): number[] => {
   return length;
 };
 
-const replaceNodeInfo = async (reg: RegExp = /./g) => {
+export const replaceNodeInfo = async (reg: RegExp = /./g) => {
   const snapshotId = getSnapshotId();
   const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
 

@@ -1,7 +1,8 @@
 import { send } from '../utils/event';
 import observeElement from '../utils/observeElement';
 import { createBarIcon } from '../utils/createIcon';
-import replaceNodeInfo from '../utils/replaceNodeInfo';
+import replaceNodeInfo, { replaceNodeInfo as directReplaceNodeInfo } from '../utils/replaceNodeInfo';
+import { getHanashiroSettings } from '../utils/indexedDB';
 
 observeElement(
   '.DraggableCard > * > .n-input-group',
@@ -67,7 +68,7 @@ observeElement(
   true,
 );
 
-observeElement('#iconBar', () => {
+observeElement('#iconBar', async () => {
   // 节点打码按钮
   const editNodeIcon = document.createElement('mdui-fab');
   editNodeIcon.icon = 'edit';
@@ -77,7 +78,10 @@ observeElement('#iconBar', () => {
   editNodeIcon.style.right = '16px';
   editNodeIcon.style.bottom = '120px';
   editNodeIcon.setAttribute('fixed', '');
-  editNodeIcon.onclick = replaceNodeInfo;
+  editNodeIcon.onclick =
+    await getHanashiroSettings<boolean>('quickReplaceNodeInfo') ?
+      async () => await directReplaceNodeInfo() :
+      replaceNodeInfo;
 
   // 生成坐标按钮
   const positionIcon = document.createElement('mdui-fab');

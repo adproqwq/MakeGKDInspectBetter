@@ -20,6 +20,7 @@ const setValue = async (settings: ISettings) => {
     await setHanashiroSettings('autoAddSelector', settings.autoAddSelector);
     if (isCategoriesLegal) await setHanashiroSettings('categories', settings.categories);
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
+    await setHanashiroSettings('quickReplaceNodeInfo', settings.quickReplaceNodeInfo);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
     await setHanashiroSettings('subscriptions', settings.subscriptions);
     await setHanashiroSettings('simplyName', settings.simplyName);
