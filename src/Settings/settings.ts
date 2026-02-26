@@ -14,7 +14,8 @@ export default async () => {
   const isSimplyName = (document.querySelector('#simplyName') as Switch).checked;
   const isAutoAddSelector = (document.querySelector('#autoAddSelector') as Switch).checked;
   const isActivityIdsSimply = (document.querySelector('#activityIdsSimply') as Switch).checked;
-  const isQuickReplaceNodeInfo = (document.querySelector('#quickReplaceNodeInfo') as Switch).checked;
+  const isQuickReplaceNodeInfo = (document.querySelector('#quickReplaceNodeInfo') as Switch)
+    .checked;
   const isReadClipboard = (document.querySelector('#readClipboard') as Switch).checked;
 
   const inspectSettings = (await getInspectSettings())!;

@@ -144,7 +144,9 @@ export default defineComponent({
     <div>
       <span>节点快速打码：</span>
       <mdui-switch id="quickReplaceNodeInfo"></mdui-switch>
-      <span class="introduction">开启后，在点击节点打码后，直接进行打码，默认行为为直接全部打码。修改该选项后请刷新页面。</span>
+      <span class="introduction"
+        >开启后，在点击节点打码后，直接进行打码，默认行为为直接全部打码。修改该选项后请刷新页面。</span
+      >
     </div>
     <div>
       <span>自动读取剪贴板：</span>

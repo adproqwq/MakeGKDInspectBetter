@@ -1,7 +1,9 @@
 import { send } from '../utils/event';
 import observeElement from '../utils/observeElement';
 import { createBarIcon } from '../utils/createIcon';
-import replaceNodeInfo, { replaceNodeInfo as directReplaceNodeInfo } from '../utils/replaceNodeInfo';
+import replaceNodeInfo, {
+  replaceNodeInfo as directReplaceNodeInfo,
+} from '../utils/replaceNodeInfo';
 import { getHanashiroSettings } from '../utils/indexedDB';
 
 observeElement(
@@ -78,10 +80,9 @@ observeElement('#iconBar', async () => {
   editNodeIcon.style.right = '16px';
   editNodeIcon.style.bottom = '120px';
   editNodeIcon.setAttribute('fixed', '');
-  editNodeIcon.onclick =
-    await getHanashiroSettings<boolean>('quickReplaceNodeInfo') ?
-      async () => await directReplaceNodeInfo() :
-      replaceNodeInfo;
+  editNodeIcon.onclick = (await getHanashiroSettings<boolean>('quickReplaceNodeInfo'))
+    ? async () => await directReplaceNodeInfo()
+    : replaceNodeInfo;
 
   // 生成坐标按钮
   const positionIcon = document.createElement('mdui-fab');
