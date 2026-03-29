@@ -61,7 +61,7 @@ pnpm build
 
 本项目IDE要求使用`VSCode`或`WebStorm`，包管理器要求使用`pnpm`，使用`TypeScript`编写
 
-`VSCode`已配置`ESLint`、`Prettier`和`MCP服务器`，因此更推荐使用`VSCode`进行开发
+`VSCode`已配置`Oxlint`、`Oxfmt`和`MCP服务器`，因此更推荐使用`VSCode`进行开发
 
 你需要fork本仓库，完成修改后，向本仓库发起`Pull Request`，等待`Review`后即可合并
 
