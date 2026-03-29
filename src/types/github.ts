@@ -4,31 +4,31 @@ export interface IGithubDeviceFlowLogin {
   verification_uri: string;
   expires_in: number;
   interval: number;
-};
+}
 
 export interface IGithubDeviceFlowAccessToken {
   access_token: string;
   token_type: string;
   scope: string;
   error?:
-    'authorization_pending' |
-    'slow_down' |
-    'expired_token' |
-    'unsupported_grant_type' |
-    'incorrect_client_credentials' |
-    'incorrect_device_code' |
-    'access_denied' |
-    'device_flow_disabled';
+    | 'authorization_pending'
+    | 'slow_down'
+    | 'expired_token'
+    | 'unsupported_grant_type'
+    | 'incorrect_client_credentials'
+    | 'incorrect_device_code'
+    | 'access_denied'
+    | 'device_flow_disabled';
   error_description?:
-    'authorization_pending' |
-    'slow_down' |
-    'expired_token' |
-    'unsupported_grant_type' |
-    'incorrect_client_credentials' |
-    'incorrect_device_code' |
-    'access_denied' |
-    'device_flow_disabled';
-};
+    | 'authorization_pending'
+    | 'slow_down'
+    | 'expired_token'
+    | 'unsupported_grant_type'
+    | 'incorrect_client_credentials'
+    | 'incorrect_device_code'
+    | 'access_denied'
+    | 'device_flow_disabled';
+}
 
 export interface IGithubUploadPolicy {
   upload_url: string;

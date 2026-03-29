@@ -1,7 +1,11 @@
 import { dialog, alert } from 'mdui';
 import { getSnapshotZip } from './indexedDB';
 import getSnapshotId from './getSnapshotId';
-import type { IGithubDeviceFlowLogin, IGithubDeviceFlowAccessToken, IGithubUploadPolicy } from '../types/github';
+import type {
+  IGithubDeviceFlowLogin,
+  IGithubDeviceFlowAccessToken,
+  IGithubUploadPolicy,
+} from '../types/github';
 
 export class GitHubDeviceAuth {
   clientId: string;
@@ -9,12 +13,12 @@ export class GitHubDeviceAuth {
   proxyUrl = 'https://proxy.adpro-qwq.workers.dev';
   apiUrl = 'https://api.github.com';
 
-  constructor(clientId: string){
+  constructor(clientId: string) {
     this.clientId = clientId;
-  };
+  }
 
   // 步骤 1：请求设备码
-  async startAuth(){
+  async startAuth() {
     const response = await fetch(`${this.proxyUrl}/github/device`, {
       method: 'POST',
       headers: {
@@ -51,13 +55,13 @@ export class GitHubDeviceAuth {
     this.token = await this.pollForToken(data.device_code, data.interval);
 
     return this.token;
-  };
+  }
 
   // 步骤 2：轮询获取 access_token
-  async pollForToken(deviceCode: string, interval: number){
+  async pollForToken(deviceCode: string, interval: number) {
     const maxAttempts = 100; // 约 15 分钟
 
-    for(let i = 0; i < maxAttempts; i++){
+    for (let i = 0; i < maxAttempts; i++) {
       await this.sleep(interval * 1000);
 
       const response = await fetch(`${this.proxyUrl}/github/token`, {
@@ -74,46 +78,46 @@ export class GitHubDeviceAuth {
 
       const data: IGithubDeviceFlowAccessToken = await response.json();
 
-      if(data.access_token) return data.access_token;
+      if (data.access_token) return data.access_token;
 
-      if(data.error === 'authorization_pending'){
+      if (data.error === 'authorization_pending') {
         continue; // 用户还未授权
       }
 
-      if(data.error === 'slow_down'){
+      if (data.error === 'slow_down') {
         interval++; // 降低轮询频率
       }
 
-      if(data.error === 'expired_token'){
+      if (data.error === 'expired_token') {
         throw new Error('设备码已过期');
       }
 
-      if(data.error){
+      if (data.error) {
         throw new Error(data.error_description || data.error);
       }
     }
 
     throw new Error('授权超时');
-  };
+  }
 
-  sleep(ms: number){
-    return new Promise(resolve => setTimeout(resolve, ms));
-  };
+  sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   // 获取上传策略
-  async getUploadPolicy(file: File): Promise<IGithubUploadPolicy>{
+  async getUploadPolicy(file: File): Promise<IGithubUploadPolicy> {
     const res = await fetch(`${this.proxyUrl}/github/upload`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.token}`,
+        Authorization: `Bearer ${this.token}`,
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-        'Accept': 'application/vnd.github.v3+json',
+        Accept: 'application/vnd.github.v3+json',
         'GitHub-Verified-Fetch': 'true',
         'User-Agent':
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0',
-        'origin': 'https://github.com',
-        'referer': 'https://github.com/',
+        origin: 'https://github.com',
+        referer: 'https://github.com/',
       },
       body: JSON.stringify({
         name: file.name,
@@ -129,7 +133,7 @@ export class GitHubDeviceAuth {
     }
 
     return res.json();
-  };
+  }
 
   // 上传到 S3（根据 policy）
   async uploadToS3(file: File, policy: IGithubUploadPolicy): Promise<void> {
@@ -151,7 +155,7 @@ export class GitHubDeviceAuth {
     if (!res.ok) {
       throw new Error(`上传失败: ${res.status}`);
     }
-  };
+  }
 
   // 完整上传流程
   async uploadFile(file: File) {
@@ -164,7 +168,7 @@ export class GitHubDeviceAuth {
       id: policy.id || policy.asset_upload_id,
       url: policy.asset_url,
     };
-  };
+  }
 }
 
 const auth = new GitHubDeviceAuth('Ov23lilAqTU5QxPHxvq6');
@@ -175,7 +179,9 @@ export default async () => {
     await auth.startAuth();
     console.log('登录成功');
 
-    const file = new File([await getSnapshotZip(getSnapshotId())], 'file.zip', { type: 'application/zip' });
+    const file = new File([await getSnapshotZip(getSnapshotId())], 'file.zip', {
+      type: 'application/zip',
+    });
 
     const remoteSnapshotId = String((await auth.uploadFile(file)).id);
 
@@ -189,8 +195,7 @@ export default async () => {
         await navigator.clipboard.writeText(`https://i.gkd.li/i/${remoteSnapshotId}`);
       },
     });
-
   } catch (err) {
     console.error('失败:', err);
   }
-}
+};
