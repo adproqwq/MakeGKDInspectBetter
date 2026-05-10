@@ -48,6 +48,7 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
         const fullname = data.split('"')[1];
         const splitedName = fullname.split('.');
         const name = splitedName[splitedName.length - 1];
+
         return await Reflect.apply(target, thisArg, [name]);
       } else return await Reflect.apply(target, thisArg, [data]);
     } else if (attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0) {

@@ -104,7 +104,7 @@ window.HatsuneMiku.utils.storage.getHanashiroSettings<T>(item: string);
 
 #### setHanashiroSettings
 
-写入脚本存储的内容。
+写入网页审查工具存储的内容。
 
 ```typescript
 window.HatsuneMiku.utils.storage.setHanashiroSettings(item, value);
@@ -117,7 +117,7 @@ window.HatsuneMiku.utils.storage.setHanashiroSettings(item, value);
 
 #### getInspectSettings
 
-获取脚本存储的内容。
+获取网页审查工具存储的内容。
 
 ```typescript
 window.HatsuneMiku.utils.storage.getInspectSettings();
@@ -127,7 +127,7 @@ window.HatsuneMiku.utils.storage.getInspectSettings();
 | --------------- | --------------------------------- | --------------------------------------------- |
 | inspectSettings | Promise<IInspectSettings \| null> | 网页审查工具的设置，不存在返回`Promise<null>` |
 
-#### setHanashiroSettings
+#### setInspectSettings
 
 写入脚本存储的内容。
 
