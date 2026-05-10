@@ -60,6 +60,7 @@
     "no-unsafe-optional-chaining": "error",
     "no-unused-labels": "error",
     "no-unused-private-class-members": "error",
+    "no-unused-vars": "error",
     "no-useless-backreference": "error",
     "no-useless-catch": "error",
     "no-with": "error",
@@ -72,6 +73,7 @@
     "@typescript-eslint/no-empty-object-type": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
@@ -85,10 +87,7 @@
     "@typescript-eslint/prefer-as-const": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/triple-slash-reference": "error",
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": "error"
   },
-  "jsPlugins": ["eslint-plugin-unused-imports"],
   "ignorePatterns": ["dist"],
   "overrides": [
     {
