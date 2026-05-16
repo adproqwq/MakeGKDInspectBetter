@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "oxfmt --write --no-error-on-unmatched-pattern",
-    "lint": "oxlint --fix --type-aware ./**/*.{js,cjs,mjs,ts,jsx,tsx}"
+    "lint": "oxlint --fix --type-aware"
   },
   "dependencies": {
     "@fontsource/material-icons": "^5.2.7",
