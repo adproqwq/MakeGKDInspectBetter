@@ -96,6 +96,10 @@ pnpm build
 
 感谢 [@AIsouler](https://github.com/AIsouler) 对本项目提出的宝贵建议和问题反馈
 
+感谢以下贡献者：
+
+![img](https://contrib.rocks/image?repo=adproqwq/MakeGKDInspectBetter&max=200)
+
 ## 许可证
 
 本仓库已签署MIT开源许可证，请遵循相关许可证条款规定。
