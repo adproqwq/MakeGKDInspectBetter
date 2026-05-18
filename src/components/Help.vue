@@ -30,8 +30,8 @@ export default defineComponent({
         Matrix群组：<a href="https://matrix.to/#/%23adproqwq_group_matrix:matrix.org">Matrix群组</a
         ><br />
         <br />
-        在这里推荐AIsouler的GKD订阅，特别好用，受到用户广泛好评！<a
-          href="https://github.com/AIsouler/GKD_subscription"
+        在这里推荐 Lin-arm 的GKD订阅，AIsouler 订阅正版续作（欢迎品鉴<a
+          href="https://github.com/Lin-arm/GKD_subscription"
           >Github仓库</a
         >
       </p>
