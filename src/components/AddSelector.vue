@@ -23,6 +23,8 @@ export default defineComponent({
 
       const savedSelectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
 
+      if (!savedSelectors['本地']) savedSelectors['本地'] = [];
+
       savedSelectors['本地'].push({
         name: name,
         description: description,
