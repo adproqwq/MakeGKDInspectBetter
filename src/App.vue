@@ -80,7 +80,8 @@ export default defineComponent({
   mounted() {
     setColorScheme('#39C5BB');
 
-    if (window.location.host === 'li.chenge.eu.org') document.querySelector('html')!.classList.add('mdui-theme-auto');
+    if (window.location.host === 'li.chenge.eu.org')
+      document.querySelector('html')!.classList.add('mdui-theme-auto');
   },
 });
 </script>
