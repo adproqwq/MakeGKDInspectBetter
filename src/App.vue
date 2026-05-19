@@ -79,6 +79,8 @@ export default defineComponent({
   },
   mounted() {
     setColorScheme('#39C5BB');
+
+    document.querySelector('html')!.classList.add('mdui-theme-auto');
   },
 });
 </script>

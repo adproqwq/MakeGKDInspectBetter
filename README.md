@@ -33,6 +33,14 @@ Powered By Vite + Vue + TypeScript
 > [!NOTE]
 > 请确保你已安装`TemperMonkey`或`ScriptCat`或其他类似的脚本管理器，但本脚本仅对`TemperMonkey`和`ScriptCat`进行长期支持，使用其他脚本管理器出现的任何Bug或失效，开发者保留无视的权力。
 
+## 兼容性
+
+本脚本目的是增强原版网页审查工具，很多设计并没有考虑其他的增强项目。
+
+这里列出一些已知的兼容性问题。
+
+1. 使用 [cjy0812/inspect-plus](https://github.com/cjy0812/inspect-plus/) 时，主题模式会与脚本存在轻微的兼容性问题。保持主题模式为“自动”可解决该问题。
+
 ## 构建
 
 本项目使用`pnpm`作为包管理器
