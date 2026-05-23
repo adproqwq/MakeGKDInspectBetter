@@ -1,3 +1,10 @@
+import type { RouteLocationNormalized } from 'vue-router';
+
 export default (): string => {
-  return location.pathname.split('/')[2];
+  const app = document.querySelector('.vue-component[data-v-app]') as HTMLDivElement;
+  const appConfig = app.__vue_app__?.config;
+  const route = appConfig?.globalProperties.$route as RouteLocationNormalized;
+  console.log(route.params.snapshotId);
+
+  return route.params.snapshotId as string;
 };

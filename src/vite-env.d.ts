@@ -312,3 +312,13 @@ declare interface Window {
     };
   };
 }
+
+declare interface HTMLElement {
+  __VUE__?: import('vue').ComponentInternalInstance[];
+	__vue_app__?: import('vue').App;
+}
+
+declare interface WindowEventMap {
+  'vue:component-mount': CustomEvent<ComponentInternalInstance>;
+  'vue:component-unmount': CustomEvent<ComponentInternalInstance>;
+}

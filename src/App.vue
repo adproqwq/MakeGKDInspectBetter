@@ -3,6 +3,7 @@ import '@fontsource/material-icons';
 import 'mdui/mdui.css';
 import { setColorScheme } from 'mdui';
 import { defineComponent } from 'vue';
+import './common/hookVue3';
 import './common/init';
 import './api/api';
 import './common/hookCopy';

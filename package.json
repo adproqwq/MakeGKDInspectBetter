@@ -32,7 +32,8 @@
     "oxlint-tsgolint": "^0.22.1",
     "typescript": "6.0.3",
     "vite": "8.0.13",
-    "vite-plugin-monkey": "8.0.5"
+    "vite-plugin-monkey": "8.0.5",
+    "vue-router": "^5.0.7"
   },
   "packageManager": "pnpm@11.0.9",
   "web-types": [
