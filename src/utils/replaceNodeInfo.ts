@@ -3,42 +3,31 @@ import { getNodeAttr, editNode, downloadSnapshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 import getCurrentNodeId from './getCurrentNodeId';
 
-const calcLength = (reg: RegExp, str: string): number[] => {
-  const length: number[] = [];
-  const matches = Array.from(str.matchAll(reg));
-
-  matches.forEach(([text]) => length.push(text.length));
-
-  return length;
+// 优化：单个函数处理字符串打码，避免重复逻辑
+const maskString = (str: string, reg: RegExp): string => {
+  // 直接替换所有匹配项为对应长度的*，无需循环
+  return str.replace(reg, (match) => '*'.repeat(match.length));
 };
 
 export const replaceNodeInfo = async (reg: RegExp = /./g) => {
   const snapshotId = getSnapshotId();
-  const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
+  const nodeId = getCurrentNodeId() === -1 ? 0 : getCurrentNodeId();
 
   const text = (await getNodeAttr(snapshotId, nodeId, 'text')) as string | null;
   const desc = (await getNodeAttr(snapshotId, nodeId, 'desc')) as string | null;
 
-  let newText = text,
-    newDesc = desc;
+  let newText = text;
+  let newDesc = desc;
 
   if (newText) {
-    const lengths = calcLength(reg, newText);
-
-    for (let i = 0; i < lengths.length; i++) {
-      newText = newText.replace(reg, '*'.repeat(lengths[i]));
-    }
+    newText = maskString(newText, reg);
   }
 
   if (newDesc) {
-    const lengths = calcLength(reg, newDesc);
-
-    for (let i = 0; i < lengths.length; i++) {
-      newText = newDesc.replace(reg, '*'.repeat(lengths[i]));
-    }
+    newDesc = maskString(newDesc, reg);
   }
 
-  editNode(snapshotId, nodeId, [
+  await editNode(snapshotId, nodeId, [
     {
       target: 'text',
       value: newText,
@@ -47,12 +36,11 @@ export const replaceNodeInfo = async (reg: RegExp = /./g) => {
       target: 'desc',
       value: newDesc,
     },
-  ]).then((result) => {
-    if (result)
-      snackbar({
-        message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
-        placement: 'top',
-      });
+  ]);
+
+  snackbar({
+    message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
+    placement: 'top',
   });
 };
 
