@@ -3,42 +3,23 @@ import { getNodeAttr, editNode, downloadSnapshot } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 import getCurrentNodeId from './getCurrentNodeId';
 
-const calcLength = (reg: RegExp, str: string): number[] => {
-  const length: number[] = [];
-  const matches = Array.from(str.matchAll(reg));
-
-  matches.forEach(([text]) => length.push(text.length));
-
-  return length;
-};
+// From @Lin-arm
+const maskString = (str: string, reg: RegExp) => str.replace(reg, match => '*'.repeat(match.length));
 
 export const replaceNodeInfo = async (reg: RegExp = /./g) => {
   const snapshotId = getSnapshotId();
-  const nodeId = getCurrentNodeId() == -1 ? 0 : getCurrentNodeId();
+  const nodeId = getCurrentNodeId() === -1 ? 0 : getCurrentNodeId();
 
   const text = (await getNodeAttr(snapshotId, nodeId, 'text')) as string | null;
   const desc = (await getNodeAttr(snapshotId, nodeId, 'desc')) as string | null;
 
-  let newText = text,
-    newDesc = desc;
+  let newText, newDesc;
 
-  if (newText) {
-    const lengths = calcLength(reg, newText);
+  if (text) newText = maskString(text, reg);
 
-    for (let i = 0; i < lengths.length; i++) {
-      newText = newText.replace(reg, '*'.repeat(lengths[i]));
-    }
-  }
+  if (desc) newDesc = maskString(desc, reg);
 
-  if (newDesc) {
-    const lengths = calcLength(reg, newDesc);
-
-    for (let i = 0; i < lengths.length; i++) {
-      newText = newDesc.replace(reg, '*'.repeat(lengths[i]));
-    }
-  }
-
-  editNode(snapshotId, nodeId, [
+  const result = await editNode(snapshotId, nodeId, [
     {
       target: 'text',
       value: newText,
@@ -47,13 +28,13 @@ export const replaceNodeInfo = async (reg: RegExp = /./g) => {
       target: 'desc',
       value: newDesc,
     },
-  ]).then((result) => {
-    if (result)
-      snackbar({
-        message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
-        placement: 'top',
-      });
-  });
+  ]);
+  if (result) {
+    snackbar({
+      message: '修改成功！你可以选择上传获取导入链接或下载快照分享',
+      placement: 'top',
+    });
+  }
 };
 
 export default () => {
