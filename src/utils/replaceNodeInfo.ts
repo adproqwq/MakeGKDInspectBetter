@@ -4,7 +4,8 @@ import getSnapshotId from '../utils/getSnapshotId';
 import getCurrentNodeId from './getCurrentNodeId';
 
 // From @Lin-arm
-const maskString = (str: string, reg: RegExp) => str.replace(reg, match => '*'.repeat(match.length));
+const maskString = (str: string, reg: RegExp) =>
+  str.replace(reg, (match) => '*'.repeat(match.length));
 
 export const replaceNodeInfo = async (reg: RegExp = /./g) => {
   const snapshotId = getSnapshotId();
