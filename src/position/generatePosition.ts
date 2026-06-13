@@ -10,12 +10,12 @@ export const getInfo = async (): Promise<
 > => {
   const canvas = document.querySelector('#canvas')! as HTMLCanvasElement;
 
-  const snapshotId = getSnapshotId();
+  const snapshotId = await getSnapshotId();
   const screenshot = await getScreenshot(snapshotId);
   const nodeId = getCurrentNodeId();
 
-  const screenWidth = (await getScreenInfo(getSnapshotId())).width;
-  const screenHeight = (await getScreenInfo(getSnapshotId())).height;
+  const screenWidth = (await getScreenInfo(snapshotId)).width;
+  const screenHeight = (await getScreenInfo(snapshotId)).height;
   const left = (await getNodeAttr(snapshotId, nodeId, 'left')!) as number;
   const top = (await getNodeAttr(snapshotId, nodeId, 'top')!) as number;
   const width = (await getNodeAttr(snapshotId, nodeId, 'width')!) as number;

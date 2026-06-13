@@ -8,7 +8,7 @@ const maskString = (str: string, reg: RegExp) =>
   str.replace(reg, (match) => '*'.repeat(match.length));
 
 export const replaceNodeInfo = async (reg: RegExp = /./g) => {
-  const snapshotId = getSnapshotId();
+  const snapshotId = await getSnapshotId();
   const nodeId = getCurrentNodeId() === -1 ? 0 : getCurrentNodeId();
 
   const text = (await getNodeAttr(snapshotId, nodeId, 'text')) as string | null;
@@ -49,13 +49,15 @@ export default () => {
       },
       {
         text: '下载快照文件并打码',
-        onClick: () => {
+        onClick: async () => {
+          const snapshotId = await getSnapshotId();
+
           return new Promise((resolve, reject) => {
             snackbar({
               message: '开始下载中……下载开始后会自动关闭弹窗',
               placement: 'top',
             });
-            downloadSnapshot(getSnapshotId())
+            downloadSnapshot(snapshotId)
               .then(() => {
                 resolve();
                 prompt({

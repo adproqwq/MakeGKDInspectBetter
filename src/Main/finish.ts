@@ -152,7 +152,7 @@ export default async () => {
   }
 
   if (isSimplyActivityIds === true) {
-    const snapshotId = getSnapshotId();
+    const snapshotId = await getSnapshotId();
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
 
     const result = await simplyActivityIds(snapshotId);

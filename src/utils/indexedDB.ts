@@ -106,6 +106,18 @@ export const downloadSnapshot = async (snapshotId: string) => {
   saveAs(snapshotFile, `snapshot-${snapshotId}.zip`);
 };
 
+export const snapshotIdToImportId = async (snapshotId: number) => {
+  const importIds = await localStorage.getItem<Record<number, number>>('githubZip');
+
+  return importIds?.[snapshotId];
+};
+
+export const importIdToSnapshotId = async (importId: number) => {
+  const snapshotIds = await localStorage.getItem<Record<number, number>>('url');
+
+  return snapshotIds?.[importId];
+};
+
 export const setHanashiroSettings = async <T>(item: string, value: T) => {
   await hanashiroStorage.setItem(item, value);
 };

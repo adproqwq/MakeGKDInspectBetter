@@ -179,7 +179,7 @@ export default async () => {
     await auth.startAuth();
     console.log('登录成功');
 
-    const file = new File([await getSnapshotZip(getSnapshotId())], 'file.zip', {
+    const file = new File([await getSnapshotZip(await getSnapshotId())], 'file.zip', {
       type: 'application/zip',
     });
 
