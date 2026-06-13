@@ -7,6 +7,6 @@ export default async (): Promise<string> => {
   const route = appConfig?.globalProperties.$route as RouteLocationNormalized;
   const params = route.params;
 
-  if(Object.hasOwn(params, 'snapshotId')) return params.snapshotId as string;
+  if (Object.hasOwn(params, 'snapshotId')) return params.snapshotId as string;
   else return String((await importIdToSnapshotId(Number(params.github_asset_id as string)))!);
 };
