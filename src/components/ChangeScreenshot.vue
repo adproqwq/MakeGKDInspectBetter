@@ -13,7 +13,7 @@ export default defineComponent({
       const fileList = inputElement.files!;
       const imageArrayBuffer = await fileList[0].arrayBuffer();
 
-      await replaceScreenshot(getSnapshotId(), imageArrayBuffer);
+      await replaceScreenshot(await getSnapshotId(), imageArrayBuffer);
 
       snackbar({
         message: '更换截图成功！刷新页面即可看见更改',
