@@ -33,7 +33,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <input type="file" id="img" accept=".png" @change="getImg" @cancel="cancel" />
+  <input type="file" id="img" accept="image/png,image/webp" @change="getImg" @cancel="cancel" />
 </template>
 
 <style>
