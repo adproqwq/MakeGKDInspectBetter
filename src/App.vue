@@ -38,7 +38,7 @@ export default defineComponent({
     };
   },
   created() {
-    receive('copyEvent', () => {
+    receive('openMain', () => {
       this.currentComponent = 'Main';
     });
 

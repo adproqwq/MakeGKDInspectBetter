@@ -28,8 +28,8 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             true,
           );
 
-          // 发送复制事件
-          send('copyEvent');
+          // 发送打开复制修改窗口事件
+          send('openMain');
         } catch {
           reject();
         }
