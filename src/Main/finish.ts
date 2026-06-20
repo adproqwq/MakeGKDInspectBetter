@@ -1,5 +1,5 @@
-import { RadioGroup, Switch, TextField, snackbar } from 'mdui';
-import { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
+import { type RadioGroup, type Switch, type TextField, type Button, snackbar } from 'mdui';
+import type { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
 import { constructPositionArray } from './position';
 import iArrayToArray from '../utils/iArrayToArray';
@@ -51,7 +51,7 @@ const checkPositionLegality = (position: Position): boolean => {
   return true;
 };
 
-export default async () => {
+export default async (element: Button) => {
   const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
   const action = (document.querySelector('#action') as RadioGroup).value as
     | 'clickCenter'
@@ -181,4 +181,7 @@ export default async () => {
 
   send('closePage');
   send('modifyEnd');
+
+  if (element.id === 'ok_open') send('openVscode');
+  else if (element.id === 'ok_open_append') send('openVscodeAppend');
 };

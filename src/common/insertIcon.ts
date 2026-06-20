@@ -78,7 +78,7 @@ observeElement('#iconBar', async () => {
   editNodeIcon.extended = true;
   editNodeIcon.textContent = '替换当前节点信息';
   editNodeIcon.style.right = '16px';
-  editNodeIcon.style.bottom = '120px';
+  editNodeIcon.style.bottom = '180px';
   editNodeIcon.setAttribute('fixed', '');
   editNodeIcon.onclick = (await getHanashiroSettings<boolean>('quickReplaceNodeInfo'))
     ? async () => await directReplaceNodeInfo()
@@ -91,12 +91,23 @@ observeElement('#iconBar', async () => {
   positionIcon.extended = true;
   positionIcon.textContent = '生成坐标';
   positionIcon.style.right = '16px';
-  positionIcon.style.bottom = '60px';
+  positionIcon.style.bottom = '120px';
   positionIcon.setAttribute('fixed', '');
   positionIcon.onclick = () => send('openGeneratePosition');
+
+  // 在 Vscode 中打开按钮
+  const openVscodeIcon = document.createElement('mdui-fab');
+  openVscodeIcon.icon = 'open_in_new';
+  openVscodeIcon.variant = 'secondary';
+  openVscodeIcon.extended = true;
+  openVscodeIcon.textContent = '在 VSCode 中打开';
+  openVscodeIcon.style.right = '16px';
+  openVscodeIcon.style.bottom = '60px';
+  openVscodeIcon.setAttribute('fixed', '');
+  openVscodeIcon.onclick = () => send('openVscode');
 
   document
     .querySelectorAll('div[data-v-app=""]')
     .item(1)
-    .firstElementChild!.append(editNodeIcon, positionIcon);
+    .firstElementChild!.append(editNodeIcon, positionIcon, openVscodeIcon);
 });

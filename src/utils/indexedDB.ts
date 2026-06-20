@@ -23,8 +23,12 @@ const hanashiroStorage = localforage.createInstance({
   name: 'Hanashiro',
 });
 
+export const getSnapshotInfo = async (snapshotId: string): Promise<Snapshot | null> => {
+  return await snapshotStorage.getItem<Snapshot>(snapshotId);
+};
+
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
-  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+  const snapshotInfo = await getSnapshotInfo(snapshotId);
   const activityId = snapshotInfo?.activityId;
 
   if (activityId) {
@@ -43,7 +47,7 @@ export const editNode = async (
   options: EditNodeOption[],
 ): Promise<boolean> => {
   try {
-    const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+    const snapshotInfo = await getSnapshotInfo(snapshotId);
 
     const nodes = snapshotInfo!.nodes;
     const nodeAttr = nodes[nodeId].attr;
@@ -64,7 +68,7 @@ export const editNode = async (
 export const getScreenInfo = async (
   snapshotId: string,
 ): Promise<{ width: number; height: number }> => {
-  const snapshotInfo = (await snapshotStorage.getItem<Snapshot>(snapshotId))!;
+  const snapshotInfo = (await getSnapshotInfo(snapshotId))!;
 
   return { width: snapshotInfo.screenWidth, height: snapshotInfo.screenHeight };
 };
@@ -82,7 +86,7 @@ export const getNodeAttr = async (
   nodeId: number,
   target: AttrList,
 ): Promise<PrimitiveType> => {
-  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+  const snapshotInfo = await getSnapshotInfo(snapshotId);
 
   const nodes = snapshotInfo!.nodes;
   const nodeAttr = nodes[nodeId].attr;
@@ -91,7 +95,7 @@ export const getNodeAttr = async (
 };
 
 export const getSnapshotZip = async (snapshotId: string): Promise<Blob> => {
-  const snapshotInfo = await snapshotStorage.getItem<Snapshot>(snapshotId);
+  const snapshotInfo = await getSnapshotInfo(snapshotId);
   const screenshot = (await screenshotStorage.getItem<ArrayBuffer>(snapshotId))!;
 
   const jszip = new JSZip();

@@ -41,7 +41,10 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
           placement: 'top',
         });
 
-        return await Reflect.apply(target, thisArg, [result]);
+        await Reflect.apply(target, thisArg, [result]);
+        send('ruleWriteClipboardDone');
+
+        return;
       }
     } else if (data.startsWith('name=')) {
       if ((await getHanashiroSettings('simplyName')) == true) {

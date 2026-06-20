@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import json5 from 'json5';
-import { RawApp, Position } from '@gkd-kit/api';
-import { Dialog, RadioGroup, TextField, prompt, snackbar } from 'mdui';
+import type { RawApp, Position } from '@gkd-kit/api';
+import { type Button, type Dialog, type RadioGroup, type TextField, prompt, snackbar } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
 import { onChange } from '../Main/position';
@@ -12,8 +12,8 @@ import { PositionZod } from '../types/positionZod';
 
 export default defineComponent({
   methods: {
-    async finish() {
-      await finish();
+    async finish(event: Event) {
+      await finish(event.target as Button);
     },
     key() {
       key();
@@ -72,6 +72,7 @@ export default defineComponent({
   data() {
     return {
       originRule: <RawApp>json5.parse(window.Hanashiro.originRule),
+      copyDepth: 'app',
     };
   },
   async mounted() {
@@ -92,7 +93,7 @@ export default defineComponent({
   <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <span>选择复制深度：</span>
-      <mdui-radio-group id="copyDepth" value="app">
+      <mdui-radio-group id="copyDepth" value="app" @change="this.copyDepth = $event.target.value">
         <mdui-radio value="ts">ts层</mdui-radio>
         <mdui-radio value="app">app层</mdui-radio>
         <mdui-radio value="groups">groups层</mdui-radio>
@@ -200,7 +201,19 @@ export default defineComponent({
       ></mdui-text-field>
     </div>
     <div>
-      <mdui-button slot="action" variant="tonal" @click="finish">确定</mdui-button>
+      <mdui-button slot="action" id="ok" variant="filled" @click="finish($event)">确定</mdui-button>
+      <mdui-button slot="action" id="ok_open" variant="tonal" @click="finish($event)"
+        >确定并打开 VSCode</mdui-button
+      >
+      <mdui-button
+        slot="action"
+        id="ok_open_append"
+        v-if="this.copyDepth === 'app'"
+        variant="tonal"
+        @click="finish($event)"
+      >
+        确定并在 VSCode 中追加规则组
+      </mdui-button>
     </div>
   </mdui-dialog>
 </template>

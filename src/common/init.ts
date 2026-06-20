@@ -1,12 +1,15 @@
 import { snackbar, confirm } from 'mdui';
-import { decode } from 'js-base64';
+import { decode, encode } from 'js-base64';
 import {
   getHanashiroSettings,
   setHanashiroSettings,
   getInspectSettings,
   setInspectSettings,
+  getSnapshotInfo,
 } from '../utils/indexedDB';
 import fetchSubscription from '../utils/fetchSubscription';
+import { receive } from '../utils/event';
+import getSnapshotId from '../utils/getSnapshotId';
 import type { ICount } from '../types/count';
 import type { ISelector, ISelectors, ISubscriptionMeta } from '../types/selectors';
 
@@ -119,6 +122,23 @@ if (!(await getHanashiroSettings<ICount>('count')))
 const count = (await getHanashiroSettings<ICount>('count'))!;
 count.loaded++;
 await setHanashiroSettings<ICount>('count', count);
+
+receive('openVscode', async () => {
+  const packageName = (await getSnapshotInfo(await getSnapshotId()))?.appId;
+
+  window.location.href = `vscode://tianfangyetan.gkd-toolkit/open?app=${packageName}`;
+});
+receive('openVscodeAppend', async () => {
+  const packageName = (await getSnapshotInfo(await getSnapshotId()))?.appId;
+
+  receive(
+    'ruleWriteClipboardDone',
+    () => {
+      window.location.href = `vscode://tianfangyetan.gkd-toolkit/append?app=${packageName}&payload=${encode(window.Hanashiro.returnResult, true)}`;
+    },
+    true,
+  );
+});
 
 if (!(await getHanashiroSettings<boolean>('hideLoadSnackbar'))) {
   snackbar({
