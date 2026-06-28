@@ -14,12 +14,12 @@
     "@fontsource/material-icons": "^5.2.7",
     "file-saver": "^2.0.5",
     "he": "^1.2.0",
-    "js-base64": "^3.7.8",
+    "js-base64": "^3.8.0",
     "json5": "^2.2.3",
     "jszip": "^3.10.1",
     "localforage": "^1.10.0",
     "mdui": "^2.1.4",
-    "vue": "^3.5.38",
+    "vue": "^3.5.39",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -27,15 +27,15 @@
     "@types/file-saver": "^2.0.7",
     "@types/he": "^1.2.3",
     "@vitejs/plugin-vue": "^6.0.7",
-    "oxfmt": "^0.55.0",
-    "oxlint": "^1.70.0",
+    "oxfmt": "^0.56.0",
+    "oxlint": "^1.71.0",
     "oxlint-tsgolint": "^0.23.0",
     "typescript": "6.0.3",
-    "vite": "8.0.16",
+    "vite": "8.1.0",
     "vite-plugin-monkey": "8.0.6",
     "vue-router": "^5.1.0"
   },
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.9.0",
   "web-types": [
     "./node_modules/mdui/web-types.zh-cn.json"
   ]
