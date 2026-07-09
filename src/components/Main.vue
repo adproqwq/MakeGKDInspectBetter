@@ -104,7 +104,9 @@ export default defineComponent({
     <div>
       <span>选择分类：</span>
       <mdui-radio-group id="category">
-        <mdui-radio v-for="category in this.categories" :value="category.name">{{ category.name }}</mdui-radio>
+        <mdui-radio v-for="category in this.categories" :value="category.name">{{
+          category.name
+        }}</mdui-radio>
       </mdui-radio-group>
     </div>
     <div>
