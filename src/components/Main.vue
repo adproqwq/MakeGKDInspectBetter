@@ -6,8 +6,8 @@ import { type Button, type Dialog, type RadioGroup, type TextField, prompt, snac
 import finish from '../Main/finish';
 import key from '../Main/key';
 import { onChange } from '../Main/position';
-import renderedCategories from '../Main/renderedCategories';
 import { send } from '../utils/event';
+import { getHanashiroSettings } from '../utils/indexedDB';
 import { PositionZod } from '../types/positionZod';
 
 export default defineComponent({
@@ -73,12 +73,13 @@ export default defineComponent({
     return {
       originRule: <RawApp>json5.parse(window.Hanashiro.originRule),
       copyDepth: 'app',
+      categories: [],
     };
   },
   async mounted() {
     window.Hanashiro.currentCategory = '';
 
-    await renderedCategories();
+    this.categories = (await getHanashiroSettings<RawCategory[]>('categories'))!;
 
     (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
       window.Hanashiro.currentCategory = (e.target as RadioGroup).value;
@@ -102,7 +103,9 @@ export default defineComponent({
     </div>
     <div>
       <span>选择分类：</span>
-      <mdui-radio-group id="category"></mdui-radio-group>
+      <mdui-radio-group id="category">
+        <mdui-radio v-for="category in this.categories" :value="category.name">{{ category.name }}</mdui-radio>
+      </mdui-radio-group>
     </div>
     <div>
       <span>插入action类型：</span>
