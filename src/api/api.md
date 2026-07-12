@@ -9,18 +9,19 @@
 ### send
 
 ```typescript
-window.HatsuneMiku.event.send(eventName);
+window.HatsuneMiku.event.send(eventName, payload);
 ```
 
-| 参数名称  | 参数类型 | 说明           | 是否必需 | 备注                                                               |
-| --------- | -------- | -------------- | -------- | ------------------------------------------------------------------ |
-| eventName | string   | 发送的事件名称 | 是       | 因为只是对原生事件函数的再封装，所以注意不能和已有的事件名称重复。 |
+| 参数名称  | 参数类型 | 说明           | 是否必需 | 备注 |
+| --------- | -------- | -------------- | -------- | ---- |
+| eventName | string   | 发送的事件名称 | 是       |      |
+| payload   | T        | 携带的参数     | 否       |      |
 
 ### receive
 
 该函数一般与`send`搭配使用。
 
-返回值类型：`void`
+返回值类型：`() => void`
 
 ```typescript
 window.HatsuneMiku.event.receive(eventName, callback, once);
@@ -31,6 +32,10 @@ window.HatsuneMiku.event.receive(eventName, callback, once);
 | eventName | string   | 监听的事件名称   | 是       |                                                       |
 | callback  | Function | 回调函数         | 是       |                                                       |
 | once      | boolean  | 是否为一次性监听 | 否       | 默认为`false`，若为`true`，则在触发一次后删除该监听。 |
+
+| 返回值名称 | 返回值类型 | 说明                 |
+| ---------- | ---------- | -------------------- |
+| off        | () => void | 取消订阅时调用该函数 |
 
 ## utils
 

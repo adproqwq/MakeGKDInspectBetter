@@ -264,6 +264,10 @@ declare interface IPosition {
   top?: number | string;
 }
 
+// oxlint-disable-next-line typescript/no-explicit-any
+declare type EventCallback<T = any> = (payload: T) => void | Promise<void>;
+declare type Unsubscribe = () => void;
+
 declare interface Window {
   Hanashiro: {
     originRule: string;
@@ -279,8 +283,8 @@ declare interface Window {
   };
   HatsuneMiku: {
     event: {
-      send: (eventName: string) => void;
-      receive: (eventName: string, callback: () => void, once?: boolean) => void;
+      send: <T>(eventName: string, payload?: T) => void;
+      receive: <T>(eventName: string, callback: EventCallback<T>, once?: boolean) => Unsubscribe;
     };
     utils: {
       icon: {
