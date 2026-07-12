@@ -104,7 +104,7 @@ window.HatsuneMiku.utils.storage.getHanashiroSettings<T>(item: string);
 
 #### setHanashiroSettings
 
-写入网页审查工具存储的内容。
+写入脚本存储的内容。
 
 ```typescript
 window.HatsuneMiku.utils.storage.setHanashiroSettings(item, value);
@@ -129,7 +129,7 @@ window.HatsuneMiku.utils.storage.getInspectSettings();
 
 #### setInspectSettings
 
-写入脚本存储的内容。
+写入网页审查工具存储的内容。
 
 ```typescript
 window.HatsuneMiku.utils.storage.setInspectSettings(newSettings);
