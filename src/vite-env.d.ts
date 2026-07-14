@@ -2,6 +2,11 @@
 /// <reference types="vite-plugin-monkey/client" />
 //// <reference types="vite-plugin-monkey/global" />
 
+declare module '@fontsource/material-icons' {
+  const cssString: string;
+  export default cssString;
+}
+
 declare interface SnackbarOptions {
   /**
    * Snackbar 中的消息文本内容
