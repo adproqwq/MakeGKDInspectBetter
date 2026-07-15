@@ -24,6 +24,9 @@ export default defineComponent({
         order: Number((e.target as Radio).getAttribute('data-order')!),
       };
     },
+    encode(src: string) {
+      return encodeURI(src);
+    },
     closeDialog() {
       send('closePage');
     },
@@ -74,12 +77,13 @@ export default defineComponent({
         <mdui-radio
           v-for="(selector, key) in selectors"
           id="selectorRadio"
-          :value="encodeURI(selector.selector)"
+          :value="encode(selector.selector)"
           :data-index="key"
           :data-description="selector.description ?? ''"
           :data-order="selector.order ?? 1"
-          @click="radioClick($event)"
-        ></mdui-radio>
+          @click="radioClick($event)">
+          {{ selector.name }}
+        </mdui-radio>
       </mdui-radio-group>
     </div>
     <div>
