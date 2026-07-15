@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import json5 from 'json5';
-import type { RawApp, Position } from '@gkd-kit/api';
+import type { RawApp, Position, RawCategory } from '@gkd-kit/api';
 import { type Button, type Dialog, type RadioGroup, type TextField, prompt, snackbar } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
@@ -73,7 +73,7 @@ export default defineComponent({
     return {
       originRule: <RawApp>json5.parse(window.Hanashiro.originRule),
       copyDepth: 'app',
-      categories: [],
+      categories: [] as RawCategory[],
     };
   },
   async mounted() {
@@ -94,7 +94,7 @@ export default defineComponent({
   <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
       <span>选择复制深度：</span>
-      <mdui-radio-group id="copyDepth" value="app" @change="this.copyDepth = $event.target.value">
+      <mdui-radio-group id="copyDepth" value="app" @change="copyDepth = $event.target.value">
         <mdui-radio value="ts">ts层</mdui-radio>
         <mdui-radio value="app">app层</mdui-radio>
         <mdui-radio value="groups">groups层</mdui-radio>
@@ -104,7 +104,7 @@ export default defineComponent({
     <div>
       <span>选择分类：</span>
       <mdui-radio-group id="category">
-        <mdui-radio v-for="category in this.categories" :value="category.name">
+        <mdui-radio v-for="category in categories" :value="category.name">
           {{ category.name }}
         </mdui-radio>
       </mdui-radio-group>
@@ -213,7 +213,7 @@ export default defineComponent({
       <mdui-button
         slot="action"
         id="ok_open_append"
-        v-if="this.copyDepth === 'app'"
+        v-if="copyDepth === 'app'"
         variant="tonal"
         @click="finish($event)"
       >
