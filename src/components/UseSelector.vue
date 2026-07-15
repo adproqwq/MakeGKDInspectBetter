@@ -28,7 +28,7 @@ export default defineComponent({
       send('closePage');
     },
   },
-  data(){
+  data() {
     return {
       selectors: [] as ISelector[],
     };
