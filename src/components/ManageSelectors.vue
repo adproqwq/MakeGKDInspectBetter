@@ -1,14 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { type Dialog, type Tabs, snackbar } from 'mdui';
-import { generateSelectorGroups, generateSelectors, editSelector } from '../selectors/manage';
+import { type Dialog, type Tabs, type TextField, type Radio, snackbar } from 'mdui';
+import { encodeURI, decode } from 'js-base64';
+import { generateSelectorGroups, updateSelectors, editSelector } from '../selectors/manage';
 import _import, { getLocalSelectors } from '../selectors/import';
 import _export from '../selectors/export';
 import subscribe from '../selectors/subscribe';
 import fetchSubscription from '../utils/fetchSubscription';
 import { send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
-import type { ISelectors, ISubscriptionMeta } from '../types/selectors';
+import type { ISelectors, ISubscriptionMeta, ISelector } from '../types/selectors';
 
 export default defineComponent({
   methods: {
@@ -40,8 +41,30 @@ export default defineComponent({
     async getLocalSelectorsFile() {
       await getLocalSelectors();
     },
-    async generateSelectors() {
-      await generateSelectors();
+    async updateSelectors() {
+      this.selectors = await updateSelectors();
+    },
+    encode(src: string) {
+      return encodeURI(src);
+    },
+    radioClick(e: Event) {
+      const nameTextField = document.querySelector('#name')! as TextField;
+      const descriptionTextField = document.querySelector('#description')! as TextField;
+      const selectorTextField = document.querySelector('#selector')! as TextField;
+      const orderTextField = document.querySelector('#order')! as TextField;
+
+      nameTextField.value = (e.target as Radio).innerText;
+      descriptionTextField.value = (e.target as Radio).getAttribute('data-description')!;
+      selectorTextField.value = decode((e.target as Radio).value);
+      orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
+
+      window.Hanashiro.currentSelector = {
+        index: Number((e.target as Radio).getAttribute('data-index')!),
+        name: (e.target as Radio).innerText,
+        description: (e.target as Radio).getAttribute('data-description')!,
+        selector: decode((e.target as Radio).value),
+        order: Number((e.target as Radio).getAttribute('data-order')!),
+      };
     },
     async updateSubscription() {
       const metas = (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!;
@@ -65,6 +88,11 @@ export default defineComponent({
           }),
       );
     },
+  },
+  data() {
+    return {
+      selectors: [] as ISelector[],
+    };
   },
   async mounted() {
     const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
@@ -106,9 +134,21 @@ export default defineComponent({
       <mdui-tabs
         id="selectorTabs"
         variant="secondary"
-        @change.self="generateSelectors"
+        @change.self="updateSelectors"
         full-width
       ></mdui-tabs>
+      <mdui-radio-group id="selectors">
+        <mdui-radio
+          v-for="(selector, key) in selectors"
+          id="selectorRadio"
+          :value="encode(selector.selector)"
+          :data-index="key"
+          :data-description="selector.description ?? ''"
+          :data-order="selector.order ?? 1"
+          @click="radioClick($event)">
+          {{ selector.name }}
+        </mdui-radio>
+      </mdui-radio-group>
     </div>
     <div>
       <span>名称：</span>
