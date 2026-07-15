@@ -1,22 +1,37 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { Dialog, Tabs } from 'mdui';
-import { generateSelectors, search } from '../selectors/use';
+import { encodeURI, decode } from 'js-base64';
+import type { Dialog, Tabs, Radio } from 'mdui';
+import { updateSelectors, search } from '../selectors/use';
 import { send } from '../utils/event';
 import { getHanashiroSettings } from '../utils/indexedDB';
-import type { ISelectors } from '../types/selectors';
+import type { ISelectors, ISelector } from '../types/selectors';
 
 export default defineComponent({
   methods: {
     async search() {
       await search();
     },
-    async generateSelectors() {
-      await generateSelectors();
+    async updateSelectors() {
+      this.selectors = await updateSelectors();
+    },
+    radioClick(e: Event) {
+      window.Hanashiro.currentSelector = {
+        index: Number((e.target as Radio).getAttribute('data-index')!),
+        name: (e.target as Radio).innerText,
+        description: (e.target as Radio).getAttribute('data-description')!,
+        selector: decode((e.target as Radio).value),
+        order: Number((e.target as Radio).getAttribute('data-order')!),
+      };
     },
     closeDialog() {
       send('closePage');
     },
+  },
+  data(){
+    return {
+      selectors: [] as ISelector[],
+    };
   },
   async mounted() {
     const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
@@ -52,10 +67,20 @@ export default defineComponent({
       <mdui-tabs
         id="selectorTabs"
         variant="secondary"
-        @change.self="generateSelectors"
+        @change.self="updateSelectors"
         full-width
       ></mdui-tabs>
-      <mdui-radio-group id="selectors"></mdui-radio-group>
+      <mdui-radio-group id="selectors">
+        <mdui-radio
+          v-for="(selector, key) in selectors"
+          id="selectorRadio"
+          :value="encodeURI(selector.selector)"
+          :data-index="key"
+          :data-description="selector.description ?? ''"
+          :data-order="selector.order ?? 1"
+          @click="radioClick($event)"
+        ></mdui-radio>
+      </mdui-radio-group>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="search">搜索</mdui-button>

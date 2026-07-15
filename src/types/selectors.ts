@@ -7,9 +7,9 @@ const selectors = z.object({
   order: z.number(),
 });
 
-export type ISelectors = Record<string, z.infer<typeof selectors>[]>;
-
 export type ISelector = z.infer<typeof selectors>;
+
+export type ISelectors = Record<string, ISelector[]>;
 
 export interface ISubscriptionMeta {
   name: string;
