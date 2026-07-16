@@ -133,7 +133,7 @@ export default defineComponent({
         <mdui-chip
           v-for="(_, key) in selectorsWithCategory"
           variant="assist"
-          deletable
+          :deletable="key === '本地' ? false : true"
           delete-icon="delete_forever"
           elevated
           @delete="deleteGroup($event, key)"
