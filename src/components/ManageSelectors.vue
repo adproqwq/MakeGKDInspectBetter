@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { type Dialog, type Tabs, type Radio, snackbar } from 'mdui';
+import { type Dialog, type Tabs, type Radio, type Chip, snackbar } from 'mdui';
 import { encodeURI, decode } from 'js-base64';
-import { generateSelectorGroups, updateSelectors, editSelector } from '../selectors/manage';
+import { updateSelectors, editSelector } from '../selectors/manage';
 import _import, { getLocalSelectors } from '../selectors/import';
 import _export from '../selectors/export';
 import subscribe from '../selectors/subscribe';
@@ -61,6 +61,18 @@ export default defineComponent({
         order: Number(this.orderText),
       };
     },
+    async deleteGroup(e: Event, category: string) {
+      const currentSelectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
+
+      delete currentSelectors[(e.target as Chip).textContent];
+
+      await setHanashiroSettings('selectors', currentSelectors);
+
+      snackbar({
+        message: `快捷选择器组【${category}】已删除！`,
+        placement: 'top',
+      });
+    },
     async updateSubscription() {
       const metas = (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!;
 
@@ -102,8 +114,6 @@ export default defineComponent({
       selectorTabs.value = '本地';
     });
 
-    generateSelectorGroups();
-
     (document.querySelector('#page') as Dialog).open = true;
   },
 });
@@ -119,7 +129,18 @@ export default defineComponent({
     </div>
     <div>
       <span>管理选择器组：</span>
-      <div id="selectorGroups"></div>
+      <div id="selectorGroups">
+        <mdui-chip
+          v-for="(_, key) in selectorsWithCategory"
+          variant="assist"
+          deletable
+          delete-icon="delete_forever"
+          elevated
+          @delete="deleteGroup($event, key)"
+        >
+          {{ key }}
+        </mdui-chip>
+      </div>
     </div>
     <div>
       <span>选择选择器：</span>

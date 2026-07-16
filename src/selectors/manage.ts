@@ -1,35 +1,6 @@
-import { type TextField, type Tabs, type Chip, snackbar } from 'mdui';
+import { type TextField, type Tabs, snackbar } from 'mdui';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import type { ISelectors } from '../types/selectors';
-
-export const generateSelectorGroups = async () => {
-  const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
-
-  Object.keys(selectors).forEach((category) => {
-    const selectorGroup = document.createElement('mdui-chip');
-
-    selectorGroup.variant = 'assist';
-    selectorGroup.deletable = true;
-    selectorGroup.deleteIcon = 'delete_forever';
-    selectorGroup.elevated = true;
-    selectorGroup.textContent = category;
-
-    selectorGroup.addEventListener('delete', async (e) => {
-      const currentSelectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
-
-      delete currentSelectors[(e.target as Chip).textContent];
-
-      await setHanashiroSettings('selectors', currentSelectors);
-
-      snackbar({
-        message: `快捷选择器组【${category}】已删除！`,
-        placement: 'top',
-      });
-    });
-
-    document.querySelector('#selectorGroups')!.append(selectorGroup);
-  });
-};
 
 export const updateSelectors = async () => {
   const panel = (document.querySelector('#selectorTabs') as Tabs).value!;
