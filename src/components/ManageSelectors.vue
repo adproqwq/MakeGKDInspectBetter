@@ -48,22 +48,17 @@ export default defineComponent({
       return encodeURI(src);
     },
     radioClick(e: Event) {
-      const nameTextField = document.querySelector('#name')! as TextField;
-      const descriptionTextField = document.querySelector('#description')! as TextField;
-      const selectorTextField = document.querySelector('#selector')! as TextField;
-      const orderTextField = document.querySelector('#order')! as TextField;
-
-      nameTextField.value = (e.target as Radio).innerText;
-      descriptionTextField.value = (e.target as Radio).getAttribute('data-description')!;
-      selectorTextField.value = decode((e.target as Radio).value);
-      orderTextField.value = (e.target as Radio).getAttribute('data-order')!;
+      this.name = (e.target as Radio).innerText;
+      this.description = (e.target as Radio).getAttribute('data-description')!;
+      this.selector = decode((e.target as Radio).value);
+      this.orderText = (e.target as Radio).getAttribute('data-order')!;
 
       window.Hanashiro.currentSelector = {
         index: Number((e.target as Radio).getAttribute('data-index')!),
-        name: (e.target as Radio).innerText,
-        description: (e.target as Radio).getAttribute('data-description')!,
-        selector: decode((e.target as Radio).value),
-        order: Number((e.target as Radio).getAttribute('data-order')!),
+        name: this.name,
+        description: this.description,
+        selector: this.selector,
+        order: Number(this.orderText),
       };
     },
     async updateSubscription() {
@@ -92,6 +87,10 @@ export default defineComponent({
   data() {
     return {
       selectors: [] as ISelector[],
+      name: '',
+      description: '',
+      selector: '',
+      orderText: '',
     };
   },
   async mounted() {
@@ -157,6 +156,7 @@ export default defineComponent({
         variant="filled"
         id="name"
         label="名称"
+        :value="name"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">失焦保存</span>
@@ -168,6 +168,7 @@ export default defineComponent({
         id="description"
         label="描述"
         rows="6"
+        :value="description"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">失焦保存</span>
@@ -178,6 +179,7 @@ export default defineComponent({
         variant="filled"
         id="selector"
         label="选择器"
+        :value="selector"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">留空删除。失焦保存</span>
@@ -189,6 +191,7 @@ export default defineComponent({
         id="order"
         label="排序优先值"
         type="number"
+        :value="orderText"
         @change="editSelector"
       ></mdui-text-field>
       <span class="introduction">数字越大，排序越前。失焦保存</span>
