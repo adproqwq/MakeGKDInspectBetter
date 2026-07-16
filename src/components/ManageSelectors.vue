@@ -145,7 +145,8 @@ export default defineComponent({
           :data-index="key"
           :data-description="selector.description ?? ''"
           :data-order="selector.order ?? 1"
-          @click="radioClick($event)">
+          @click="radioClick($event)"
+        >
           {{ selector.name }}
         </mdui-radio>
       </mdui-radio-group>
