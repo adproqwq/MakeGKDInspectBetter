@@ -34,23 +34,16 @@ export default defineComponent({
   data() {
     return {
       selectors: [] as ISelector[],
+      selectorsWithCategory: {} as ISelectors,
     };
   },
   async mounted() {
-    const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
-    const selectorTabs = document.querySelector('#selectorTabs') as Tabs;
-    Object.keys(selectors).forEach((category) => {
-      const tab = document.createElement('mdui-tab');
-      tab.value = category;
-      tab.textContent = category;
+    this.selectorsWithCategory = (await getHanashiroSettings<ISelectors>('selectors'))!;
 
-      const panel = document.createElement('mdui-tab-panel');
-      panel.slot = 'panel';
-      panel.value = category;
-
-      selectorTabs.append(tab, panel);
+    this.$nextTick(() => {
+      const selectorTabs = document.querySelector('#selectorTabs') as Tabs;
+      selectorTabs.value = '本地';
     });
-    selectorTabs.value = '本地';
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -67,12 +60,16 @@ export default defineComponent({
   >
     <div>
       <span>选择选择器：</span>
-      <mdui-tabs
-        id="selectorTabs"
-        variant="secondary"
-        @change.self="updateSelectors"
-        full-width
-      ></mdui-tabs>
+      <mdui-tabs id="selectorTabs" variant="secondary" @change.self="updateSelectors" full-width>
+        <mdui-tab v-for="(_, key) in selectorsWithCategory" :value="key">
+          {{ key }}
+        </mdui-tab>
+        <mdui-tab-panel
+          v-for="(_, key) in selectorsWithCategory"
+          slot="panel"
+          :value="key"
+        ></mdui-tab-panel>
+      </mdui-tabs>
       <mdui-radio-group id="selectors">
         <mdui-radio
           v-for="(selector, key) in selectors"
