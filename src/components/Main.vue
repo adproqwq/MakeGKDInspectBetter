@@ -21,6 +21,9 @@ export default defineComponent({
     onPositionChange(event: Event) {
       onChange(event.target as TextField);
     },
+    currentCategoryChange(event: Event) {
+      window.Hanashiro.currentCategory = (event.target as RadioGroup).value;
+    },
     readPosition() {
       prompt({
         headline: '坐标快捷填入',
@@ -81,10 +84,6 @@ export default defineComponent({
 
     this.categories = (await getHanashiroSettings<RawCategory[]>('categories'))!;
 
-    (document.querySelector('#category') as RadioGroup).addEventListener('change', (e) => {
-      window.Hanashiro.currentCategory = (e.target as RadioGroup).value;
-    });
-
     (document.querySelector('#page') as Dialog).open = true;
   },
 });
@@ -103,7 +102,7 @@ export default defineComponent({
     </div>
     <div>
       <span>选择分类：</span>
-      <mdui-radio-group id="category">
+      <mdui-radio-group id="category" @change="currentCategoryChange($event)">
         <mdui-radio v-for="category in categories" :value="category.name">
           {{ category.name }}
         </mdui-radio>
