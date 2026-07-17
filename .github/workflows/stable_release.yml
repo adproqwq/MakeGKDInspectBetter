@@ -23,7 +23,7 @@ jobs:
 
       - name: build
         run: |
-          pnpm install
+          pnpm ci
           pnpm build
 
       - name: Create Release
