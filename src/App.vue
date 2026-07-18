@@ -5,6 +5,7 @@ import { setColorScheme } from 'mdui';
 import { defineComponent } from 'vue';
 import './common/hookVue3';
 import './common/init';
+import './common/vidAdaption';
 import './api/api';
 import './common/hookCopy';
 import './common/insertIcon';

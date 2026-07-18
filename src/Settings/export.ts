@@ -15,6 +15,7 @@ export default async () => {
   const subscriptions = await getHanashiroSettings<ISubscriptionMeta[]>('categories');
   const simplyName = await getHanashiroSettings<boolean>('simplyName');
   const readClipboard = await getHanashiroSettings<boolean>('readClipboard');
+  const vidAdaption = await getHanashiroSettings<boolean>('vidAdaption');
 
   const settings: ISettings = {
     activityIdsSimply: activityIdsSimply ?? false,
@@ -26,6 +27,7 @@ export default async () => {
     subscriptions: subscriptions ?? [],
     simplyName: simplyName ?? false,
     readClipboard: readClipboard ?? false,
+    vidAdaption: vidAdaption ?? false,
   };
 
   const settingsFile = new Blob([JSON.stringify(settings, undefined, 2)]);

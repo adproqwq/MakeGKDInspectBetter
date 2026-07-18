@@ -27,6 +27,10 @@ export const getSnapshotInfo = async (snapshotId: string): Promise<Snapshot | nu
   return await snapshotStorage.getItem<Snapshot>(snapshotId);
 };
 
+export const writeSnapshotInfo = async (snapshotId: string, snapshotInfo: Snapshot) => {
+  await snapshotStorage.setItem(snapshotId, snapshotInfo);
+};
+
 export const simplyActivityIds = async (snapshotId: string): Promise<string | false> => {
   const snapshotInfo = await getSnapshotInfo(snapshotId);
   const activityId = snapshotInfo?.activityId;
@@ -57,7 +61,7 @@ export const editNode = async (
     nodes[nodeId].attr = nodeAttr;
     snapshotInfo!.nodes = nodes;
 
-    await snapshotStorage.setItem(snapshotId, snapshotInfo);
+    await writeSnapshotInfo(snapshotId, snapshotInfo!);
 
     return true;
   } catch {

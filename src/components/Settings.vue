@@ -50,16 +50,18 @@ export default defineComponent({
         (await getInspectSettings())!.maxShowNodeSize,
       );
     }
-    if ((await getHanashiroSettings<boolean>('hideLoadSnackbar')) == true)
+    if (await getHanashiroSettings<boolean>('hideLoadSnackbar'))
       (document.querySelector('#hideLoadSnackbar') as Switch).checked = true;
-    if ((await getHanashiroSettings<boolean>('simplyName')) == true)
+    if (await getHanashiroSettings<boolean>('simplyName'))
       (document.querySelector('#simplyName') as Switch).checked = true;
-    if ((await getHanashiroSettings<boolean>('activityIdsSimply')) == true)
+    if (await getHanashiroSettings<boolean>('activityIdsSimply'))
       (document.querySelector('#activityIdsSimply') as Switch).checked = true;
-    if ((await getHanashiroSettings<boolean>('readClipboard')) == true)
+    if (await getHanashiroSettings<boolean>('readClipboard'))
       (document.querySelector('#readClipboard') as Switch).checked = true;
-    if ((await getHanashiroSettings<boolean>('quickReplaceNodeInfo')) == true)
+    if (await getHanashiroSettings<boolean>('quickReplaceNodeInfo'))
       (document.querySelector('#quickReplaceNodeInfo') as Switch).checked = true;
+    if (await getHanashiroSettings<boolean>('vidAdaption'))
+      (document.querySelector('#vidAdaption') as Switch).checked = true;
 
     (document.querySelector('#page') as Dialog).open = true;
   },
@@ -154,6 +156,11 @@ export default defineComponent({
       <span class="introduction"
         >当进入网页审查工具首页时，自动读取剪贴板。如果存在以.zip结尾的链接时，自动粘贴以唤起快捷导入窗口。火狐内核不可用。</span
       >
+    </div>
+    <div>
+      <span>旧快照 vid 适配：</span>
+      <mdui-switch id="vidAdaption"></mdui-switch>
+      <span class="introduction">在旧快照中，在符合条件的节点上显示 vid</span>
     </div>
     <div>
       <mdui-button slot="action" variant="tonal" @click="settings">确定</mdui-button>

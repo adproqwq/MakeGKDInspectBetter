@@ -17,6 +17,7 @@ export default async () => {
   const isQuickReplaceNodeInfo = (document.querySelector('#quickReplaceNodeInfo') as Switch)
     .checked;
   const isReadClipboard = (document.querySelector('#readClipboard') as Switch).checked;
+  const isVidAdaption = (document.querySelector('#vidAdaption') as Switch).checked;
 
   const inspectSettings = (await getInspectSettings())!;
 
@@ -46,6 +47,7 @@ export default async () => {
   await setHanashiroSettings('activityIdsSimply', isActivityIdsSimply);
   await setHanashiroSettings('quickReplaceNodeInfo', isQuickReplaceNodeInfo);
   await setHanashiroSettings('readClipboard', isReadClipboard);
+  await setHanashiroSettings('vidAdaption', isVidAdaption);
 
   inspectSettings.maxShowNodeSize = Number(maxShowSize);
   await setInspectSettings(inspectSettings);

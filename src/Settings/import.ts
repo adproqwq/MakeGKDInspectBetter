@@ -25,6 +25,7 @@ const setValue = async (settings: ISettings) => {
     await setHanashiroSettings('subscriptions', settings.subscriptions);
     await setHanashiroSettings('simplyName', settings.simplyName);
     await setHanashiroSettings('readClipboard', settings.readClipboard);
+    await setHanashiroSettings('vidAdaption', settings.vidAdaption);
   } catch {
     snackbar({
       message: '应用设置失败',

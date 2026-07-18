@@ -12,4 +12,5 @@ export interface ISettings {
   activityIdsSimply: boolean;
   quickReplaceNodeInfo: boolean;
   readClipboard: boolean;
+  vidAdaption: boolean;
 }
