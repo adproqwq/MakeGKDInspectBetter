@@ -9,10 +9,10 @@ export default defineComponent({
   methods: {
     async getImg() {
       const inputElement = document.querySelector('#img') as HTMLInputElement;
+      const fileList = inputElement.files;
+      if (!fileList || fileList.length === 0) return;
 
-      const fileList = inputElement.files!;
       const imageArrayBuffer = await fileList[0].arrayBuffer();
-
       await replaceScreenshot(await getSnapshotId(), imageArrayBuffer);
 
       snackbar({
@@ -20,6 +20,7 @@ export default defineComponent({
         placement: 'top',
       });
 
+      inputElement.value = '';
       send('closePage');
     },
     cancel() {
