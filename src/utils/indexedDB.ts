@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import { Snapshot, PrimitiveType } from '../types/snapshot';
 import { IInspectSettings } from '../types/inspectSettings';
 import { AttrList } from '../common/attrList';
+import { detectImageMime } from './imageDetect';
 
 interface EditNodeOption {
   target: AttrList;
@@ -104,7 +105,10 @@ export const getSnapshotZip = async (snapshotId: string): Promise<Blob> => {
 
   const jszip = new JSZip();
   jszip.file(`snapshot-${snapshotId}.json`, JSON.stringify(snapshotInfo, undefined, 2));
-  jszip.file(`screenshot-${snapshotId}.png`, screenshot);
+
+  const mime = detectImageMime(screenshot) ?? 'image/png';
+  const ext = mime === 'image/webp' ? 'webp' : 'png';
+  jszip.file(`screenshot-${snapshotId}.${ext}`, screenshot);
 
   return await jszip.generateAsync({ type: 'blob' });
 };
