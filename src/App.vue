@@ -9,6 +9,7 @@ import './common/vidAdaption';
 import './api/api';
 import './common/hookCopy';
 import './common/insertIcon';
+import './common/screenshotSize';
 import './common/readClipboard';
 import { receive } from './utils/event';
 import Main from './components/Main.vue';
