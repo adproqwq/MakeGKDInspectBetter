@@ -14,14 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - uses: pnpm/action-setup@v4
+
       - name: Set up Nodejs
         uses: actions/setup-node@v5
         with:
           node-version: 24
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11
 
       - name: build
         run: |
