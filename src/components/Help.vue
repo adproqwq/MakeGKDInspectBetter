@@ -35,8 +35,7 @@ export default defineComponent({
         感谢以下捐献者：
         <img
           src="https://github.cnxiaobai.com/https://github.com/adproqwq/sponsor/raw/refs/heads/main/afdian-sponsor.svg"
-        >
-        </img>
+        />
       </p>
     </div>
   </mdui-dialog>
