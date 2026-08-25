@@ -42,39 +42,15 @@ export const groupsKeyOrder: GroupsKeyOrder = [
   'rules',
 ];
 
-export default async (groups: RawAppGroup): Promise<RawAppGroup> => {
+const orderFields = <T extends object>(source: T, keys: readonly (keyof T)[]): T =>
+  Object.fromEntries(keys.map((key) => [key, source[key]])) as T;
+
+export default async (group: RawAppGroup): Promise<RawAppGroup> => {
   const rulesKeyOrder = (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!;
+  const [rule] = group.rules as RawAppRule[];
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const groupsKeyValue: any[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rulesKeyValue: any[] = [];
-
-  groupsKeyOrder.forEach((groupsKey) => {
-    if (groups[groupsKey] !== undefined) groupsKeyValue.push(groups[groupsKey]);
-    else groupsKeyValue.push(undefined);
-  });
-  rulesKeyOrder.forEach((rulesKey) => {
-    if ((groups.rules as RawAppRule[])[0][rulesKey] !== undefined)
-      rulesKeyValue.push((groups.rules as RawAppRule[])[0][rulesKey]);
-    else rulesKeyValue.push(undefined);
-  });
-
-  const sortedRules: RawAppRule = {};
-  rulesKeyOrder.forEach((rulesKey, index) => {
-    sortedRules[rulesKey] = rulesKeyValue[index];
-  });
-  const sortedGroups: RawAppGroup = {
-    key: groupsKeyValue[0],
-    name: groupsKeyValue[1],
-    desc: groupsKeyValue[2],
-    matchTime: groupsKeyValue[3],
-    actionMaximum: groupsKeyValue[4],
-    resetMatch: groupsKeyValue[5],
-    priorityTime: groupsKeyValue[6],
-    matchRoot: groupsKeyValue[7],
-    rules: [sortedRules],
+  return {
+    ...orderFields(group, groupsKeyOrder),
+    rules: [orderFields(rule, rulesKeyOrder)],
   };
-
-  return sortedGroups;
 };
