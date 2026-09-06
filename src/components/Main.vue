@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue';
 import json5 from 'json5';
 import type { RawApp, RawCategory } from '@gkd-kit/api';
-import { type Button, type Dialog, type RadioGroup, type TextField } from 'mdui';
+import { type Button, type Dialog, type RadioGroup } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
 import { send } from '../utils/event';
@@ -20,6 +20,7 @@ export default defineComponent({
       window.Hanashiro.currentCategory = (event.target as RadioGroup).value;
     },
     closeDialog() {
+      send('closeWithCancaled');
       send('closePage');
     },
   },

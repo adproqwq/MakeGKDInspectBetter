@@ -67,9 +67,7 @@ class EventBus {
 
 const eventBus = EventBus.getInstance();
 
-export const send = <T>(eventName: string, payload?: T) => {
-  eventBus.emit(eventName, payload);
-};
+export const send = <T>(eventName: string, payload?: T) => eventBus.emit(eventName, payload);
 
 export const receive = <T>(
   eventName: string,
@@ -79,3 +77,5 @@ export const receive = <T>(
   if (once) return eventBus.once(eventName, callback);
   else return eventBus.on(eventName, callback);
 };
+
+export const clear = (eventName: string) => eventBus.clear(eventName);

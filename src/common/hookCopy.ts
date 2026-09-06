@@ -1,6 +1,6 @@
 import { snackbar } from 'mdui';
 import { attrList } from './attrList';
-import { receive, send } from '../utils/event';
+import { receive, send, clear } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
 import { ICount } from '../types/count';
 
@@ -26,6 +26,8 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
             true,
           );
 
+          receive('closeWithCancaled', () => clear('modifyEnd'), true);
+
           // 发送打开复制修改窗口事件
           send('openMain');
         } catch {
@@ -41,9 +43,9 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
 
         await Reflect.apply(target, thisArg, [result]);
         send('ruleWriteClipboardDone');
-
-        return;
       }
+
+      return;
     } else if (data.startsWith('name=')) {
       if ((await getHanashiroSettings('simplyName')) == true) {
         const fullname = data.split('"')[1];
