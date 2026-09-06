@@ -1,4 +1,4 @@
-import { type RadioGroup, type Switch, type TextField, type Button } from 'mdui';
+import { type Switch, type TextField, type Button } from 'mdui';
 import type { RawApp, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
 import iArrayToArray from '../utils/iArrayToArray';
@@ -8,19 +8,10 @@ import { simplyActivityIds, getHanashiroSettings } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
 
 export default async (element: Button) => {
-  const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
-  const action = (document.querySelector('#action') as RadioGroup).value as
-    | 'clickCenter'
-    | 'back'
-    | 'longClick'
-    | undefined;
   const ruleName = (document.querySelector('#ruleName') as TextField).value;
   const ruleDesc = (document.querySelector('#ruleDesc') as TextField).value;
   const category = window.Hanashiro.currentCategory;
-  const isLimit = (document.querySelector('#limit') as Switch).checked;
-  const isMatchRoot = (document.querySelector('#matchRoot') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
-  const preKeys = (document.querySelector('#preKeys') as TextField).value;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
@@ -42,50 +33,9 @@ export default async (element: Button) => {
     }
   }
 
-  if (action) {
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    rule.action = action;
-    origin.groups[0].rules = [rule];
-  }
-
-  if (isLimit) {
-    if (copyDepth == 'rules') {
-      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-      rule.actionMaximum = 1;
-      rule.resetMatch = 'app';
-      rule.matchTime = 10000;
-      origin.groups[0].rules = [rule];
-    } else {
-      origin.groups[0].actionMaximum = 1;
-      origin.groups[0].resetMatch = 'app';
-      origin.groups[0].matchTime = 10000;
-    }
-  }
-
-  if (isMatchRoot) {
-    if (copyDepth == 'rules') {
-      const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-      rule.matchRoot = true;
-      origin.groups[0].rules = [rule];
-    } else origin.groups[0].matchRoot = true;
-  }
-
   if (isNoExample) {
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
     delete rule.exampleUrls;
-    origin.groups[0].rules = [rule];
-  }
-
-  if (preKeys) {
-    const preKeysArray = preKeys.split(',');
-    const preKeysNumberArray: number[] = [];
-
-    preKeysArray.forEach((preKey) => {
-      preKeysNumberArray.push(Number(preKey));
-    });
-
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    rule.preKeys = preKeysNumberArray;
     origin.groups[0].rules = [rule];
   }
 
@@ -103,19 +53,7 @@ export default async (element: Button) => {
 
   origin.groups[0] = await sort(origin.groups[0]);
 
-  const stringify = json5.stringify(origin, null, 2);
-  if (copyDepth == 'ts') {
-    const text = `import { defineGkdApp } from '@gkd-kit/define';\r\rexport default defineGkdApp(${stringify});\r`;
-    window.Hanashiro.returnResult = text;
-  } else if (copyDepth == 'app') window.Hanashiro.returnResult = stringify;
-  else if (copyDepth == 'groups')
-    window.Hanashiro.returnResult = json5.stringify(origin.groups[0], null, 2);
-  else if (copyDepth == 'rules')
-    window.Hanashiro.returnResult = json5.stringify(
-      iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0],
-      null,
-      2,
-    );
+  window.Hanashiro.returnResult = json5.stringify(origin, null, 2);
 
   send('closePage');
   send('modifyEnd');

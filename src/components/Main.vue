@@ -43,39 +43,12 @@ export default defineComponent({
 <template>
   <mdui-dialog id="page" headline="配置" close-on-overlay-click close-on-esc @closed="closeDialog">
     <div>
-      <span>选择复制深度：</span>
-      <mdui-radio-group id="copyDepth" value="app" @change="copyDepth = $event.target.value">
-        <mdui-radio value="ts">ts层</mdui-radio>
-        <mdui-radio value="app">app层</mdui-radio>
-        <mdui-radio value="groups">groups层</mdui-radio>
-        <mdui-radio value="rules">rules层</mdui-radio>
-      </mdui-radio-group>
-    </div>
-    <div>
       <span>选择分类：</span>
       <mdui-radio-group id="category" @change="currentCategoryChange($event)">
         <mdui-radio v-for="category in categories" :value="category.name">
           {{ category.name }}
         </mdui-radio>
       </mdui-radio-group>
-    </div>
-    <div>
-      <span>插入action类型：</span>
-      <mdui-radio-group id="action">
-        <mdui-radio value="clickCenter">clickCenter</mdui-radio>
-        <mdui-radio value="back">back</mdui-radio>
-        <mdui-radio value="longClick">longClick</mdui-radio>
-      </mdui-radio-group>
-    </div>
-    <div>
-      <span>插入限制字段：</span>
-      <mdui-switch id="limit"></mdui-switch>
-      <span class="introduction">插入matchTime、resetMatch和actionMaximum</span>
-    </div>
-    <div>
-      <span>插入matchRoot：</span>
-      <mdui-switch id="matchRoot"></mdui-switch>
-      <span class="introduction">插入matchRoot</span>
     </div>
     <div>
       <span>去除exampleUrls：</span>
@@ -89,20 +62,10 @@ export default defineComponent({
         type="number"
         label="key"
         placeholder="填写一个数字"
-        helper="rules模式修改ruleKey，其余修改groupKey。请提前选好模式，失焦保存！"
+        helper="仅支持修改 ruleKey，其余 key 值修改请使用编排规则功能。失焦保存！"
         @change="key"
       >
       </mdui-text-field>
-    </div>
-    <div>
-      <span>修改preKeys值为：</span>
-      <mdui-text-field
-        id="preKeys"
-        variant="filled"
-        label="preKeys"
-        placeholder="填写多个以英文逗号分隔的数字"
-        helper="失焦保存"
-      ></mdui-text-field>
     </div>
     <div>
       <span>规则组名称：</span>

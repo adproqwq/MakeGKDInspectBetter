@@ -260,15 +260,6 @@ declare interface DialogOptions {
   onOverlayClick?: (dialog: import('mdui').Dialog) => void;
 }
 
-declare type ISelectorsExtend = import('./types/selectors').ISelector & {
-  index: number;
-};
-
-declare interface IPosition {
-  left?: number | string;
-  top?: number | string;
-}
-
 // oxlint-disable-next-line typescript/no-explicit-any
 declare type EventCallback<T = any> = (payload: T) => void | Promise<void>;
 declare type Unsubscribe = () => void;
