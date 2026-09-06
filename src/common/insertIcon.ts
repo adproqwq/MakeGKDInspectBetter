@@ -10,7 +10,9 @@ observeElement(
   '.GkDraggableCard > .app-panel > .selector-syntax-field',
   () => {
     if (!document.querySelector('#iconBar')) {
-      const selectorSyntaxField = document.querySelector('.GkDraggableCard > .app-panel > .selector-syntax-field')!;
+      const selectorSyntaxField = document.querySelector(
+        '.GkDraggableCard > .app-panel > .selector-syntax-field',
+      )!;
       const iconBar = document.createElement('div');
       iconBar.id = 'iconBar';
 
