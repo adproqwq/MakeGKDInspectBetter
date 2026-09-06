@@ -80,8 +80,5 @@ observeElement('#iconBar', async () => {
   openVscodeIcon.setAttribute('fixed', '');
   openVscodeIcon.onclick = () => send('openVscode');
 
-  document
-    .querySelectorAll('div[data-v-app=""]')
-    .item(1)
-    .firstElementChild!.append(openVscodeIcon);
+  document.querySelectorAll('div[data-v-app=""]').item(1).firstElementChild!.append(openVscodeIcon);
 });
