@@ -8,7 +8,7 @@ const formatSize = (bytes: number): string => {
   else return `${(bytes / 1048576).toFixed(2)} MB`;
 };
 
-observeElement('.DraggableCard > * > .n-input-group', async () => {
+observeElement('.GkDraggableCard > .app-panel > .selector-syntax-field', async () => {
   const origin = document.querySelector('img + div + div') as HTMLDivElement;
   const layer = origin.lastElementChild!.cloneNode() as HTMLDivElement;
 
