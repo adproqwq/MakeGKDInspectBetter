@@ -19,7 +19,6 @@ import UseSelector from './components/UseSelector.vue';
 import AddSelector from './components/AddSelector.vue';
 import ManageSelectors from './components/ManageSelectors.vue';
 import ChangeScreenshot from './components/ChangeScreenshot.vue';
-import GeneratePosition from './components/GeneratePosition.vue';
 import Count from './components/Count.vue';
 
 export default defineComponent({
@@ -31,7 +30,6 @@ export default defineComponent({
     AddSelector,
     ManageSelectors,
     ChangeScreenshot,
-    GeneratePosition,
     Count,
   },
   data() {
@@ -68,10 +66,6 @@ export default defineComponent({
       this.currentComponent = 'ChangeScreenshot';
     });
 
-    receive('openGeneratePosition', () => {
-      this.currentComponent = 'GeneratePosition';
-    });
-
     receive('openCount', () => {
       this.currentComponent = 'Count';
     });
@@ -83,8 +77,7 @@ export default defineComponent({
   mounted() {
     setColorScheme('#39C5BB');
 
-    if (window.location.host === 'li.chenge.eu.org')
-      document.querySelector('html')!.classList.add('mdui-theme-auto');
+    document.querySelector('html')!.classList.add('mdui-theme-auto');
   },
 });
 </script>
