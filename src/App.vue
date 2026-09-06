@@ -15,9 +15,6 @@ import { receive } from './utils/event';
 import Main from './components/Main.vue';
 import Settings from './components/Settings.vue';
 import Help from './components/Help.vue';
-import UseSelector from './components/UseSelector.vue';
-import AddSelector from './components/AddSelector.vue';
-import ManageSelectors from './components/ManageSelectors.vue';
 import ChangeScreenshot from './components/ChangeScreenshot.vue';
 import Count from './components/Count.vue';
 
@@ -26,9 +23,6 @@ export default defineComponent({
     Main,
     Settings,
     Help,
-    UseSelector,
-    AddSelector,
-    ManageSelectors,
     ChangeScreenshot,
     Count,
   },
@@ -48,18 +42,6 @@ export default defineComponent({
 
     receive('openHelp', () => {
       this.currentComponent = 'Help';
-    });
-
-    receive('openUseSelector', () => {
-      this.currentComponent = 'UseSelector';
-    });
-
-    receive('openAddSelector', () => {
-      this.currentComponent = 'AddSelector';
-    });
-
-    receive('openManageSelectors', () => {
-      this.currentComponent = 'ManageSelectors';
     });
 
     receive('openChangeScreenshot', () => {

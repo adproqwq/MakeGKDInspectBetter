@@ -278,13 +278,7 @@ declare interface Window {
     originRule: string;
     returnResult: string;
     currentCategory: string;
-    currentSelector: ISelectorsExtend;
-    currentPositionView: 'partial' | 'global';
     defaultRulesKeySortOrder: string[];
-    nodePosition: {
-      absolute: IPosition;
-      relative: IPosition;
-    };
   };
   HatsuneMiku: {
     event: {

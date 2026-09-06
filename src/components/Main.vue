@@ -1,14 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import json5 from 'json5';
-import type { RawApp, Position, RawCategory } from '@gkd-kit/api';
-import { type Button, type Dialog, type RadioGroup, type TextField, prompt, snackbar } from 'mdui';
+import type { RawApp, RawCategory } from '@gkd-kit/api';
+import { type Button, type Dialog, type RadioGroup, type TextField } from 'mdui';
 import finish from '../Main/finish';
 import key from '../Main/key';
-import { onChange } from '../Main/position';
 import { send } from '../utils/event';
 import { getHanashiroSettings } from '../utils/indexedDB';
-import { PositionZod } from '../types/positionZod';
 
 export default defineComponent({
   methods: {
@@ -18,55 +16,8 @@ export default defineComponent({
     key() {
       key();
     },
-    onPositionChange(event: Event) {
-      onChange(event.target as TextField);
-    },
     currentCategoryChange(event: Event) {
       window.Hanashiro.currentCategory = (event.target as RadioGroup).value;
-    },
-    readPosition() {
-      prompt({
-        headline: '坐标快捷填入',
-        description: '请输入从生成坐标处获得的坐标',
-        closeOnEsc: true,
-        closeOnOverlayClick: true,
-        validator: (value): boolean => {
-          try {
-            PositionZod.parse(json5.parse<{ position: Position }>(value).position);
-          } catch {
-            snackbar({
-              message: '格式错误，请检查格式！',
-              placement: 'top',
-            });
-            return false;
-          }
-
-          return true;
-        },
-        textFieldOptions: {
-          label: 'position对象',
-          placeholder: '请填入{ position }对象',
-          rows: 8,
-        },
-        onConfirm: (value) => {
-          const position = json5.parse<{ position: Position }>(value).position;
-
-          if (position.left) {
-            (document.querySelector('#left') as TextField).value = String(position.left);
-            onChange(document.querySelector('#left') as TextField);
-          } else if (position.right) {
-            (document.querySelector('#right') as TextField).value = String(position.right);
-            onChange(document.querySelector('#right') as TextField);
-          }
-          if (position.top) {
-            (document.querySelector('#top') as TextField).value = String(position.top);
-            onChange(document.querySelector('#top') as TextField);
-          } else if (position.bottom) {
-            (document.querySelector('#bottom') as TextField).value = String(position.bottom);
-            onChange(document.querySelector('#bottom') as TextField);
-          }
-        },
-      });
     },
     closeDialog() {
       send('closePage');
@@ -152,39 +103,6 @@ export default defineComponent({
         placeholder="填写多个以英文逗号分隔的数字"
         helper="失焦保存"
       ></mdui-text-field>
-    </div>
-    <div>
-      <span>坐标：</span>
-      <mdui-chip variant="input">左</mdui-chip>
-      <mdui-text-field
-        variant="filled"
-        class="position"
-        id="left"
-        @change="onPositionChange"
-      ></mdui-text-field>
-      <mdui-chip variant="input">右</mdui-chip>
-      <mdui-text-field
-        variant="filled"
-        class="position"
-        id="right"
-        @change="onPositionChange"
-      ></mdui-text-field>
-      <mdui-chip variant="input">上</mdui-chip>
-      <mdui-text-field
-        variant="filled"
-        class="position"
-        id="top"
-        @change="onPositionChange"
-      ></mdui-text-field>
-      <mdui-chip variant="input">下</mdui-chip>
-      <mdui-text-field
-        variant="filled"
-        class="position"
-        id="bottom"
-        @change="onPositionChange"
-      ></mdui-text-field>
-      <mdui-button variant="tonal" class="position" @click="readPosition">快捷填入</mdui-button>
-      <span class="introduction">快捷填入可将从获取坐标功能中获取的position字段一键填入</span>
     </div>
     <div>
       <span>规则组名称：</span>

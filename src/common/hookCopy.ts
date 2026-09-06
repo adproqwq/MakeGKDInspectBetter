@@ -1,9 +1,7 @@
-import { snackbar, prompt } from 'mdui';
-import { decode } from 'js-base64';
+import { snackbar } from 'mdui';
 import { attrList } from './attrList';
 import { receive, send } from '../utils/event';
 import { getHanashiroSettings, setHanashiroSettings } from '../utils/indexedDB';
-import { ISelectors } from '../types/selectors';
 import { ICount } from '../types/count';
 
 const copyProxy = new Proxy(navigator.clipboard.writeText, {
@@ -56,40 +54,6 @@ const copyProxy = new Proxy(navigator.clipboard.writeText, {
       } else return await Reflect.apply(target, thisArg, [data]);
     } else if (attrList.filter((attr) => data.startsWith(`${attr}=`)).length != 0) {
       return await Reflect.apply(target, thisArg, [`[${data}]`]);
-    } else if (data.startsWith(window.origin)) {
-      const selectors = (await getHanashiroSettings<ISelectors>('selectors'))!;
-      const copiedUrl = new URL(data);
-
-      if (copiedUrl.searchParams.has('gkd')) {
-        const selectorBase64 = copiedUrl.searchParams.get('gkd')!;
-
-        prompt({
-          headline: '备注',
-          description: '给该选择器的备注，留空就用默认的了哦~',
-          confirmText: '就决定是你了！',
-          cancelText: '这个不要保存！',
-          closeOnEsc: true,
-          closeOnOverlayClick: true,
-          onConfirm: async (value) => {
-            selectors['本地'].push({
-              name: value ? value : selectorBase64,
-              description: '',
-              selector: decode(selectorBase64),
-              order: 1,
-            });
-
-            selectors['本地'].sort((a, b) => {
-              if (a.order > b.order) return -1;
-              else if (a.order == b.order) return 0;
-              else return 1;
-            });
-
-            await setHanashiroSettings('selectors', selectors);
-          },
-        }).catch();
-      }
-
-      return await Reflect.apply(target, thisArg, [data]);
     } else return await Reflect.apply(target, thisArg, [data]);
   },
 });

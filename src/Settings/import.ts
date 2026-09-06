@@ -17,11 +17,9 @@ const setValue = async (settings: ISettings) => {
       });
     }
     await setHanashiroSettings('activityIdsSimply', settings.activityIdsSimply);
-    await setHanashiroSettings('autoAddSelector', settings.autoAddSelector);
     if (isCategoriesLegal) await setHanashiroSettings('categories', settings.categories);
     await setHanashiroSettings('hideLoadSnackbar', settings.hideLoadSnackbar);
     await setHanashiroSettings('rulesKeySort', settings.rulesKeySort);
-    await setHanashiroSettings('subscriptions', settings.subscriptions);
     await setHanashiroSettings('simplyName', settings.simplyName);
     await setHanashiroSettings('readClipboard', settings.readClipboard);
     await setHanashiroSettings('vidAdaption', settings.vidAdaption);

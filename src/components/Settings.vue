@@ -9,7 +9,6 @@ import _export from '../Settings/export';
 import { send } from '../utils/event';
 import { getHanashiroSettings, getInspectSettings } from '../utils/indexedDB';
 import type { RulesKeyOrder } from '../utils/sort';
-import type { ISubscriptionMeta } from '../types/selectors';
 
 export default defineComponent({
   methods: {
@@ -38,11 +37,6 @@ export default defineComponent({
     if (await getHanashiroSettings('rulesKeySort')) {
       (document.querySelector('#rulesKeySort') as TextField).value = json5.stringify(
         (await getHanashiroSettings<RulesKeyOrder>('rulesKeySort'))!,
-      );
-    }
-    if (await getHanashiroSettings('subscriptions')) {
-      (document.querySelector('#subscriptions') as TextField).value = json5.stringify(
-        (await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!,
       );
     }
     if (await getInspectSettings()) {
@@ -98,16 +92,6 @@ export default defineComponent({
       </span>
     </div>
     <div>
-      <span>快捷选择器订阅管理：</span>
-      <mdui-text-field
-        variant="filled"
-        id="subscriptions"
-        label="快捷选择器订阅"
-        placeholder="填入合法的快捷选择器订阅 meta"
-        rows="10"
-      ></mdui-text-field>
-    </div>
-    <div>
       <span>节点阈值：</span>
       <mdui-text-field
         variant="filled"
@@ -130,11 +114,6 @@ export default defineComponent({
         >在复制name属性时，会自动优化复制的内容。如复制 android.widget.TextView 时会优化为
         TextView</span
       >
-    </div>
-    <div>
-      <span>选择器分享自动添加快捷搜索：</span>
-      <mdui-switch id="autoAddSelector"></mdui-switch>
-      <span class="introduction">在分享选择器时，自动添加到快捷搜索列表中</span>
     </div>
     <div>
       <span>activityIds规则复制优化：</span>

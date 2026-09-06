@@ -12,21 +12,6 @@ observeElement(
       const iconBar = document.createElement('div');
       iconBar.id = 'iconBar';
 
-      // 搜索选择器按钮
-      const UseSelectorIcon = createBarIcon('search', '搜索选择器', () => {
-        send('openUseSelector');
-      });
-
-      // 添加选择器按钮
-      const AddSelectorIcon = createBarIcon('add', '添加选择器', () => {
-        send('openAddSelector');
-      });
-
-      // 管理选择器按钮
-      const ManageSelectorsIcon = createBarIcon('edit', '管理选择器', () => {
-        send('openManageSelectors');
-      });
-
       // 更换截图按钮
       const ChangeScreenshotIcon = createBarIcon('photo', '更换截图', () => {
         send('openChangeScreenshot');
@@ -53,9 +38,6 @@ observeElement(
       });
 
       iconBar.append(
-        UseSelectorIcon,
-        AddSelectorIcon,
-        ManageSelectorsIcon,
         ChangeScreenshotIcon,
         SettingsIcon,
         CountIcon,
@@ -76,7 +58,7 @@ observeElement('#iconBar', async () => {
   openVscodeIcon.extended = true;
   openVscodeIcon.textContent = '在 VSCode 中打开';
   openVscodeIcon.style.right = '16px';
-  openVscodeIcon.style.bottom = '60px';
+  openVscodeIcon.style.bottom = '180px';
   openVscodeIcon.setAttribute('fixed', '');
   openVscodeIcon.onclick = () => send('openVscode');
 

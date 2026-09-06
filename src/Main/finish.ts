@@ -1,55 +1,11 @@
-import { type RadioGroup, type Switch, type TextField, type Button, snackbar } from 'mdui';
-import type { RawApp, Position, IArray, RawAppRule } from '@gkd-kit/api';
+import { type RadioGroup, type Switch, type TextField, type Button } from 'mdui';
+import type { RawApp, IArray, RawAppRule } from '@gkd-kit/api';
 import json5 from 'json5';
-import { constructPositionArray } from './position';
 import iArrayToArray from '../utils/iArrayToArray';
 import { send } from '../utils/event';
 import sort from '../utils/sort';
 import { simplyActivityIds, getHanashiroSettings } from '../utils/indexedDB';
 import getSnapshotId from '../utils/getSnapshotId';
-
-const checkPositionLegality = (position: Position): boolean => {
-  const { top, left, right, bottom } = position;
-
-  if (top) {
-    if (bottom || (!left && !right)) {
-      snackbar({
-        message: '非法坐标',
-        placement: 'top',
-      });
-      return false;
-    }
-  }
-  if (left) {
-    if (right || (!top && !bottom)) {
-      snackbar({
-        message: '非法坐标',
-        placement: 'top',
-      });
-      return false;
-    }
-  }
-  if (right) {
-    if (left || (!top && !bottom)) {
-      snackbar({
-        message: '非法坐标',
-        placement: 'top',
-      });
-      return false;
-    }
-  }
-  if (bottom) {
-    if (top || (!left && !right)) {
-      snackbar({
-        message: '非法坐标',
-        placement: 'top',
-      });
-      return false;
-    }
-  }
-
-  return true;
-};
 
 export default async (element: Button) => {
   const copyDepth = (document.querySelector('#copyDepth') as RadioGroup).value;
@@ -65,7 +21,6 @@ export default async (element: Button) => {
   const isMatchRoot = (document.querySelector('#matchRoot') as Switch).checked;
   const isNoExample = (document.querySelector('#noExample') as Switch).checked;
   const preKeys = (document.querySelector('#preKeys') as TextField).value;
-  const position = constructPositionArray().length != 0 ? constructPositionArray() : false;
   const isSimplyActivityIds = await getHanashiroSettings('activityIdsSimply');
   const origin: RawApp = json5.parse(window.Hanashiro.originRule);
 
@@ -131,23 +86,6 @@ export default async (element: Button) => {
 
     const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
     rule.preKeys = preKeysNumberArray;
-    origin.groups[0].rules = [rule];
-  }
-
-  if (position) {
-    const positionName: ['top', 'left', 'right', 'bottom'] = ['top', 'left', 'right', 'bottom'];
-    const positionObject: Position = {};
-
-    position.forEach((position, index) => {
-      if (position) {
-        positionObject[positionName[index]] = position;
-      }
-    });
-
-    if (!checkPositionLegality(positionObject)) return;
-
-    const rule = iArrayToArray(origin.groups[0].rules as IArray<RawAppRule>)[0];
-    rule.position = positionObject;
     origin.groups[0].rules = [rule];
   }
 

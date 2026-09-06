@@ -1,5 +1,5 @@
 import { snackbar, confirm } from 'mdui';
-import { decode, encode } from 'js-base64';
+import { encode } from 'js-base64';
 import {
   getHanashiroSettings,
   setHanashiroSettings,
@@ -7,11 +7,9 @@ import {
   setInspectSettings,
   getSnapshotInfo,
 } from '../utils/indexedDB';
-import fetchSubscription from '../utils/fetchSubscription';
 import { receive } from '../utils/event';
 import getSnapshotId from '../utils/getSnapshotId';
 import type { ICount } from '../types/count';
-import type { ISelector, ISelectors, ISubscriptionMeta } from '../types/selectors';
 
 Object.defineProperty(window, 'Hanashiro', {
   value: {},
@@ -35,43 +33,6 @@ const rulesKeySort = [
   'exampleUrls',
   'snapshotUrls',
 ];
-
-if (!(await getHanashiroSettings('selectors'))) await setHanashiroSettings('selectors', {});
-if (Array.isArray(await getHanashiroSettings('selectors'))) {
-  const selectorRecord: ISelectors = {
-    本地: [],
-  };
-
-  Array.from((await getHanashiroSettings<ISelector[]>('selectors'))!).forEach((selector) => {
-    selectorRecord['本地'].push(selector);
-  });
-
-  await setHanashiroSettings('selectors', selectorRecord);
-}
-if (
-  Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!).some(([_, selectors]) =>
-    selectors.some((selector) => Object.hasOwn(selector, 'base64')),
-  )
-) {
-  const oldSelectors = Object.entries((await getHanashiroSettings<ISelectors>('selectors'))!);
-  let newSelectors: ISelectors = {};
-
-  oldSelectors.forEach(([category, selectors]) => {
-    selectors.forEach((selector, index) => {
-      if (Object.hasOwn(selector, 'base64')) {
-        selector.selector = decode((selector as ISelector & { base64?: string }).base64!);
-        delete (selector as ISelector & { base64?: string }).base64;
-        selectors[index] = selector;
-      }
-    });
-
-    newSelectors[category] = selectors;
-  });
-
-  await setHanashiroSettings('selectors', newSelectors);
-}
-
-if (!(await getHanashiroSettings('subscriptions'))) await setHanashiroSettings('subscriptions', []);
 
 if (!(await getHanashiroSettings('rulesKeySort')) || userRulesKeySort.length == 0) {
   await setHanashiroSettings('rulesKeySort', rulesKeySort);
@@ -146,31 +107,4 @@ if (!(await getHanashiroSettings<boolean>('hideLoadSnackbar'))) {
     autoCloseDelay: 2000,
     placement: 'top',
   });
-}
-
-if (
-  (await getHanashiroSettings<number>('subscriptionsLastUpdateTime')) === null ||
-  Date.now() - (await getHanashiroSettings<number>('subscriptionsLastUpdateTime'))! >=
-    60 * 60 * 1000
-) {
-  Array.from((await getHanashiroSettings<ISubscriptionMeta[]>('subscriptions'))!).forEach(
-    (meta) => {
-      fetchSubscription(meta)
-        .then(() => {
-          snackbar({
-            message: `订阅【${meta.name}】已更新`,
-            placement: 'top',
-          });
-        })
-        .catch(() => {
-          snackbar({
-            message: `订阅【${meta.name}】更新失败`,
-            placement: 'top',
-          });
-        })
-        .finally(async () => {
-          await setHanashiroSettings('subscriptionsLastUpdateTime', Date.now());
-        });
-    },
-  );
 }
