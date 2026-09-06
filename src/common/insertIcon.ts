@@ -7,10 +7,10 @@ import replaceNodeInfo, {
 import { getHanashiroSettings } from '../utils/indexedDB';
 
 observeElement(
-  '.DraggableCard > * > .n-input-group',
+  '.GkDraggableCard > .app-panel > .selector-syntax-field',
   () => {
     if (!document.querySelector('#iconBar')) {
-      const inputGroup = document.querySelector('.DraggableCard > * > .n-input-group')!;
+      const selectorSyntaxField = document.querySelector('.GkDraggableCard > .app-panel > .selector-syntax-field')!;
       const iconBar = document.createElement('div');
       iconBar.id = 'iconBar';
 
@@ -64,7 +64,7 @@ observeElement(
         HelpIcon,
         SponsorIcon,
       );
-      inputGroup.insertAdjacentElement('beforebegin', iconBar);
+      selectorSyntaxField.insertAdjacentElement('beforebegin', iconBar);
     }
   },
   true,
