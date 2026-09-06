@@ -1,9 +1,8 @@
 import localforage from 'localforage';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import { Snapshot, PrimitiveType } from '../types/snapshot';
+import { Snapshot } from '../types/snapshot';
 import { IInspectSettings } from '../types/inspectSettings';
-import { AttrList } from '../common/attrList';
 import { detectImageMime } from './imageDetect';
 
 const localStorage = localforage.createInstance({
@@ -55,19 +54,6 @@ export const getScreenshot = async (snapshotId: string): Promise<ArrayBuffer> =>
 
 export const replaceScreenshot = async (snapshotId: string, image: ArrayBuffer) => {
   await screenshotStorage.setItem<ArrayBuffer>(snapshotId, image);
-};
-
-export const getNodeAttr = async (
-  snapshotId: string,
-  nodeId: number,
-  target: AttrList,
-): Promise<PrimitiveType> => {
-  const snapshotInfo = await getSnapshotInfo(snapshotId);
-
-  const nodes = snapshotInfo!.nodes;
-  const nodeAttr = nodes[nodeId].attr;
-
-  return nodeAttr[target] as PrimitiveType;
 };
 
 export const getSnapshotZip = async (snapshotId: string): Promise<Blob> => {
