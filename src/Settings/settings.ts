@@ -14,8 +14,6 @@ export default async () => {
   const isSimplyName = (document.querySelector('#simplyName') as Switch).checked;
   const isAutoAddSelector = (document.querySelector('#autoAddSelector') as Switch).checked;
   const isActivityIdsSimply = (document.querySelector('#activityIdsSimply') as Switch).checked;
-  const isQuickReplaceNodeInfo = (document.querySelector('#quickReplaceNodeInfo') as Switch)
-    .checked;
   const isReadClipboard = (document.querySelector('#readClipboard') as Switch).checked;
   const isVidAdaption = (document.querySelector('#vidAdaption') as Switch).checked;
 
@@ -45,7 +43,6 @@ export default async () => {
   await setHanashiroSettings('simplyName', isSimplyName);
   await setHanashiroSettings('autoAddSelector', isAutoAddSelector);
   await setHanashiroSettings('activityIdsSimply', isActivityIdsSimply);
-  await setHanashiroSettings('quickReplaceNodeInfo', isQuickReplaceNodeInfo);
   await setHanashiroSettings('readClipboard', isReadClipboard);
   await setHanashiroSettings('vidAdaption', isVidAdaption);
 

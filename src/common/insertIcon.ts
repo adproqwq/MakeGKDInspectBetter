@@ -1,10 +1,6 @@
 import { send } from '../utils/event';
 import observeElement from '../utils/observeElement';
 import { createBarIcon } from '../utils/createIcon';
-import replaceNodeInfo, {
-  replaceNodeInfo as directReplaceNodeInfo,
-} from '../utils/replaceNodeInfo';
-import { getHanashiroSettings } from '../utils/indexedDB';
 
 observeElement(
   '.GkDraggableCard > .app-panel > .selector-syntax-field',
@@ -73,30 +69,6 @@ observeElement(
 );
 
 observeElement('#iconBar', async () => {
-  // 节点打码按钮
-  const editNodeIcon = document.createElement('mdui-fab');
-  editNodeIcon.icon = 'edit';
-  editNodeIcon.variant = 'secondary';
-  editNodeIcon.extended = true;
-  editNodeIcon.textContent = '替换当前节点信息';
-  editNodeIcon.style.right = '16px';
-  editNodeIcon.style.bottom = '180px';
-  editNodeIcon.setAttribute('fixed', '');
-  editNodeIcon.onclick = (await getHanashiroSettings<boolean>('quickReplaceNodeInfo'))
-    ? async () => await directReplaceNodeInfo()
-    : replaceNodeInfo;
-
-  // 生成坐标按钮
-  const positionIcon = document.createElement('mdui-fab');
-  positionIcon.icon = 'open_with';
-  positionIcon.variant = 'secondary';
-  positionIcon.extended = true;
-  positionIcon.textContent = '生成坐标';
-  positionIcon.style.right = '16px';
-  positionIcon.style.bottom = '120px';
-  positionIcon.setAttribute('fixed', '');
-  positionIcon.onclick = () => send('openGeneratePosition');
-
   // 在 Vscode 中打开按钮
   const openVscodeIcon = document.createElement('mdui-fab');
   openVscodeIcon.icon = 'open_in_new';
@@ -111,5 +83,5 @@ observeElement('#iconBar', async () => {
   document
     .querySelectorAll('div[data-v-app=""]')
     .item(1)
-    .firstElementChild!.append(editNodeIcon, positionIcon, openVscodeIcon);
+    .firstElementChild!.append(openVscodeIcon);
 });

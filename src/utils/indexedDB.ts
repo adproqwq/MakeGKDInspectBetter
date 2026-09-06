@@ -6,11 +6,6 @@ import { IInspectSettings } from '../types/inspectSettings';
 import { AttrList } from '../common/attrList';
 import { detectImageMime } from './imageDetect';
 
-interface EditNodeOption {
-  target: AttrList;
-  value: PrimitiveType;
-}
-
 const localStorage = localforage.createInstance({
   name: 'localforage',
 });
@@ -44,30 +39,6 @@ export const simplyActivityIds = async (snapshotId: string): Promise<string | fa
       return simplyActivityIds;
     } else return false;
   } else return false;
-};
-
-export const editNode = async (
-  snapshotId: string,
-  nodeId: number,
-  options: EditNodeOption[],
-): Promise<boolean> => {
-  try {
-    const snapshotInfo = await getSnapshotInfo(snapshotId);
-
-    const nodes = snapshotInfo!.nodes;
-    const nodeAttr = nodes[nodeId].attr;
-
-    options.forEach((option) => ((nodeAttr[option.target] as PrimitiveType) = option.value));
-
-    nodes[nodeId].attr = nodeAttr;
-    snapshotInfo!.nodes = nodes;
-
-    await writeSnapshotInfo(snapshotId, snapshotInfo!);
-
-    return true;
-  } catch {
-    return false;
-  }
 };
 
 export const getScreenInfo = async (
